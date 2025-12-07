@@ -50,10 +50,9 @@ export default function WhoAmI() {
             {[
               'Quantum Computing',
               'Machine Learning',
-              'Philosophy of Mind',
+              'Absurdism',
               'Web Development',
               'Theoretical Physics',
-              'Consciousness Studies',
             ].map((interest) => (
               <span
                 key={interest}
