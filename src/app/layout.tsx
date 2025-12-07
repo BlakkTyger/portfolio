@@ -27,15 +27,15 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   // Browser tab title
   title: "Himanshu Sharma | The Coherent State",
-  
+
   // Search engine description
   description: "Personal portfolio showcasing physics research and software development",
-  
+
   keywords: ["portfolio", "physicist", "developer", "quantum computing", "AI"],
-  
+
   // Author info
   authors: [{ name: "Himanshu Sharma" }],
-  
+
   // Open Graph metadata (for social media sharing)
   openGraph: {
     title: "Himanshu Sharma | Personal Portfolio",
@@ -49,18 +49,19 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode; 
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" className="no-scrollbar">
-      
+
       <body
+        suppressHydrationWarning
         className={`
-          ${spaceGrotesk.variable} 
-          ${inter.variable} 
-          ${jetbrainsMono.variable}
-          antialiased
-        `}
+    ${spaceGrotesk.variable} 
+    ${inter.variable} 
+    ${jetbrainsMono.variable}
+    antialiased
+  `}
       >
         {children}
       </body>

@@ -2,16 +2,40 @@
 
 import { Canvas } from '@react-three/fiber'
 import { Preload } from '@react-three/drei'
+import Hero from './Hero';
 
-export default function Scene({ children, ...props }: any) {
+interface SceneProps {
+  children?: React.ReactNode;
+}
+
+export default function Scene({ children }: SceneProps) {
   return (
-    <div className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none">
-      <Canvas {...props}>
-        {/* Helper lights for development */}
-        <directionalLight position={[-5, 5, 5]} intensity={4} />
+    <div className="fixed inset-0 -z-10">
+      {}
+      
+      <Canvas
+        camera={{
+          position: [0, 0, 10],  // Camera 10 units back
+          fov: 50,               // 50° field of view
+          near: 0.1,             // Don't render closer than 0.1
+          far: 100,              // Don't render farther than 100
+        }}
+        dpr={[1, 2]}  // Pixel ratio: 1x to 2x (for retina)
+      >
+        {}
+        
+        {}
+        <ambientLight intensity={0.5} />
+        
+        {}
+        <Hero />
+        
+        {}
         {children}
+        
+        {}
         <Preload all />
       </Canvas>
     </div>
-  )
+  );
 }

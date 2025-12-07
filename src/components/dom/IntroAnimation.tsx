@@ -1,21 +1,27 @@
 'use client'
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useStore } from '@/store/useStore';
 
 export default function IntroAnimation() {
+  const [hasMounted, setHasMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const setIntroComplete = useStore((state) => state.setIntroComplete);
   const isComplete = useStore((state) => state.isIntroComplete);
+
+  // After hydration completes, mark as mounted
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  
   useGSAP(() => {
-    if (isComplete) return;    
+    if (!hasMounted || isComplete) return;
+    
     const tl = gsap.timeline({
       onComplete: () => setIntroComplete(true)
     });
-    
-    
     
     tl.from('.intro-hello', {
       opacity: 0,        // Start invisible
@@ -59,46 +65,25 @@ export default function IntroAnimation() {
     }, '-=0.3')
     
     
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [hasMounted, isComplete] });
   
   
-  if (isComplete) return null;
+  if (!hasMounted || isComplete) {
+    return null;
+  }
+
   
   
-  return (
-    <div 
+    return (
+    <div
       ref={containerRef}
-  
-      className="
-        fixed inset-0 z-50
-        flex items-center justify-center
-        bg-[var(--void-black)]
-      "
-      >
-      {}
-      <div 
-        className="intro-text"
-        style={{ transformOrigin: 'top right' }}
-      >
-        {}
-        <h1 
-          className="
-            intro-hello
-            font-heading text-[12vw] leading-none
-            text-[var(--photon-white)]
-          "
-        >
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--void-black)]"
+    >
+      <div className="intro-text" style={{ transformOrigin: 'top right' }}>
+        <h1 className="intro-hello font-heading text-[12vw] leading-none text-[var(--photon-white)]">
           Hello
         </h1>
-        
-        {}
-        <h1 
-          className="
-            intro-universe
-            font-heading text-[12vw] leading-none
-            text-[var(--photon-white)]
-          "
-        >
+        <h1 className="intro-universe font-heading text-[12vw] leading-none text-[var(--photon-white)]">
           Universe
         </h1>
       </div>
