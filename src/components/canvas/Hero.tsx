@@ -3,6 +3,7 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { scrollState } from './WorldlineScene';
 
 const CONFIG = {
     PARTICLE_COUNT: 1000,
@@ -20,9 +21,11 @@ interface Particle {
 
 export default function Hero() {
     const meshRef = useRef<THREE.InstancedMesh>(null);
+    const materialRef = useRef<THREE.MeshBasicMaterial>(null);
     const mouse3D = useRef(new THREE.Vector3(0, 0, 0));
     const isClicked = useRef(false);
     const clickPos = useRef(new THREE.Vector3());
+    const currentOpacity = useRef(0.8);
 
     const { viewport, size } = useThree();
 
@@ -96,6 +99,28 @@ export default function Hero() {
             initialized.current = true;
         }
 
+        // Fade out particles when scrolling past first viewport (hero section)
+        // Start fading after 0.5 viewport, fully faded by 2 viewports
+        const viewportHeight = window.innerHeight;
+        const scrollY = scrollState.pageScrollY;
+        const fadeStart = viewportHeight * 0.5;  // Start fading halfway through hero
+        const fadeEnd = viewportHeight * 2;      // Fully gone before Worldline
+        
+        let targetOpacity = 0.8;
+        if (scrollY > fadeStart) {
+            const fadeProgress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
+            targetOpacity = Math.max(0, 0.8 * (1 - fadeProgress));
+        }
+        
+        currentOpacity.current = THREE.MathUtils.lerp(currentOpacity.current, targetOpacity, 0.12);
+        
+        if (materialRef.current) {
+            materialRef.current.opacity = currentOpacity.current;
+        }
+
+        // Skip particle updates if nearly invisible
+        if (currentOpacity.current < 0.02) return;
+
         particles.forEach((particle, index) => {
             // Brownian motion
             particle.velocity.x += (Math.random() - 0.5) * CONFIG.BROWNIAN_STRENGTH;
@@ -164,7 +189,7 @@ export default function Hero() {
             args={[undefined, undefined, CONFIG.PARTICLE_COUNT]}
         >
             <sphereGeometry args={[CONFIG.PARTICLE_SIZE, 8, 8]} />
-            <meshBasicMaterial color="#F0F0F0" transparent opacity={0.8} />
+            <meshBasicMaterial ref={materialRef} color="#F0F0F0" transparent opacity={0.8} />
         </instancedMesh>
     );
 }

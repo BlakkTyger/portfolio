@@ -1,12 +1,14 @@
 'use client'
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import WorldlineGrid from './WorldlineGrid';
 
 // Store scroll progress globally (updated from DOM)
-export const scrollState = { progress: 0 };
+// progress: worldline section progress (0-1)
+// pageScrollY: raw page scroll position for early particle fade
+export const scrollState = { progress: 0, pageScrollY: 0 };
 
 export default function WorldlineScene() {
   const groupRef = useRef<THREE.Group>(null);

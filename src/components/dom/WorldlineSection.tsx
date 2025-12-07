@@ -23,6 +23,9 @@ export default function WorldlineSection() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Track global page scroll for particle fade
+      scrollState.pageScrollY = window.scrollY;
+      
       if (!sectionRef.current) return;
 
       const rect = sectionRef.current.getBoundingClientRect();
@@ -49,7 +52,6 @@ export default function WorldlineSection() {
         // Calculate which milestone is active
         const exactIndex = progress * (totalMilestones - 1);
         const currentIndex = Math.min(Math.floor(exactIndex), totalMilestones - 1);
-        const progressWithinItem = exactIndex - currentIndex;
         
         setActiveIndex(currentIndex);
         setTransitionProgress(progress);
