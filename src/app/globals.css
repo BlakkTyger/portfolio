@@ -5,21 +5,60 @@
 @tailwind utilities;
 
 :root {
-  --background: #050505; /* Void Black */
-  --foreground: #f0f0f0; /* Photon White */
+  --void-black: #050505;
+  --event-horizon: #121212;
+  --spectral-violet: #8F00FF;
+  --terminal-cyan: #00FF9D;
+  --photon-white: #F0F0F0;
+  --tungsten-gray: #888888;
+  --background: var(--void-black);
+  --foreground: var(--photon-white);
+  --card: var(--event-horizon);
+  --muted: var(--tungsten-gray);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  overflow-x: hidden; /* Prevent horizontal scroll from animations */
+  overflow-x: hidden;
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
-/* Utilities for hiding scrollbars if needed */
+html {
+  scroll-behavior: smooth;
+}
+
+
+.font-heading {
+  font-family: var(--font-heading), system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+}
+
+code, pre {
+  font-family: var(--font-mono), monospace;
+}
+
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none;  
+  scrollbar-width: none;      
+}
+
+::selection {
+  background: var(--spectral-violet);
+  color: var(--photon-white);
 }
