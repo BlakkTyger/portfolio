@@ -4,6 +4,8 @@ import WhoAmI from '@/components/dom/WhoAmI';
 import CV from '@/components/dom/CV';
 import WorldlineSection from '@/components/dom/WorldlineSection';
 import ManifoldSection from '@/components/dom/ManifoldSection';
+import ProjectsSection from '@/components/dom/ProjectsSection';
+import Contact from '@/components/dom/Contact';
 import Navigation from '@/components/dom/Navigation';
 
 export default function Home() {
@@ -53,6 +55,16 @@ export default function Home() {
         {/* Interests Manifold Section */}
         <div className="pointer-events-auto">
           <ManifoldSection />
+        </div>
+        
+        {/* Projects Section */}
+        <div className="pointer-events-auto">
+          <ProjectsSection />
+        </div>
+        
+        {/* Contact Section */}
+        <div className="pointer-events-auto">
+          <Contact />
         </div>
         
       </div>

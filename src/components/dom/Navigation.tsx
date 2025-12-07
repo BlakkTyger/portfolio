@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { useStore } from '@/store/useStore';
 import NavLink from './NavLink';
 import MobileMenu from './MobileMenu';
 
@@ -11,19 +13,36 @@ const NAV_ITEMS = [
   { id: 'cv', label: 'CV' },
   { id: 'worldline', label: 'Journey' },
   { id: 'manifold', label: 'Interests' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
 ];
+
+const NAVBAR_HEIGHT = 80; // Height of navbar in pixels
 
 export default function Navigation() {
   const activeSection = useActiveSection();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isIntroComplete = useStore((state) => state.isIntroComplete);
   
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Calculate position with offset for navbar height
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - NAVBAR_HEIGHT;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
       setMobileOpen(false);
     }
   };
+  
+  // Hide navbar during intro animation
+  if (!isIntroComplete) {
+    return null;
+  }
   
   return (
     <>
@@ -50,6 +69,24 @@ export default function Navigation() {
                   />
                 </li>
               ))}
+              {/* Blog Link */}
+              <li>
+                <Link 
+                  href="/blog"
+                  className="text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
+                >
+                  Blog
+                </Link>
+              </li>
+              {/* Misc Link */}
+              <li>
+                <Link 
+                  href="/misc"
+                  className="text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
+                >
+                  Misc
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

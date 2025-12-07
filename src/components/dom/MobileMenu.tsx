@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 interface MobileMenuProps {
   items: Array<{ id: string; label: string }>;
@@ -92,6 +93,46 @@ export default function MobileMenu({
               </button>
             </li>
           ))}
+          {/* Blog Link */}
+          <li
+            style={{
+              transitionDelay: isOpen ? `${items.length * 50}ms` : '0ms',
+            }}
+            className={`
+              transition-all duration-500
+              ${isOpen 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-4'
+              }
+            `}
+          >
+            <Link
+              href="/blog"
+              className="font-heading text-3xl text-[var(--photon-white)]"
+            >
+              Blog
+            </Link>
+          </li>
+          {/* Misc Link */}
+          <li
+            style={{
+              transitionDelay: isOpen ? `${(items.length + 1) * 50}ms` : '0ms',
+            }}
+            className={`
+              transition-all duration-500
+              ${isOpen 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-4'
+              }
+            `}
+          >
+            <Link
+              href="/misc"
+              className="font-heading text-3xl text-[var(--photon-white)]"
+            >
+              Misc
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

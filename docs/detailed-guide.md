@@ -6137,11 +6137,11 @@ export default function ProjectModal({ category, onClose }: ProjectModalProps) {
 
 ## Phase 10 Checklist
 
-- [ ] `src/data/projects.ts` — Project data
-- [ ] `src/components/canvas/LightBeam.tsx` — Beam geometry
-- [ ] `src/components/canvas/Prism.tsx` — Central prism
-- [ ] `src/components/canvas/BeamSplitter.tsx` — Complete scene
-- [ ] `src/components/dom/ProjectModal.tsx` — Project details
+- [x] `src/data/projects.ts` — Project data
+- [x] `src/components/canvas/LightBeam.tsx` — Beam geometry
+- [x] `src/components/canvas/Prism.tsx` — Central prism
+- [x] `src/components/canvas/BeamSplitter.tsx` — Complete scene
+- [x] `src/components/dom/ProjectModal.tsx` — Project details
 - [ ] Beams animate and glow
 - [ ] Clicking beam opens modal
 - [ ] Projects filter by category
