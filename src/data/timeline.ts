@@ -18,7 +18,9 @@ const yearToZ = (year: number): number => {
   return -yearsAgo * 3;  // Each year = 3 units of depth (negative = in front of camera)
 };
 
-export const milestones: Milestone[] = [
+// Keep the interface and yearToZ exactly as they are above
+
+const rawMilestones: Milestone[] = [
   {
     id: 'birth',
     year: 2005,
@@ -75,4 +77,8 @@ export const milestones: Milestone[] = [
     category: 'personal',
     position: { x: 0, z: yearToZ(2025) },
   },
-].sort((a, b) => a.position.z - b.position.z);  // Sort by Z (most negative = furthest first)
+];
+
+export const milestones: Milestone[] = [...rawMilestones].sort(
+  (a, b) => a.position.z - b.position.z,
+);
