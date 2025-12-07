@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #050505; /* Void Black */
+  --foreground: #f0f0f0; /* Photon White */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+/* Utilities for hiding scrollbars if needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
