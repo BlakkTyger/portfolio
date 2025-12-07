@@ -1,17 +1,14 @@
-import dynamic from 'next/dynamic'
-
-// Lazy load the 3D scene to prevent hydration errors
-const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
+import SceneWrapper from '@/components/canvas/SceneWrapper'
 
 export default function Home() {
   return (
     <main className="relative w-full h-screen">
-      {/* The 3D Layer */}
-      <Scene />
+      {/* Now we use the wrapper, which is safe for Server Components */}
+      <SceneWrapper />
       
-      {/* The DOM Layer */}
+      {/* The DOM Layer (Text) remains Server-Side Rendered for SEO */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full pointer-events-none">
-        <h1 className="text-6xl font-bold tracking-tighter pointer-events-auto">
+        <h1 className="text-6xl font-bold tracking-tighter pointer-events-auto mix-blend-difference">
           HELLO, UNIVERSE
         </h1>
         <p className="mt-4 text-gray-400">System Initialization...</p>
