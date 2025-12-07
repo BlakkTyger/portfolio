@@ -1,7 +1,11 @@
 # TODO
 
 - [ ] Loading Animation : Rethink text, typography, design, animations
-- [ ]  
+- [ ] Smooth transition from loading animation to the landing page
+- [ ] Paticles Animation: Improve, too distracting right now, and very basic. Make it more interesting, more relevant.
+- [ ] Paticles Animation: Change (tone down) as we scroll down
+- [ ] Improve Landing Page: Physicist • Developer • Philosopher animation
+- [ ] 
 
 
 

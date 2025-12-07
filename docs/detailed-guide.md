@@ -4639,14 +4639,14 @@ export default function Worldline() {
 
 After completing these phases, you should have:
 
-- [ ] `src/data/content.ts` — Content data file
-- [ ] `src/data/timeline.ts` — Timeline milestones
-- [ ] `src/components/dom/SectionWrapper.tsx` — Reusable scroll wrapper
-- [ ] `src/components/dom/WhoAmI.tsx` — Biography section
-- [ ] `src/components/dom/CV.tsx` — Skills and experience
-- [ ] `src/components/canvas/TimelineMarker.tsx` — 3D milestone markers
-- [ ] `src/components/canvas/WorldlineGrid.tsx` — Animated grid
-- [ ] `src/components/canvas/Worldline.tsx` — Main timeline component
+- [x] `src/data/content.ts` — Content data file
+- [x] `src/data/timeline.ts` — Timeline milestones
+- [x] `src/components/dom/SectionWrapper.tsx` — Reusable scroll wrapper
+- [x] `src/components/dom/WhoAmI.tsx` — Biography section
+- [x] `src/components/dom/CV.tsx` — Skills and experience
+- [x] `src/components/canvas/TimelineMarker.tsx` — 3D milestone markers
+- [x] `src/components/canvas/WorldlineGrid.tsx` — Animated grid
+- [x] `src/components/canvas/Worldline.tsx` — Main timeline component
 - [ ] All sections animate on scroll
 - [ ] Timeline camera moves with scroll
 

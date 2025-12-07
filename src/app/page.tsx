@@ -2,6 +2,7 @@ import IntroAnimation from '@/components/dom/IntroAnimation';
 import SceneWrapper from '@/components/canvas/SceneWrapper';
 import WhoAmI from '@/components/dom/WhoAmI';
 import CV from '@/components/dom/CV';
+import WorldlineSection from '@/components/dom/WorldlineSection';
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
       <SceneWrapper />
       
       {/* Content Layer */}
-      <div className="relative z-10">
+      <div className="relative z-10 pointer-events-none">
         {/* Hero Section (first viewport) */}
         <section className="h-screen flex items-center justify-center">
           <div className="text-center">
@@ -37,9 +38,13 @@ export default function Home() {
         <WhoAmI />
         
         {/* CV Section */}
-        <CV />
+        <div className="pointer-events-auto">
+          <CV />
+        </div>
         
-        {/* More sections will be added here */}
+        {/* Worldline Timeline Section */}
+        <WorldlineSection />
+        
       </div>
     </main>
   );

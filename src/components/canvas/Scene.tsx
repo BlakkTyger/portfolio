@@ -3,6 +3,7 @@
 import { Canvas } from '@react-three/fiber'
 import { Preload } from '@react-three/drei'
 import Hero from './Hero';
+import WorldlineScene from './WorldlineScene';
 
 interface SceneProps {
   children?: React.ReactNode;
@@ -11,29 +12,24 @@ interface SceneProps {
 export default function Scene({ children }: SceneProps) {
   return (
     <div className="fixed inset-0 -z-10">
-      {}
-      
       <Canvas
         camera={{
-          position: [0, 0, 10],  // Camera 10 units back
-          fov: 50,               // 50° field of view
-          near: 0.1,             // Don't render closer than 0.1
-          far: 100,              // Don't render farther than 100
+          position: [0, 0, 10],
+          fov: 50,
+          near: 0.1,
+          far: 200,
         }}
-        dpr={[1, 2]}  // Pixel ratio: 1x to 2x (for retina)
+        dpr={[1, 2]}
       >
-        {}
-        
-        {}
         <ambientLight intensity={0.5} />
         
-        {}
+        {/* Hero particles for landing */}
         <Hero />
         
-        {}
-        {children}
+        {/* Worldline timeline */}
+        <WorldlineScene />
         
-        {}
+        {children}
         <Preload all />
       </Canvas>
     </div>
