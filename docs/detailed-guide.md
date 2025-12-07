@@ -4756,7 +4756,7 @@ src/
 ---
 
 ## File 1: Interests Data
-
+;
 **File:** `src/data/interests.ts`
 
 ```typescript

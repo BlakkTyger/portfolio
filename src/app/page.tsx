@@ -3,6 +3,7 @@ import SceneWrapper from '@/components/canvas/SceneWrapper';
 import WhoAmI from '@/components/dom/WhoAmI';
 import CV from '@/components/dom/CV';
 import WorldlineSection from '@/components/dom/WorldlineSection';
+import ManifoldSection from '@/components/dom/ManifoldSection';
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
         <section className="h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="font-heading text-6xl md:text-8xl text-[var(--photon-white)] mb-4">
-              Your Name
+              Himanshu Sharma
             </h1>
             <p className="text-xl text-[var(--tungsten-gray)]">
               Physicist • Developer • Philosopher
@@ -44,6 +45,11 @@ export default function Home() {
         
         {/* Worldline Timeline Section */}
         <WorldlineSection />
+        
+        {/* Interests Manifold Section */}
+        <div className="pointer-events-auto">
+          <ManifoldSection />
+        </div>
         
       </div>
     </main>
