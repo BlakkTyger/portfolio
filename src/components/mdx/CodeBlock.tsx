@@ -3,24 +3,28 @@
 import { useState } from 'react';
 
 interface CodeBlockProps {
-  children: React.ReactNode;
+  children: React.ReactElement<{
+    className?: string;
+    children?: string;
+  }>;
 }
+
 
 export default function CodeBlock({ children }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   
   // Extract code content and language
-  const codeElement = children as React.ReactElement;
-  const className = codeElement?.props?.className || '';
+  const codeElement = children;
+  const className = codeElement.props.className || '';
   const language = className.replace('language-', '');
-  const code = codeElement?.props?.children || '';
-  
+  const code = codeElement.props.children || '';
+
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-  
+
   return (
     <div className="relative my-6 rounded-xl overflow-hidden">
       {/* Language label */}
