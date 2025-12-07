@@ -4,6 +4,7 @@ import WhoAmI from '@/components/dom/WhoAmI';
 import CV from '@/components/dom/CV';
 import WorldlineSection from '@/components/dom/WorldlineSection';
 import ManifoldSection from '@/components/dom/ManifoldSection';
+import Navigation from '@/components/dom/Navigation';
 
 export default function Home() {
   return (
@@ -11,13 +12,16 @@ export default function Home() {
       {/* Intro Animation (plays once) */}
       <IntroAnimation />
       
+      {/* Navigation (fixed) */}
+      <Navigation />
+      
       {/* 3D Background (fixed, behind everything) */}
       <SceneWrapper />
       
       {/* Content Layer */}
       <div className="relative z-10 pointer-events-none">
         {/* Hero Section (first viewport) */}
-        <section className="h-screen flex items-center justify-center">
+        <section id="hero" className="h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="font-heading text-6xl md:text-8xl text-[var(--photon-white)] mb-4">
               Himanshu Sharma

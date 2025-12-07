@@ -5,7 +5,18 @@
 - [ ] Paticles Animation: Improve, too distracting right now, and very basic. Make it more interesting, more relevant.
 - [ ] Paticles Animation: Change (tone down) as we scroll down
 - [ ] Improve Landing Page: Physicist • Developer • Philosopher animation
-- [ ] 
+- [ ] Add CV pdf
+- [ ] Worldline:
+  - [ ] Make a better narrative
+  - [ ] Ideate and Design Graphics
+  - [ ] Add graphcs and animations to website
+  - [ ] Better and smoother scroll animations and sync with graphcs animations
+  - [ ] Fix timeline ending animations
+- [ ] Interests Manifold
+  - [ ] Latency and efficiency
+  - [ ] Neatness - Heading + Graph
+  - [ ] Responsiveness
+  - [ ] Better Content and Linking
 
 
 
