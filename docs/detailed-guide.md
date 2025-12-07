@@ -4647,8 +4647,8 @@ After completing these phases, you should have:
 - [x] `src/components/canvas/TimelineMarker.tsx` — 3D milestone markers
 - [x] `src/components/canvas/WorldlineGrid.tsx` — Animated grid
 - [x] `src/components/canvas/Worldline.tsx` — Main timeline component
-- [ ] All sections animate on scroll
-- [ ] Timeline camera moves with scroll
+- [x] All sections animate on scroll
+- [x] Timeline camera moves with scroll
 
 ## Testing Phases 4-6
 

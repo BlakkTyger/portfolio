@@ -11,11 +11,11 @@ export interface Milestone {
 }
 
 // Helper to calculate Z position from year
-// Earlier years = further away (larger Z), recent = closer (smaller Z)
+// Earlier years = further away (more negative Z), recent = closer to camera
 const yearToZ = (year: number): number => {
   const currentYear = new Date().getFullYear();
   const yearsAgo = currentYear - year;
-  return yearsAgo * 5;  // Each year = 5 units of depth
+  return -yearsAgo * 3;  // Each year = 3 units of depth (negative = in front of camera)
 };
 
 export const milestones: Milestone[] = [
@@ -75,4 +75,4 @@ export const milestones: Milestone[] = [
     category: 'personal',
     position: { x: 0, z: yearToZ(2024) },
   },
-].sort((a, b) => a.position.z - b.position.z);  // Sort by Z (furthest first)
+].sort((a, b) => a.position.z - b.position.z);  // Sort by Z (most negative = furthest first)
