@@ -3896,11 +3896,11 @@ export default function WhoAmI() {
 
 ### What This Component Does
 
-Displays your professional experience and skills:
-- Skills with progress bars
-- Experience timeline
-- Education history
-- All with scroll animations
+Displays a simple section with a button that opens your full CV as a PDF in a new browser tab.
+
+**Setup:**
+1. Place your CV PDF file in the `public` folder (e.g., `public/cv.pdf`)
+2. The link will point to `/cv.pdf` which Next.js serves from the public folder
 
 **File:** `src/components/dom/CV.tsx`
 
@@ -3908,183 +3908,20 @@ Displays your professional experience and skills:
 /* ============================================================
    CV / RESUME COMPONENT
    
-   Displays skills, experience, and education with
-   animated progress bars and timeline entries.
+   Simple section with a button to view/download CV as PDF.
+   PDF should be placed in the public folder.
    ============================================================ */
 
 'use client'
 
-import { skills, experiences, type Skill, type Experience } from '@/data/content';
 import SectionWrapper from './SectionWrapper';
-
-// === SUB-COMPONENTS ===
-
-/**
- * SkillBar - Animated progress bar for a skill
- */
-function SkillBar({ skill, index }: { skill: Skill; index: number }) {
-  return (
-    <div 
-      className="animate-item mb-4"
-      style={{ animationDelay: `${index * 50}ms` }}
-      /*
-         animationDelay staggers the CSS animation.
-         Index 0: 0ms delay
-         Index 1: 50ms delay
-         Index 2: 100ms delay, etc.
-      */
-    >
-      {/* Skill name and percentage */}
-      <div className="flex justify-between mb-2">
-        <span className="text-[var(--photon-white)]">{skill.name}</span>
-        <span className="text-[var(--tungsten-gray)]">{skill.level}%</span>
-      </div>
-      
-      {/* Progress bar background */}
-      <div className="h-2 bg-[var(--void-black)] rounded-full overflow-hidden">
-        {/*
-           h-2: 8px height
-           rounded-full: Pill shape
-           overflow-hidden: Clip the inner bar to rounded edges
-        */}
-        
-        {/* Progress bar fill */}
-        <div
-          className="h-full rounded-full transition-all duration-1000 ease-out"
-          style={{
-            width: `${skill.level}%`,
-            backgroundColor: skill.category === 'development' 
-              ? 'var(--terminal-cyan)' 
-              : skill.category === 'research'
-                ? 'var(--spectral-violet)'
-                : 'var(--tungsten-gray)',
-          }}
-          /*
-             DYNAMIC STYLES:
-             
-             width: Set to skill level (0-100%)
-             backgroundColor: Different color per category
-               - development: cyan/green
-               - research: violet/purple
-               - tools: gray
-             
-             transition-all duration-1000: Animate width change
-             over 1 second (for scroll-trigger effect)
-          */
-        />
-      </div>
-    </div>
-  );
-}
-
-/**
- * ExperienceCard - A single experience entry
- */
-function ExperienceCard({ experience }: { experience: Experience }) {
-  return (
-    <div className="animate-item relative pl-8 pb-12 border-l-2 border-[var(--tungsten-gray)]/30 last:pb-0">
-      {/*
-         TIMELINE STYLING:
-         
-         pl-8: Padding left for the timeline dot
-         pb-12: Padding bottom (space before next entry)
-         border-l-2: Left border (the timeline line)
-         border-[...]/30: 30% opacity gray
-         last:pb-0: Remove bottom padding on last item
-      */}
-      
-      {/* Timeline Dot */}
-      <div 
-        className="absolute left-0 top-0 w-4 h-4 rounded-full -translate-x-1/2"
-        style={{
-          backgroundColor: experience.type === 'work'
-            ? 'var(--terminal-cyan)'
-            : experience.type === 'research'
-              ? 'var(--spectral-violet)'
-              : 'var(--photon-white)',
-        }}
-        /*
-           Timeline dot positioned on the left border.
-           -translate-x-1/2 centers it on the border line.
-           Color based on experience type.
-        */
-      />
-      
-      {/* Period and Location */}
-      <div className="flex flex-wrap items-center gap-2 mb-2">
-        <span className="text-[var(--terminal-cyan)] font-mono text-sm">
-          {experience.period}
-        </span>
-        <span className="text-[var(--tungsten-gray)]">•</span>
-        <span className="text-[var(--tungsten-gray)] text-sm">
-          {experience.location}
-        </span>
-      </div>
-      
-      {/* Title */}
-      <h3 className="text-xl font-heading text-[var(--photon-white)] mb-1">
-        {experience.title}
-      </h3>
-      
-      {/* Organization */}
-      <p className="text-[var(--tungsten-gray)] mb-4">
-        {experience.organization}
-      </p>
-      
-      {/* Description */}
-      <p className="text-[var(--photon-white)]/80 mb-4">
-        {experience.description}
-      </p>
-      
-      {/* Highlights */}
-      {experience.highlights.length > 0 && (
-        <ul className="space-y-2 mb-4">
-          {experience.highlights.map((highlight, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-[var(--photon-white)]/70">
-              <span className="text-[var(--terminal-cyan)] mt-1">▸</span>
-              {highlight}
-            </li>
-          ))}
-        </ul>
-      )}
-      
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2">
-        {experience.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-3 py-1 text-xs rounded-full bg-[var(--void-black)] text-[var(--tungsten-gray)]"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // === MAIN COMPONENT ===
 
 export default function CV() {
-  // Group skills by category
-  const skillsByCategory = {
-    development: skills.filter(s => s.category === 'development'),
-    research: skills.filter(s => s.category === 'research'),
-    tools: skills.filter(s => s.category === 'tools'),
-  };
-  /*
-     FILTER SKILLS
-     
-     Create three arrays, one for each category.
-     .filter() creates a new array with items that pass the test.
-  */
-  
   return (
     <SectionWrapper id="cv" animation="fade-up" stagger={true}>
-      <div className="max-w-6xl mx-auto">
-        {/*
-           max-w-6xl: Wider than WhoAmI (1152px) for two columns
-        */}
+      <div className="max-w-4xl mx-auto text-center">
         
         {/* Section Label */}
         <span className="animate-item text-[var(--spectral-violet)] text-sm font-mono uppercase tracking-widest mb-4 block">
@@ -4092,77 +3929,94 @@ export default function CV() {
         </span>
         
         {/* Main Heading */}
-        <h2 className="animate-item font-heading text-5xl md:text-6xl lg:text-7xl mb-16 text-[var(--photon-white)]">
-          Skills & Experience
+        <h2 className="animate-item font-heading text-5xl md:text-6xl lg:text-7xl mb-8 text-[var(--photon-white)]">
+          My CV
         </h2>
         
-        {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/*
-             RESPONSIVE GRID:
+        {/* Description */}
+        <p className="animate-item text-lg md:text-xl text-[var(--tungsten-gray)] mb-12 max-w-2xl mx-auto">
+          View my full curriculum vitae for a detailed overview of my 
+          education, experience, skills, and accomplishments.
+        </p>
+        
+        {/* CV Button */}
+        <a
+          href="/cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            animate-item
+            inline-flex items-center gap-3
+            px-8 py-4
+            bg-[var(--spectral-violet)]
+            hover:bg-[var(--spectral-violet)]/80
+            text-[var(--photon-white)]
+            font-heading text-lg
+            rounded-full
+            transition-all duration-300
+            hover:scale-105
+            hover:shadow-lg hover:shadow-[var(--spectral-violet)]/25
+          "
+          /*
+             BUTTON STYLES:
              
-             grid-cols-1: Single column on mobile
-             lg:grid-cols-2: Two columns on large screens
-             gap-16: 64px gap between columns/rows
-          */}
-          
-          {/* LEFT COLUMN: Skills */}
-          <div>
-            <h3 className="animate-item text-2xl font-heading mb-8 text-[var(--photon-white)]">
-              Technical Skills
-            </h3>
-            
-            {/* Development Skills */}
-            <div className="mb-8">
-              <h4 className="animate-item text-sm font-mono uppercase tracking-widest text-[var(--terminal-cyan)] mb-4">
-                Development
-              </h4>
-              {skillsByCategory.development.map((skill, i) => (
-                <SkillBar key={skill.name} skill={skill} index={i} />
-              ))}
-            </div>
-            
-            {/* Research Skills */}
-            <div className="mb-8">
-              <h4 className="animate-item text-sm font-mono uppercase tracking-widest text-[var(--spectral-violet)] mb-4">
-                Research
-              </h4>
-              {skillsByCategory.research.map((skill, i) => (
-                <SkillBar key={skill.name} skill={skill} index={i} />
-              ))}
-            </div>
-            
-            {/* Tools */}
-            <div>
-              <h4 className="animate-item text-sm font-mono uppercase tracking-widest text-[var(--tungsten-gray)] mb-4">
-                Tools & Platforms
-              </h4>
-              {skillsByCategory.tools.map((skill, i) => (
-                <SkillBar key={skill.name} skill={skill} index={i} />
-              ))}
-            </div>
-          </div>
-          
-          {/* RIGHT COLUMN: Experience */}
-          <div>
-            <h3 className="animate-item text-2xl font-heading mb-8 text-[var(--photon-white)]">
-              Experience
-            </h3>
-            
-            {/* Experience Timeline */}
-            <div>
-              {experiences.map((exp) => (
-                <ExperienceCard key={exp.id} experience={exp} />
-              ))}
-            </div>
-          </div>
-          
-        </div>
+             inline-flex items-center gap-3: Flexbox for icon + text
+             px-8 py-4: Generous padding
+             bg-[...]: Purple background
+             hover:bg-[...]/80: Slightly transparent on hover
+             rounded-full: Pill shape
+             transition-all: Smooth transitions
+             hover:scale-105: Slight grow on hover
+             hover:shadow-lg: Add shadow on hover
+             
+             target="_blank": Opens in new tab
+             rel="noopener noreferrer": Security for external links
+          */
+        >
+          {/* Icon (optional - using Unicode, or use Lucide icon) */}
+          <svg 
+            className="w-5 h-5" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+            />
+          </svg>
+          View Full CV
+        </a>
+        
+        {/* Optional: Secondary text */}
+        <p className="animate-item mt-6 text-sm text-[var(--tungsten-gray)]">
+          Opens as PDF in a new tab
+        </p>
+        
       </div>
     </SectionWrapper>
   );
 }
 ```
+
+### Alternative: Using Lucide Icons
+
+If you have `lucide-react` installed, you can use a proper icon:
+
+```tsx
+import { FileDown } from 'lucide-react';
+
+// Then in the button:
+<FileDown className="w-5 h-5" />
+```
+
+### Notes
+
+- **PDF Location:** Place your CV at `public/cv.pdf`
+- **File Name:** You can change the path to match your file (e.g., `/resume.pdf`, `/himanshu-sharma-cv.pdf`)
+- **Download vs View:** Using `target="_blank"` opens the PDF in a new tab. If you want to force download instead, add the `download` attribute to the `<a>` tag
 
 ---
 
