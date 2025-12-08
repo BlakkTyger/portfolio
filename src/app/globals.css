@@ -11,6 +11,9 @@
   --terminal-cyan: #00FF9D;
   --photon-white: #F0F0F0;
   --tungsten-gray: #888888;
+  --quantum-purple: #A855F7;
+  --laser-orange: #F97316;
+  --beam-cyan: #22D3EE;
   --background: var(--void-black);
   --foreground: var(--photon-white);
   --card: var(--event-horizon);
@@ -77,4 +80,15 @@ code, pre {
 
 .animate-fade-in {
   animation: fade-in 0.6s ease-out forwards;
+}
+
+/* Beam splitter floating particles */
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+  50% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
+}
+
+@keyframes beam-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
 }

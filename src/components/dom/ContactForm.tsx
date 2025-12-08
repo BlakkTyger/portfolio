@@ -18,21 +18,26 @@ export default function ContactForm() {
     setStatus('loading');
     
     try {
-      // Option 1: Formspree (replace with your form ID)
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
       
-      if (response.ok) {
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        // Reset status after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000);
       } else {
-        throw new Error('Failed to send');
+        throw new Error(result.error || 'Failed to send');
       }
     } catch (error) {
       setStatus('error');
+      // Reset error status after 5 seconds
+      setTimeout(() => setStatus('idle'), 5000);
     }
   };
   

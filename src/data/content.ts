@@ -27,20 +27,12 @@ export interface SocialLink {
 export const personalInfo = {
   name: "Himanshu Sharma",
   tagline: "Physicist • Developer • Philosopher",
-  email: "your.email@example.com",
-  location: "Your City, Country",
+  email: "himans23@iitk.ac.in",
+  location: "Delhi, India",
   
   // Short bio for the WhoAmI section
   bio: `
-    I'm a physicist turned developer with a passion for understanding 
-    the fundamental nature of reality and building tools to explore it.
-    
-    My work spans quantum computing, machine learning, and web development.
-    I believe in the power of interdisciplinary thinking — the best ideas 
-    come from the intersections between fields.
-    
-    When I'm not coding or doing physics, you'll find me reading philosophy,
-    playing chess, or contemplating the nature of consciousness.
+    Here I will add a short bio
   `,
   
   // Longer bio paragraphs (for expanded view)
@@ -50,7 +42,7 @@ export const personalInfo = {
     `This led me to physics research, where I developed simulations 
      for quantum systems and explored the boundaries of computation.`,
     `Along the way, I discovered that software development is its own 
-     form of creation — building abstract machines that solve real problems.`,
+     form of creation - building abstract machines that solve real problems.`,
   ],
 };
 
@@ -131,7 +123,7 @@ export const experiences: Experience[] = [
 
 export const socialLinks: SocialLink[] = [
   { name: 'GitHub', url: 'https://github.com/BlakkTyger', icon: 'Github' },
-  { name: 'LinkedIn', url: 'https://linkedin.com/in/yourusername', icon: 'Linkedin' },
-  { name: 'Twitter', url: 'https://twitter.com/yourusername', icon: 'Twitter' },
-  { name: 'Email', url: 'mailto:your.email@example.com', icon: 'Mail' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/in/himanshu-sharma-152282217/', icon: 'Linkedin' },
+  { name: 'Twitter', url: 'https://x.com/blakktyger', icon: 'Twitter' },
+  { name: 'Email', url: 'mailto:himans23@iitk.ac.in', icon: 'Mail' },
 ];

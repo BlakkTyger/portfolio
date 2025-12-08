@@ -7,6 +7,7 @@ import ManifoldSection from '@/components/dom/ManifoldSection';
 import ProjectsSection from '@/components/dom/ProjectsSection';
 import Contact from '@/components/dom/Contact';
 import Navigation from '@/components/dom/Navigation';
+import HeroText from '@/components/dom/HeroText';
 
 export default function Home() {
   return (
@@ -24,21 +25,7 @@ export default function Home() {
       <div className="relative z-10 pointer-events-none">
         {/* Hero Section (first viewport) */}
         <section id="hero" className="h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="font-heading text-6xl md:text-8xl text-[var(--photon-white)] mb-4">
-              Himanshu Sharma
-            </h1>
-            <p className="text-xl text-[var(--tungsten-gray)]">
-              Physicist • Developer • Philosopher
-            </p>
-            
-            {/* Scroll indicator */}
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-              <div className="w-6 h-10 rounded-full border-2 border-[var(--tungsten-gray)]/50 flex justify-center">
-                <div className="w-1.5 h-3 bg-[var(--tungsten-gray)] rounded-full mt-2 animate-bounce" />
-              </div>
-            </div>
-          </div>
+          <HeroText />
         </section>
         
         {/* WhoAmI Section */}

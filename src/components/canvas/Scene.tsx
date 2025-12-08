@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { Preload } from '@react-three/drei'
 import Hero from './Hero';
 import WorldlineScene from './WorldlineScene';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 interface SceneProps {
   children?: React.ReactNode;
@@ -30,6 +31,17 @@ export default function Scene({ children }: SceneProps) {
         <WorldlineScene />
         
         {children}
+
+        {/*
+        <EffectComposer>
+          <Bloom
+            intensity={0.4}          // how strong the glow is
+            luminanceThreshold={0.0} // 0 = glow even on darker stuff
+            luminanceSmoothing={0.6}
+            radius={0.5}             // how wide/soft the halo is
+          />
+        </EffectComposer>*/}
+
         <Preload all />
       </Canvas>
     </div>

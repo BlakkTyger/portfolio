@@ -1,22 +1,22 @@
 # TODO
 
-- [ ] Loading Animation : Rethink text, typography, design, animations
-- [ ] Smooth transition from loading animation to the landing page
-- [ ] Paticles Animation: Improve, too distracting right now, and very basic. Make it more interesting, more relevant.
-- [ ] Paticles Animation: Change (tone down) as we scroll down
-- [ ] Improve Landing Page: Physicist • Developer • Philosopher animation
+- [x] Loading Animation : Rethink text, typography, design, animations
+- [x] Smooth transition from loading animation to the landing page
+- [x] Paticles Animation: Improve, too distracting right now, and very basic. Make it more interesting, more relevant.
+- [x] Paticles Animation: Change (tone down) as we scroll down
+- [x] Improve Landing Page: Physicist • Developer • Philosopher animation
 - [ ] Add CV pdf
 - [ ] Worldline:
   - [ ] Make a better narrative
   - [ ] Ideate and Design Graphics
   - [ ] Add graphcs and animations to website
   - [ ] Better and smoother scroll animations and sync with graphcs animations
-  - [ ] Fix timeline ending animations
+  - [x] Fix timeline ending animations
 - [ ] Interests Manifold
   - [ ] Latency and efficiency
-  - [ ] Neatness - Heading + Graph
-  - [ ] Responsiveness
-  - [ ] Better Content and Linking
+  - [x] Neatness - Heading + Graph
+  - [x] Responsiveness
+  - [x] Better Content and Linking
 
 
 
