@@ -92,19 +92,23 @@ export default function Navigation() {
               {/* External Links Separator */}
               <li className="h-4 w-px bg-[var(--tungsten-gray)]/30" />
               
-              {/* Blog Link - External */}
+              {/* Simple Profile Link */}
               <li>
                 <Link 
-                  href="/blog"
-                  className="group relative px-3 py-1.5 text-sm font-mono uppercase tracking-widest
-                    text-[var(--quantum-purple)] hover:text-[var(--photon-white)]
-                    border border-[var(--quantum-purple)]/40 rounded-full
-                    hover:border-[var(--quantum-purple)] hover:bg-[var(--quantum-purple)]/10
-                    transition-all duration-300"
+                  href="/simple"
+                  className="group relative px-3 py-1.5 text-sm font-mono uppercase tracking-widest text-[#8F00FF] hover:text-[var(--photon-white)] border border-[#8F00FF]/40 rounded-full hover:border-[#8F00FF] hover:bg-[#8F00FF]/10 transition-all duration-300"
+                >
+                  <span className="relative z-10">Minimal Website</span>
+                </Link>
+              </li>
+              {/* Blog Link - External */}
+              <li>
+                <div 
+                  className="group relative px-3 py-1.5 text-sm font-mono uppercase tracking-widest text-[var(--tungsten-gray)] cursor-not-allowed border border-[var(--tungsten-gray)]/20 rounded-full flex flex-col items-center justify-center transition-all duration-300"
                 >
                   <span className="relative z-10">Blog</span>
-                  <span className="absolute top-0 right-0 -mt-1 -mr-1 w-2 h-2 rounded-full bg-[var(--quantum-purple)] animate-pulse" />
-                </Link>
+                  <span className="text-[8px] tracking-tighter opacity-70 mt-0.5 lowercase">under construction</span>
+                </div>
               </li>
               {/* Misc Link - External */}
               <li>
@@ -125,7 +129,7 @@ export default function Navigation() {
         </div>
         
         {/* Backdrop blur */}
-        <div className="absolute inset-0 -z-10 bg-[var(--void-black)]/80 backdrop-blur-md" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--void-black)] to-transparent backdrop-blur-lg border-b border-[var(--tungsten-gray)]/10" />
       </nav>
       
       {/* Mobile Navigation */}

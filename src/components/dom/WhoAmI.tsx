@@ -28,7 +28,7 @@ export default function WhoAmI() {
         </p>
         
         {/* Bio Card */}
-        <div className="animate-item bg-[var(--event-horizon)] rounded-2xl p-8 md:p-12 mb-12">
+        <div className="animate-item bg-gradient-to-b from-[var(--event-horizon)] to-transparent rounded-2xl border border-[var(--tungsten-gray)]/10 shadow-[0_0_40px_rgba(143,0,255,0.05)] backdrop-blur-sm p-8 md:p-12 mb-12">
           
           <div className="prose prose-invert prose-lg max-w-none">
             
@@ -56,14 +56,7 @@ export default function WhoAmI() {
             ].map((interest) => (
               <span
                 key={interest}
-                className="
-                  px-4 py-2 rounded-full
-                  bg-[var(--void-black)]
-                  border border-[var(--tungsten-gray)]/30
-                  text-sm text-[var(--photon-white)]
-                  hover:border-[var(--terminal-cyan)]/50
-                  transition-colors duration-300
-                "
+                className="px-4 py-2 rounded-full bg-[var(--void-black)] border border-[var(--tungsten-gray)]/30 text-sm text-[var(--photon-white)] hover:border-[var(--terminal-cyan)]/50 transition-colors duration-300"
                 
               >
                 {interest}

@@ -84,7 +84,7 @@ export default function HeroText() {
       {/* Main rotating title - LARGER and more prominent */}
       <div className="relative">
         {/* Static "Student" */}
-        <div className="flex items-center justify-center gap-3 md:gap-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+        <div className="flex items-center justify-center gap-3 md:gap-5 text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
           <span className="text-[var(--photon-white)] font-heading tracking-tight">Student</span>
           
           {/* Plus sign with subtle animation */}

@@ -173,10 +173,10 @@ export default function ProjectsSection() {
       </div>
 
       {/* Main Animation Container - Full screen */}
-      <div className="relative w-full h-full">
+      <div className="hidden md:block relative w-full h-full">
         
         {/* === LASER SOURCE (Left Edge) === */}
-        <div className="absolute left-4 md:left-8 top-[70%] -translate-y-1/2 z-20">
+        <div className="absolute left-2 sm:left-4 md:left-8 top-[70%] -translate-y-1/2 z-20">
           <div className={`
             relative w-16 md:w-24 h-10 md:h-14 bg-gradient-to-r from-zinc-900 to-zinc-800 
             rounded-r-lg border-2 border-zinc-700
@@ -205,7 +205,7 @@ export default function ProjectsSection() {
         {/* === INPUT BEAM (Laser to Center) === */}
         <div 
           className={`
-            absolute top-[70%] h-2 md:h-3 -translate-y-1/2
+            absolute top-[70%] h-1.5 sm:h-2 md:h-3 -translate-y-1/2
             transition-all duration-700 ease-out origin-left
             ${animationPhase >= 2 ? 'scale-x-100' : 'scale-x-0'}
           `}
@@ -355,8 +355,8 @@ export default function ProjectsSection() {
         <Link 
           href="/cs-projects"
           className={`
-            absolute right-2 md:right-6 top-[70%] -translate-y-1/2 z-20
-            flex flex-col items-center gap-2 p-3 md:p-5 rounded-2xl
+            absolute right-2 sm:right-4 md:right-6 top-[70%] -translate-y-1/2 z-20
+            flex flex-col items-center gap-2 p-2 sm:p-3 md:p-5 rounded-2xl
             transition-all duration-500 cursor-pointer w-28 md:w-40
             ${csLit 
               ? 'bg-[var(--event-horizon)]/90 border-2 border-[var(--terminal-cyan)] shadow-[0_0_60px_rgba(0,255,157,0.5)]' 
@@ -366,7 +366,7 @@ export default function ProjectsSection() {
           `}
         >
           <div className={`
-            w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center
+            w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center
             transition-all duration-500
             ${csLit 
               ? 'bg-[var(--terminal-cyan)] shadow-[0_0_40px_var(--terminal-cyan)]' 
@@ -403,7 +403,7 @@ export default function ProjectsSection() {
           href="/research"
           className={`
             absolute top-20 md:top-24 left-1/2 -translate-x-1/2 z-20
-            flex flex-col items-center gap-2 md:gap-3 p-4 md:p-6 rounded-2xl
+            flex flex-col items-center gap-2 md:gap-3 p-2 sm:p-4 md:p-6 rounded-2xl
             transition-all duration-500 cursor-pointer w-36 md:w-48
             ${physicsLit 
               ? 'bg-[var(--event-horizon)]/90 border-2 border-purple-500 shadow-[0_0_50px_rgba(139,92,246,0.4)]' 
@@ -413,7 +413,7 @@ export default function ProjectsSection() {
           `}
         >
           <div className={`
-            w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center
+            w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center
             transition-all duration-500
             ${physicsLit 
               ? 'bg-purple-500 shadow-[0_0_40px_#8F00FF]' 
@@ -452,43 +452,40 @@ export default function ProjectsSection() {
               key={i}
               className="absolute w-1 h-1 rounded-full bg-[var(--terminal-cyan)]/20"
               style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-                animation: `float ${4 + Math.random() * 3}s ease-in-out infinite`,
-                animationDelay: `${Math.random() * 2}s`,
+                left: `${10 + (Math.sin(i * 12.3) * 0.5 + 0.5) * 80}%`,
+                top: `${10 + (Math.cos(i * 45.6) * 0.5 + 0.5) * 80}%`,
+                animation: `float ${4 + (Math.sin(i * 78.9) * 0.5 + 0.5) * 3}s ease-in-out infinite`,
+                animationDelay: `${(Math.cos(i * 12.3) * 0.5 + 0.5) * 2}s`,
               }}
             />
           ))}
         </div>
       </div>
 
-      {/* Mobile buttons */}
-      <div className="absolute bottom-8 left-0 right-0 flex flex-wrap justify-center gap-4 md:hidden px-4 z-20">
+      {/* Mobile View */}
+      <div className="absolute inset-0 pt-24 pb-8 px-6 flex flex-col justify-center gap-6 md:hidden z-20 overflow-y-auto">
         <Link
           href="/cs-projects"
-          className={`
-            flex items-center gap-2 px-4 py-2 rounded-full transition-all text-sm
-            ${csLit 
-              ? 'bg-[var(--terminal-cyan)]/20 border border-[var(--terminal-cyan)]' 
-              : 'bg-[var(--event-horizon)]'
-            }
-          `}
+          className="group relative flex flex-col p-6 rounded-2xl bg-gradient-to-br from-[var(--event-horizon)] to-[var(--void-black)] border border-zinc-800 hover:border-[var(--terminal-cyan)] transition-all shadow-lg"
         >
-          <span className="w-3 h-3 rounded-full" style={{ backgroundColor: CYAN }} />
-          <span className="text-[var(--photon-white)]">CS Projects</span>
+          <div className="w-12 h-12 rounded-full bg-[var(--terminal-cyan)]/10 border border-[var(--terminal-cyan)] flex items-center justify-center mb-4">
+            <span className="font-mono text-xl text-[var(--terminal-cyan)]">{'{ }'}</span>
+          </div>
+          <h3 className="font-heading text-2xl text-white mb-2 group-hover:text-[var(--terminal-cyan)] transition-colors">CS Projects</h3>
+          <p className="text-[var(--tungsten-gray)] text-sm mb-4">Software development, machine learning, and web applications</p>
+          <div className="font-mono text-xs text-[var(--terminal-cyan)] opacity-60">01010101 →</div>
         </Link>
+        
         <Link
           href="/research"
-          className={`
-            flex items-center gap-2 px-4 py-2 rounded-full transition-all text-sm
-            ${physicsLit 
-              ? 'bg-purple-500/20 border border-purple-500' 
-              : 'bg-[var(--event-horizon)]'
-            }
-          `}
+          className="group relative flex flex-col p-6 rounded-2xl bg-gradient-to-br from-[var(--event-horizon)] to-[var(--void-black)] border border-zinc-800 hover:border-[#8F00FF] transition-all shadow-lg"
         >
-          <span className="w-3 h-3 rounded-full" style={{ backgroundColor: PURPLE }} />
-          <span className="text-[var(--photon-white)]">Physics Research</span>
+          <div className="w-12 h-12 rounded-full bg-[#8F00FF]/10 border border-[#8F00FF] flex items-center justify-center mb-4">
+            <span className="font-mono text-xl text-[#8F00FF]">ψ</span>
+          </div>
+          <h3 className="font-heading text-2xl text-white mb-2 group-hover:text-[#8F00FF] transition-colors">Physics Research</h3>
+          <p className="text-[var(--tungsten-gray)] text-sm mb-4">Quantum computing, optics, and computational physics</p>
+          <div className="font-mono text-xs text-[#8F00FF] opacity-60">∇²ψ + k²ψ = 0 →</div>
         </Link>
       </div>
     </section>

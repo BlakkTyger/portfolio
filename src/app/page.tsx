@@ -11,7 +11,7 @@ import HeroText from '@/components/dom/HeroText';
 
 export default function Home() {
   return (
-    <main className="relative">
+    <main className="relative w-full max-w-[100vw] ">
       {/* Intro Animation (plays once) */}
       <IntroAnimation />
       

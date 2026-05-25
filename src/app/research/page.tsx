@@ -61,7 +61,7 @@ export default function ResearchPage() {
           {physicsProjects.map((project) => (
             <article 
               key={project.id}
-              className="group p-8 bg-[var(--event-horizon)] rounded-xl border border-transparent hover:border-[#8F00FF]/30 transition-all"
+              className="group h-full flex flex-col p-8 bg-gradient-to-br from-[var(--event-horizon)] to-[var(--void-black)] rounded-xl border border-[var(--tungsten-gray)]/10 hover:border-[#8F00FF]/40 shadow-[0_0_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_40px_rgba(143,0,255,0.1)] transition-all"
             >
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Purple indicator */}
@@ -85,10 +85,22 @@ export default function ResearchPage() {
                     </span>
                   )}
                   
-                  {/* Title */}
-                  <h2 className="font-heading text-2xl md:text-3xl text-[var(--photon-white)] mt-2 mb-3 transition-colors group-hover:text-[#8F00FF]">
-                    {project.title}
-                  </h2>
+                  {/* Image placeholder / Asset renderer */}
+              {project.image && (
+                <div className="w-full h-48 mb-4 overflow-hidden rounded-lg bg-zinc-900 border border-zinc-800">
+                  {/* Replace with next/image later if optimized images exist */}
+                  <Link href={`/blog/project/${project.id}`} className="block w-full h-full">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                  </Link>
+                </div>
+              )}
+
+              {/* Title */}
+              <Link href={`/blog/project/${project.id}`} className="block">
+                <h2 className="font-heading text-2xl md:text-3xl text-[var(--photon-white)] mt-2 mb-3 transition-colors group-hover:text-[#8F00FF]">
+                  {project.title}
+                </h2>
+              </Link>
                   
                   {/* Description */}
                   <p className="text-[var(--tungsten-gray)] mb-4 text-lg">
@@ -108,11 +120,28 @@ export default function ResearchPage() {
                     ))}
                   </div>
                   
-                  {/* Links */}
+                  {/* Assets */}
+              {project.assets && (
+                <div className="flex flex-wrap gap-4 mb-4">
+                  {project.assets.document && (
+                    <a href={project.assets.document} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><FileText size={14} /> Document</a>
+                  )}
+                  {project.assets.ppt && (
+                    <a href={project.assets.ppt} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><Presentation size={14} /> PPT</a>
+                  )}
+                  {project.assets.link && (
+                    <a href={project.assets.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><ExternalLink size={14} /> Link</a>
+                  )}
+                </div>
+              )}
+
+              <div className="flex-grow"></div>
+
+              {/* Links */}
                   <div className="flex flex-wrap gap-6">
                     {project.links?.github && (
                       <a
-                        href={project.links.github}
+                    href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
@@ -123,7 +152,7 @@ export default function ResearchPage() {
                     )}
                     {project.links?.paper && (
                       <a
-                        href={project.links.paper}
+                    href={project.links.paper}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
@@ -134,7 +163,7 @@ export default function ResearchPage() {
                     )}
                     {project.links?.presentation && (
                       <a
-                        href={project.links.presentation}
+                    href={project.links.presentation}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
@@ -145,7 +174,7 @@ export default function ResearchPage() {
                     )}
                     {project.links?.website && (
                       <a
-                        href={project.links.website}
+                    href={project.links.website}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"

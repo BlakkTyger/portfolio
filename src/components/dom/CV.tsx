@@ -30,13 +30,7 @@ export default function CV() {
                     href="/cv.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="animate-item inline-flex items-center justify-center gap-3
-             px-6 py-3 rounded-full
-             bg-[var(--spectral-violet)] text-[var(--photon-white)]
-             font-heading text-lg
-             transition-transform transition-shadow transition-colors duration-300
-             hover:bg-[var(--spectral-violet)]/80
-             hover:scale-105 hover:shadow-lg hover:shadow-[var(--spectral-violet)]/25"
+                    className="animate-item inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-[var(--spectral-violet)] text-[var(--photon-white)] font-heading text-lg transition-transform transition-shadow transition-colors duration-300 hover:bg-[var(--spectral-violet)]/80 hover:scale-105 hover:shadow-lg hover:shadow-[var(--spectral-violet)]/40 hover:scale-[1.02]"
                 >
                     <svg
                         className="w-5 h-5"

@@ -265,11 +265,17 @@ export default function ManifoldSection() {
 
   useEffect(() => {
     const updateDimensions = () => {
-      // Fit graph with title visible - more width than height
-      const width = window.innerWidth - 40;
-      const height = window.innerHeight - 180; // More room for heading
-      setDimensions({ width, height });
-      setPositions(calculatePositions(width, height));
+      if (sectionRef.current) {
+        const width = sectionRef.current.clientWidth;
+        const height = sectionRef.current.clientHeight;
+        setDimensions({ width, height });
+        setPositions(calculatePositions(width, height));
+      } else {
+        const width = window.innerWidth - 40;
+        const height = 500;
+        setDimensions({ width, height });
+        setPositions(calculatePositions(width, height));
+      }
     };
 
     updateDimensions();
@@ -372,7 +378,7 @@ export default function ManifoldSection() {
         </h2>
       </div>
 
-      <div className="relative flex justify-center">
+      <div className="hidden md:flex relative justify-center">
         <svg 
           ref={svgRef}
           width={dimensions.width} 
@@ -741,6 +747,38 @@ export default function ManifoldSection() {
             </div>
           </div>
         )}
+      </div>
+      {/* Mobile View */}
+      <div className="md:hidden flex flex-col gap-6 mt-8">
+        {Object.entries(
+          nodes.reduce((acc, node) => {
+            acc[node.category] = acc[node.category] || [];
+            acc[node.category].push(node);
+            return acc;
+          }, {} as Record<string, typeof nodes>)
+        ).map(([category, catNodes]) => (
+          <div key={category} className="bg-[var(--event-horizon)] border border-[var(--tungsten-gray)]/20 p-5 rounded-xl">
+            <h3 className="text-sm font-mono uppercase tracking-widest mb-4 flex items-center gap-2" style={{ color: categoryColors[category] }}>
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: categoryColors[category] }} />
+              {category}
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {catNodes.map(node => (
+                <div key={node.id} className="group relative">
+                  <span 
+                    className="inline-block px-3 py-1.5 text-sm rounded-full border bg-[var(--void-black)] transition-colors"
+                    style={{ borderColor: `${categoryColors[category]}40`, color: '#ccc' }}
+                  >
+                    {node.label}
+                  </span>
+                  <div className="hidden group-hover:block absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 text-xs bg-zinc-900 border border-zinc-700 rounded shadow-xl text-zinc-300">
+                    {node.description}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

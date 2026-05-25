@@ -2,7 +2,6 @@
 
 import SectionWrapper from './SectionWrapper';
 import SocialLinks from './SocialLinks';
-import ContactForm from './ContactForm';
 import { personalInfo } from '@/data/content';
 
 export default function Contact() {
@@ -28,14 +27,6 @@ export default function Contact() {
             Connect
           </h3>
           <SocialLinks />
-        </div>
-        
-        {/* Contact Form (optional) */}
-        <div className="animate-item">
-          <h3 className="text-sm font-mono uppercase tracking-widest text-[var(--tungsten-gray)] mb-6">
-            Or Send a Message
-          </h3>
-          <ContactForm />
         </div>
         
         {/* Location */}

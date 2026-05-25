@@ -60,9 +60,17 @@ export default function Hero() {
         
         for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
             // More uniform distribution across entire screen
-            const x = (Math.random() - 0.5) * boundsX * 2.5;
-            const y = (Math.random() - 0.5) * boundsY * 2.5;
-            const z = (Math.random() - 0.5) * CONFIG.Z_DEPTH;
+            let x = (Math.random() - 0.5) * boundsX * 2.5;
+            let y = (Math.random() - 0.5) * boundsY * 2.5;
+            let z = (Math.random() - 0.5) * CONFIG.Z_DEPTH;
+            
+            // Push away from center text area (approx 4 units radius)
+            let distToCenter = Math.sqrt(x*x + y*y);
+            if (distToCenter < 4) {
+                let pushScale = 4 / distToCenter;
+                x *= pushScale;
+                y *= pushScale;
+            }
             
             const position = new THREE.Vector3(x, y, z);
             
@@ -169,6 +177,14 @@ export default function Hero() {
             // Gentle drift back to base position
             const toBase = new THREE.Vector3().subVectors(particle.basePosition, particle.position);
             particle.velocity.add(toBase.multiplyScalar(0.002));
+
+            // Center repulsion to keep text clear
+            const distCenter = Math.sqrt(particle.position.x * particle.position.x + particle.position.y * particle.position.y);
+            if (distCenter < 4.5 && Math.abs(particle.position.z) < 2) {
+                const repulsion = (4.5 - distCenter) * 0.02;
+                const dir = new THREE.Vector3(particle.position.x, particle.position.y, 0).normalize();
+                particle.velocity.add(dir.multiplyScalar(repulsion));
+            }
 
             // Mouse attraction (subtle)
             const toMouse = new THREE.Vector3().subVectors(mouse3D.current, particle.position);

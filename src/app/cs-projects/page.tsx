@@ -52,12 +52,12 @@ export default function CSProjectsPage() {
           {csProjects.map((project, index) => (
             <article 
               key={project.id}
-              className="group p-6 bg-[var(--event-horizon)] rounded-xl border border-[var(--tungsten-gray)]/10 hover:border-[var(--terminal-cyan)]/30 transition-all"
+              className="group h-full flex flex-col p-6 bg-gradient-to-br from-[var(--event-horizon)] to-[var(--void-black)] rounded-xl border border-[var(--tungsten-gray)]/10 hover:border-[var(--terminal-cyan)]/40 shadow-[0_0_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_40px_var(--terminal-cyan)] transition-all"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Binary header decoration */}
               <div className="text-[var(--terminal-cyan)]/20 font-mono text-xs mb-4">
-                {Array.from({ length: 8 }, () => Math.random() > 0.5 ? '1' : '0').join('')}
+                {Array.from({ length: 8 }, (_, j) => Math.sin(index * 10 + j) > 0 ? '1' : '0').join('')}
               </div>
               
               {/* Year */}
@@ -67,10 +67,22 @@ export default function CSProjectsPage() {
                 </span>
               )}
               
+              {/* Image placeholder / Asset renderer */}
+              {project.image && (
+                <div className="w-full h-48 mb-4 overflow-hidden rounded-lg bg-zinc-900 border border-zinc-800">
+                  {/* Replace with next/image later if optimized images exist */}
+                  <Link href={`/blog/project/${project.id}`} className="block w-full h-full">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                  </Link>
+                </div>
+              )}
+
               {/* Title */}
-              <h2 className="font-heading text-2xl text-[var(--photon-white)] mt-2 mb-3 group-hover:text-[var(--terminal-cyan)] transition-colors">
-                {project.title}
-              </h2>
+              <Link href={`/blog/project/${project.id}`} className="block">
+                <h2 className="font-heading text-2xl text-[var(--photon-white)] mt-2 mb-3 group-hover:text-[var(--terminal-cyan)] transition-colors">
+                  {project.title}
+                </h2>
+              </Link>
               
               {/* Description */}
               <p className="text-[var(--tungsten-gray)] mb-4">
@@ -89,6 +101,23 @@ export default function CSProjectsPage() {
                 ))}
               </div>
               
+              {/* Assets */}
+              {project.assets && (
+                <div className="flex flex-wrap gap-4 mb-4">
+                  {project.assets.document && (
+                    <a href={project.assets.document} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><FileText size={14} /> Document</a>
+                  )}
+                  {project.assets.ppt && (
+                    <a href={project.assets.ppt} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><Presentation size={14} /> PPT</a>
+                  )}
+                  {project.assets.link && (
+                    <a href={project.assets.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><ExternalLink size={14} /> Link</a>
+                  )}
+                </div>
+              )}
+
+              <div className="flex-grow"></div>
+
               {/* Links */}
               <div className="flex flex-wrap gap-4">
                 {project.links?.github && (

@@ -1,0 +1,125 @@
+Himanshu Sharma
+B.S. Physics (3rd Year)           ï Himanshu Sharma |        # himans23@iitk.ac.in |     +91-9999633455 |     § GitHub
+Academic Qualifications
+       Year               Degree/Certificate                          Institute                             CPI/%
+   2023 - Present           B.S. (Physics)             Indian Institute of Technology, Kanpur               8.0/10
+       2023                  CBSE(XII)                   Amity International School, Saket                   98.0%
+       2021                   CBSE(X)                    Amity International School, Saket                   98.2%
+
+Scholastic Achievements
+ • Secured All India Rank of 4506 in JEE Advanced 2023 among the 1,20,000+ candidates across India                 (2023)
+ • Qualified Pre Regional Mathematics Olympiad, ranked among top 300 in Delhi region                               (2019)
+
+Relevant Coursework (*) represents ongoing
+ • Physics: Quantum Physics (A), Quantum Computing and Communication (A), Nanophotonics (A), Quantum Me-
+   chanics II (*), Quantum Processes in Low Dimensional Semiconductors, Quantum Optics (*), Function Spaces for
+   Formalism of Quantum Mechanics (*), Mathematical Methods for Physics, Classical Electrodynamics (*), Statistical
+   Mechanics (*)
+ • Labs: Modern Physics Lab (A), Optics Lab, Electronics Lab
+
+Technical Skills                                                 – Implemented a 2D axisymmetric eigenfrequency
+ • Programming: Python, MATLAB, C, C++                             FEM model in COMSOL with PML boundaries to
+ • Computational Physics & Toolkits:              QuTiP,           compute whispering-gallery modes and quantify radia-
+   Qiskit, COMSOL Multiphysics, OriginPro                          tive loss.
+ • Machine Learning and Data Analysis: Tensor-                   – Performed mesh-convergence analysis and opti-
+   flow, Keras, PyTorch, Transformerlens, OpenCV                   mized ring geometry (radius 19.5–20.5 µm, 250 × 500
+ • Experimental Skills:        Crystal Growth, Chemical            nm waveguide) to spectrally align the fundamental
+   Vapor Transport, Scanning Electron Microscopy, X-ray            WGM (m = 354) with the NV ZPL, extracting Q and
+   Diffraction, Energy-Dispersive X-ray Spectroscopy               mode volume.
+                                                                 – Analyzed the Q–V trade-off and benchmarked
+Summer School                                                      against prior literature, revealing confinement-induced
+ IBM Quantum Global Summer School 2025  ©                         loss mechanisms intrinsic to microring architectures.
+ (July’25)                                                       – Achieved Q ≈ 1.7 × 105 with Purcell enhancement
+  – Developed a theoretical and hands-on understanding of          Fp ≈ 3.9, demonstrating fundamental emission-rate
+    Quantum Computing, Simulation, Advanced Algo-                  limits of microrings and motivating photonic crystal
+    rithms, Architectures, Hardware, Noise Charac-                 cavities for high-efficiency NV quantum interfaces.
+    terization, Error Correction, Benchmarking.
+  – Engineered the mathematical structure of Quantum
+    Error Correction (QEC) codes by constructing the             Quantum Optics Simulations, Cavity-QED Research © ø
+    stabilizer parity check matrices for locally-connected       Dr Rituraj, IIT Kanpur                (Nov’25 - Ongoing)
+    Toric code and non-local Gross (QLDPC) code.                  – Developed a unified computational and theoretical
+  – Characterized, mitigated computational errors by im-            framework to study light–matter interaction in con-
+    plementing Zero Noise Extrapolation with global                 fined quantum systems and photonic quantum comput-
+    and local circuit folding, demonstrating practical ap-          ing primitives.
+    proach to managing decoherence in quantum systems.            – Analyzed the validity and breakdown of the Rotat-
+  – Determined ground state energy of molecular Hamil-              ing Wave Approximation (RWA) in driven, time-
+    tonian (N2 ) using hybrid Sample-based Quantum                  dependent regimes.
+    Diagonalization algorithm, employing physically-              – Compared the full Rabi Hamiltonian with the
+    motivated LUCJ ansatz to prepare the quantum                    Jaynes–Cummings model by sweeping detuning
+    state.                                                          and coupling strength to quantify counter-rotating ef-
+  – Developed a post-processing workflow to correct noisy           fects and estimate error bounds.
+    experimental data by implementing a self-consistent           – Studied open quantum system dynamics using
+    configuration recovery technique that enforces                  Lindblad master equations and Landau–Zener tran-
+    physical symmetries.                                            sitions for non-adiabatic regimes.
+                                                                  – Implemented time-dependent Schrödinger evolution
+                                                                    with external driving, computed transition amplitudes
+Selected Research Projects                                          via time-dependent perturbation theory, and nu-
+ High-Q SiN Microring Resonator for Diamond NV Center               merically reproduced Rabi oscillations.
+ Purcell Enhancement P ø       |Dr Rituraj, IIT Kanpur            – Constructed photonic qubit representations and simu-
+ Course Project, Nanophotonics       (Sept’25 - Nov’25)             lated multi-mode optical dynamics to analyze elemen-
+  – Designed and simulated a SiN-on-SiO2 microring                  tary quantum gate operations.
+    resonator to enhance spontaneous emission of dia-             – Identified regimes of RWA failure and built a reusable
+    mond NV centers at the 637 nm zero-phonon line,                 simulation framework for coherent control, decoher-
+    targeting cavity-QED based spin–photon interfaces.              ence, and photonic quantum architectures.
+
+
+                                                             i
+Synthesis and Discovery of Electronic Phase Transitions in         Course Presentations
+Te-Rich N bN i2 T e2 Crystals P ø        |Dr Zakir Hossain,        Point Groups in 3D Crystal Structures ø            (Nov’25)
+IITK Course Project, Modern Physics Lab          (Sept’25 -        Dr Subhomoy Haldar, IIT Kanpur
+Nov’25)                                                            PHY312: Quantum Processes in Low Dim. Semiconduc-
+ – Synthesized layered Ni–Nb–Te single crystals and char-          tors
+   acterized their structure and transport properties to            – Presented crystallographic point groups as symmetry
+   identify correlated electronic behavior in a van der                operations governing anisotropy in optical, electrical,
+   Waals telluride system.                                             and mechanical properties of crystals, applying repre-
+ – Synthesized crystals using chemical vapor trans-                    sentation theory and character tables to identify orbital
+   port with a 1:2:2 Nb:Ni:Te starting ratio, iodine trans-            symmetries and degeneracies.
+   port agent, and a 950◦ C to 850◦ C temperature gradient          – Derived IR and Raman selection rules, explaining the
+   over 14 days, producing cleavable plate-like crystals.              role of inversion symmetry and the rule of mutual ex-
+ – Determined a Te-rich composition (Ni1.05 NbTe2.45 ) via             clusion.
+   SEM–EDX and confirmed strong c-axis preferred ori-               – Compared Si (Oh ) and GaAs (Td ), and analyzed
+   entation using X-ray diffraction dominated by sharp                 Rashba–Dresselhaus spin–orbit effects and symme-
+   (00ℓ) peaks.                                                        try breaking in monolayer MoS enabling spin–valley
+ – Measured temperature-dependent resistivity ρ(T ) from               physics.
+   300–4 K, verifying heating/cooling consistency to as-
+   sess hysteresis and transition order.                           Variational Circuits and Quantum Machine Learning ø
+ – Observed bad-metallic behavior (ρ(300 K) ≈                      Dr Washim Uddin Mondal, IIT Kanpur               (Mar’25)
+   450 µΩ · cm) with two anomalies: a transition near              EE798V Project: Quantum Computing and Comms.
+   275 K (no hysteresis) and a resistivity minimum                  – Studied variational quantum circuits with parameter-
+   near 111.5 K.                                                      ized gates for hybrid quantum–classical optimization,
+                                                                      focusing on Variational Quantum Eigensolver (VQE)
+Geometric and Dynamical Analysis of Function Vector                   and quantum machine learning workflows.
+Representations in Transformer Models P P                           – Analyzed quantum clustering algorithms (k-means, k-
+Dr Jivnesh Sandhan, Graduate School of Informatics, Ky-               median, kNN); compared asymptotic runtimes with
+oto University (Two manuscripts in preparation for ACL                classical methods.
+2026 Industry Track) |               (June’25 - Ongoing)            – Designed quantum pipelines for distance estimation via
+ – Modeled internal transformer representations as tra-               amplitude & angle embedding; implemented the swap-
+   jectory dynamics in a high-dimensional state                       test circuit.
+   space, revealing structured temporal evolution rather            – Evaluated trade-offs b/w amplitude and angle embed-
+   than static embedding behavior.                                    ding in terms of qubit cost, circuit depth, NISQ hard-
+ – Identified robust power-law scaling and systematic                 ware feasibility.
+   directional drift across GPT-2 layers (R2 = 0.86–
+   0.89), indicating constrained, non-random dynamics.
+ – Demonstrated that representation dynamics lie on a              Community Work
+   low-dimensional manifold (8–10 dominant modes,                  Programming Club |Coordinator (April’25 - Ongoing)
+   96% variance), enabling accurate long-horizon forecast-         Secretary (June’24 - April’25)
+   ing using low-rank state-space predictors.                       – Led a two-level team of over 30 students to orga-
+ – Achieved high-fidelity trajectory prediction (co-                  nize campus-wide hackathons, technical sessions, and
+   sine similarity up to 0.91) while reducing computa-                project activities that increased student participation
+   tional cost by 22–50% relative to full-model evalua-               in programming and computational thinking.
+   tion.                                                            – Mentored 20+ students on quantum algorithms and
+ – Diagnosed geometric failure modes in behavioral steer-             quantum machine learning using IBM Qiskit.
+   ing caused by a dominant shared subspace (83%                    – Managed a budget of approximately INR 3 lakhs, co-
+   alignment), collapsing functional separability.                    ordinating vendors and ensuring smooth execution of
+ – Developed a fast orthogonal projection framework                   large-scale events.
+   that restores geometric independence, yielding up to             – Designed problem statements and evaluation frame-
+   13.5× improvement in separability and 18–22%                       works for national and intra-campus hackathons.
+   bias reduction at negligible O(nd) cost.                         – Collaborated with college administration to develop
+                                                                      campus-level technical applications & improve compu-
+                                                                      tational services.
+
+
+
+
+                                                              ii
+

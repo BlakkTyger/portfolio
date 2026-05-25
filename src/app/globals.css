@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  --void-black: #050505;
-  --event-horizon: #121212;
+  --void-black: #020204;
+  --event-horizon: #0a0a0f;
   --spectral-violet: #8F00FF;
   --terminal-cyan: #00FF9D;
   --photon-white: #F0F0F0;
@@ -23,7 +23,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  overflow-x: hidden;
+  
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
@@ -91,4 +91,13 @@ code, pre {
 @keyframes beam-pulse {
   0%, 100% { opacity: 0.8; }
   50% { opacity: 1; }
+}
+
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  html, body {
+    
+    width: 100%;
+  }
 }

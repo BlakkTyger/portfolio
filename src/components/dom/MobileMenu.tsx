@@ -120,15 +120,13 @@ export default function MobileMenu({
               }
             `}
           >
-            <Link
-              href="/blog"
-              className="relative font-heading text-3xl text-[var(--quantum-purple)] 
-                px-4 py-2 border border-[var(--quantum-purple)]/40 rounded-full
-                hover:bg-[var(--quantum-purple)]/10 transition-all"
+            <div 
+              className="relative block text-3xl font-heading font-medium tracking-wide
+                text-[var(--tungsten-gray)] cursor-not-allowed flex items-center gap-4 transition-all"
             >
               Blog
-              <span className="absolute top-0 right-0 -mt-1 -mr-1 w-3 h-3 rounded-full bg-[var(--quantum-purple)] animate-pulse" />
-            </Link>
+              <span className="text-xs font-mono uppercase tracking-widest opacity-70 mt-1">under construction</span>
+            </div>
           </li>
           {/* Misc Link - External */}
           <li
