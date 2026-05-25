@@ -71,14 +71,14 @@ export default function CSProjectsPage() {
               {project.image && (
                 <div className="w-full h-48 mb-4 overflow-hidden rounded-lg bg-zinc-900 border border-zinc-800">
                   {/* Replace with next/image later if optimized images exist */}
-                  <Link href={`/blog/project/${project.id}`} className="block w-full h-full">
+                  <Link href={`/blog/${project.id}`} className="block w-full h-full">
                     <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
                   </Link>
                 </div>
               )}
 
               {/* Title */}
-              <Link href={`/blog/project/${project.id}`} className="block">
+              <Link href={`/blog/${project.id}`} className="block">
                 <h2 className="font-heading text-2xl text-[var(--photon-white)] mt-2 mb-3 group-hover:text-[var(--terminal-cyan)] transition-colors">
                   {project.title}
                 </h2>

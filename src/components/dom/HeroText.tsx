@@ -1,7 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useStore } from '@/store/useStore';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const ROLES = ['Physicist', 'Developer', 'Philosopher'];
 const CYCLE_DURATION = 2500;
@@ -12,6 +14,16 @@ export default function HeroText() {
   const [displayText, setDisplayText] = useState(ROLES[0]);
   const [mounted, setMounted] = useState(false);
   const isIntroComplete = useStore((state) => state.isIntroComplete);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (isIntroComplete && containerRef.current) {
+      gsap.fromTo('.hero-anim-item', 
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: 'power3.out' }
+      );
+    }
+  }, [isIntroComplete]);
 
   useEffect(() => {
     setMounted(true);
@@ -64,7 +76,7 @@ export default function HeroText() {
   const styles = getRoleStyles();
 
   return (
-    <div className="text-center px-4 relative">
+    <div ref={containerRef} className="text-center px-4 relative">
       {/* Ambient background glow */}
       <div 
         className={`absolute inset-0 bg-gradient-radial ${styles.bg} opacity-50 blur-3xl transition-all duration-700`}
@@ -72,17 +84,17 @@ export default function HeroText() {
       />
       
       {/* Small greeting */}
-      <p className="text-[var(--tungsten-gray)] text-sm md:text-base font-mono tracking-widest uppercase mb-4 opacity-60">
+      <p className="hero-anim-item text-[var(--tungsten-gray)] text-sm md:text-base font-mono tracking-widest uppercase mb-4 opacity-60">
         Welcome to my universe
       </p>
       
       {/* Name - smaller, more subtle */}
-      <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl text-[var(--photon-white)]/90 mb-8 md:mb-12 tracking-tight font-light">
+      <h1 className="hero-anim-item font-heading text-3xl sm:text-4xl md:text-5xl text-[var(--photon-white)]/90 mb-8 md:mb-12 tracking-tight font-light">
         Himanshu Sharma
       </h1>
       
       {/* Main rotating title - LARGER and more prominent */}
-      <div className="relative">
+      <div className="hero-anim-item relative">
         {/* Static "Student" */}
         <div className="flex items-center justify-center gap-3 md:gap-5 text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
           <span className="text-[var(--photon-white)] font-heading tracking-tight">Student</span>
@@ -123,7 +135,7 @@ export default function HeroText() {
       </div>
 
       {/* Role indicator dots */}
-      <div className="mt-8 flex items-center justify-center gap-3">
+      <div className="hero-anim-item mt-8 flex items-center justify-center gap-3">
         {ROLES.map((role, i) => (
           <button
             key={role}
@@ -152,7 +164,7 @@ export default function HeroText() {
       </div>
 
       {/* Decorative elements */}
-      <div className="mt-10 md:mt-14 flex items-center justify-center gap-4">
+      <div className="hero-anim-item mt-10 md:mt-14 flex items-center justify-center gap-4">
         <div className="w-16 md:w-24 h-px bg-gradient-to-r from-transparent via-[var(--tungsten-gray)]/30 to-transparent" />
         <div className={`w-1.5 h-1.5 rounded-full transition-colors duration-500 ${
           displayText === 'Physicist' ? 'bg-purple-400' :
@@ -163,7 +175,7 @@ export default function HeroText() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-auto">
+      <div className="hero-anim-item absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-auto">
         <div className="flex flex-col items-center gap-2 opacity-50 hover:opacity-80 transition-opacity">
           <span className="text-[10px] text-[var(--tungsten-gray)] uppercase tracking-[0.2em]">Explore</span>
           <div className="w-5 h-8 rounded-full border border-[var(--tungsten-gray)]/40 flex justify-center p-1">

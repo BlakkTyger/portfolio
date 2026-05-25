@@ -55,21 +55,6 @@ export default function SimpleProfile() {
           </div>
         </section>
 
-        {/* Condensed Journey / Timeline */}
-        <section>
-          <h2 className="text-2xl font-bold border-b border-[#222] pb-4 mb-8 text-white">Academic Journey</h2>
-          <div className="space-y-8 border-l border-[#333] pl-6 ml-3 relative">
-            {milestones.filter(m => ['education', 'work'].includes(m.category)).map((milestone, idx) => (
-              <div key={idx} className="relative">
-                <div className="absolute -left-[31px] top-1.5 w-3 h-3 bg-[#333] rounded-full ring-4 ring-[#050505]" />
-                <span className="text-sm font-mono text-[#888] mb-1 block">{milestone.year}</span>
-                <h3 className="text-xl font-semibold text-[#ddd]">{milestone.title}</h3>
-                <p className="text-[#888] mt-2">{milestone.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Physics Research */}
         <section>
           <h2 className="text-2xl font-bold border-b border-[#222] pb-4 mb-8 text-[#8F00FF] flex items-center gap-3">
@@ -161,6 +146,21 @@ export default function SimpleProfile() {
                 {skills.filter(s => s.category === 'tools').map(s => <li key={s.name} className="flex items-center gap-2"><div className="w-1 h-1 bg-white rounded-full"/> {s.name}</li>)}
               </ul>
             </div>
+          </div>
+        </section>
+
+        {/* Condensed Journey / Timeline */}
+        <section>
+          <h2 className="text-2xl font-bold border-b border-[#222] pb-4 mb-8 text-white">Academic Journey</h2>
+          <div className="space-y-8 border-l border-[#333] pl-6 ml-3 relative">
+            {milestones.filter(m => ['education', 'work'].includes(m.category)).map((milestone, idx) => (
+              <div key={idx} className="relative">
+                <div className="absolute -left-[31px] top-1.5 w-3 h-3 bg-[#333] rounded-full ring-4 ring-[#050505]" />
+                <span className="text-sm font-mono text-[#888] mb-1 block">{milestone.year}</span>
+                <h3 className="text-xl font-semibold text-[#ddd]">{milestone.title}</h3>
+                <p className="text-[#888] mt-2">{milestone.description}</p>
+              </div>
+            ))}
           </div>
         </section>
 

@@ -2,6 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PURPLE = '#8F00FF';
 const CYAN = '#00FF9D';
@@ -114,36 +119,58 @@ function WaveBeam({ active }: { active: boolean }) {
 }
 
 export default function ProjectsSection() {
-  const [animationPhase, setAnimationPhase] = useState(0);
-  const [csLit, setCsLit] = useState(false);
-  const [physicsLit, setPhysicsLit] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
+  const [streamsActive, setStreamsActive] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          setAnimationPhase(1);
-          setTimeout(() => setAnimationPhase(2), 600);
-          setTimeout(() => setAnimationPhase(3), 1400);
-          setTimeout(() => setAnimationPhase(4), 1800);
-          setTimeout(() => {
-            setCsLit(true);
-            setPhysicsLit(true);
-          }, 2600);
-        }
-      },
-      { threshold: 0.2 }
-    );
+  useGSAP(() => {
+    if (!sectionRef.current) return;
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 60%",
+      }
+    });
 
-    return () => observer.disconnect();
-  }, []);
+    // Reset initial states
+    gsap.set('.proj-laser-source', { boxShadow: 'none' });
+    gsap.set('.proj-laser-led', { backgroundColor: '#3f3f46', boxShadow: 'none' }); // zinc-700
+    gsap.set('.proj-laser-aperture', { opacity: 0 });
+    gsap.set('.proj-input-beam', { scaleX: 0 });
+    gsap.set('.proj-splitter-ring', { opacity: 0 });
+    gsap.set('.proj-splitter-cube', { scale: 1, borderColor: 'rgba(255,255,255,0)' });
+    gsap.set('.proj-splitter-surface', { opacity: 0.2 });
+    gsap.set('.proj-transmitted-beam', { scaleX: 0 });
+    gsap.set('.proj-reflected-beam', { scaleY: 0, opacity: 0 });
+    gsap.set('.proj-cs-card', { backgroundColor: 'rgba(10,10,15,0.5)', borderColor: '#27272a', boxShadow: 'none' });
+    gsap.set('.proj-cs-icon', { backgroundColor: '#27272a', borderColor: '#3f3f46', boxShadow: 'none' });
+    gsap.set('.proj-cs-title', { color: '#888888' });
+    gsap.set('.proj-cs-text', { opacity: 0 });
+    gsap.set('.proj-physics-card', { backgroundColor: 'rgba(10,10,15,0.5)', borderColor: '#27272a', boxShadow: 'none' });
+    gsap.set('.proj-physics-icon', { backgroundColor: '#27272a', borderColor: '#3f3f46', boxShadow: 'none' });
+    gsap.set('.proj-physics-title', { color: '#888888' });
+    gsap.set('.proj-physics-text', { opacity: 0 });
+
+    tl.to('.proj-laser-source', { boxShadow: '0 0 40px rgba(0,255,157,0.6)', duration: 0.5 })
+      .to('.proj-laser-led', { backgroundColor: '#4ade80', boxShadow: '0 0 12px #00FF9D', duration: 0.3 }, "<")
+      .to('.proj-laser-aperture', { opacity: 1, duration: 0.3 }, "<")
+      .to('.proj-input-beam', { scaleX: 1, duration: 0.8, ease: "power2.out" })
+      .to('.proj-splitter-ring', { opacity: 1, duration: 0.5 })
+      .to('.proj-splitter-cube', { scale: 1.1, backgroundColor: 'rgba(255,255,255,0.1)', borderColor: 'rgba(255,255,255,0.4)', duration: 0.5 }, "<")
+      .to('.proj-splitter-surface', { opacity: 1, duration: 0.5 }, "<")
+      .add(() => setStreamsActive(true))
+      .to('.proj-transmitted-beam', { scaleX: 1, duration: 0.8, ease: "power2.out" }, "+=0.2")
+      .to('.proj-reflected-beam', { scaleY: 1, opacity: 1, duration: 0.8, ease: "power2.out" }, "<")
+      .to('.proj-cs-card', { backgroundColor: 'rgba(10,10,15,0.9)', borderColor: CYAN, boxShadow: '0 0 60px rgba(0,255,157,0.5)', duration: 0.5 })
+      .to('.proj-cs-icon', { backgroundColor: CYAN, borderColor: CYAN, boxShadow: `0 0 40px ${CYAN}`, duration: 0.5 }, "<")
+      .to('.proj-cs-title', { color: CYAN, duration: 0.5 }, "<")
+      .to('.proj-cs-text', { opacity: 1, duration: 0.5 }, "<")
+      .to('.proj-physics-card', { backgroundColor: 'rgba(10,10,15,0.9)', borderColor: '#a855f7', boxShadow: '0 0 50px rgba(168,85,247,0.4)', duration: 0.5 }, "<")
+      .to('.proj-physics-icon', { backgroundColor: '#a855f7', borderColor: '#a855f7', boxShadow: '0 0 40px #a855f7', duration: 0.5 }, "<")
+      .to('.proj-physics-title', { color: '#c084fc', duration: 0.5 }, "<")
+      .to('.proj-physics-text', { opacity: 1, duration: 0.5 }, "<");
+
+  }, { scope: sectionRef });
 
   return (
     <section 
@@ -177,38 +204,20 @@ export default function ProjectsSection() {
         
         {/* === LASER SOURCE (Left Edge) === */}
         <div className="absolute left-2 sm:left-4 md:left-8 top-[70%] -translate-y-1/2 z-20">
-          <div className={`
-            relative w-16 md:w-24 h-10 md:h-14 bg-gradient-to-r from-zinc-900 to-zinc-800 
-            rounded-r-lg border-2 border-zinc-700
-            transition-all duration-500
-            ${animationPhase >= 1 ? 'shadow-[0_0_40px_rgba(0,255,157,0.6)]' : ''}
-          `}>
+          <div className="proj-laser-source relative w-16 md:w-24 h-10 md:h-14 bg-gradient-to-r from-zinc-900 to-zinc-800 rounded-r-lg border-2 border-zinc-700">
             {/* LED indicators */}
             <div className="absolute top-1.5 left-2 w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-900" />
-            <div className={`
-              absolute top-1.5 left-5 md:left-7 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300
-              ${animationPhase >= 1 ? 'bg-green-400 shadow-[0_0_12px_#00FF9D]' : 'bg-zinc-700'}
-            `} />
+            <div className="proj-laser-led absolute top-1.5 left-5 md:left-7 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full" />
             {/* Aperture */}
             <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-2 h-5 md:h-7 bg-zinc-950 rounded-r">
-              <div className={`
-                w-full h-full rounded-r
-                ${animationPhase >= 1 ? 'bg-gradient-to-r from-cyan-400/60 to-cyan-300' : ''}
-              `} />
+              <div className="proj-laser-aperture w-full h-full rounded-r bg-gradient-to-r from-cyan-400/60 to-cyan-300" />
             </div>
-            <span className="absolute -bottom-5 left-0 text-[10px] md:text-xs font-mono text-[var(--tungsten-gray)] tracking-wider">
-              
-            </span>
           </div>
         </div>
 
         {/* === INPUT BEAM (Laser to Center) === */}
         <div 
-          className={`
-            absolute top-[70%] h-1.5 sm:h-2 md:h-3 -translate-y-1/2
-            transition-all duration-700 ease-out origin-left
-            ${animationPhase >= 2 ? 'scale-x-100' : 'scale-x-0'}
-          `}
+          className="proj-input-beam absolute top-[70%] h-1.5 sm:h-2 md:h-3 -translate-y-1/2 origin-left"
           style={{ 
             left: '5rem',
             right: '50%',
@@ -225,10 +234,7 @@ export default function ProjectsSection() {
         >
           {/* Outer glow ring */}
           <div 
-            className={`
-              absolute -inset-8 rounded-full transition-all duration-700
-              ${animationPhase >= 3 ? 'opacity-100' : 'opacity-0'}
-            `}
+            className="proj-splitter-ring absolute -inset-8 rounded-full"
             style={{
               background: 'radial-gradient(circle, rgba(0,255,157,0.2) 0%, rgba(143,0,255,0.1) 50%, transparent 70%)',
               animation: 'pulse 2s ease-in-out infinite',
@@ -236,73 +242,25 @@ export default function ProjectsSection() {
           />
           
           <div 
-            className={`
-              relative w-20 h-20 md:w-28 md:h-28 transition-all duration-500
-              ${animationPhase >= 3 ? 'scale-110' : ''}
-            `}
+            className="proj-splitter-cube relative w-20 h-20 md:w-28 md:h-28"
             style={{ transform: 'rotate(45deg)' }}
           >
             {/* Glass cube with rainbow edges */}
             <div 
-              className={`
-                absolute inset-0 rounded-xl transition-all duration-500
-                ${animationPhase >= 3 
-                  ? 'bg-gradient-to-br from-cyan-400/50 via-white/40 to-purple-500/50 shadow-[0_0_100px_rgba(0,255,157,0.5),0_0_50px_rgba(143,0,255,0.5)]' 
-                  : 'bg-gradient-to-br from-zinc-800/60 to-zinc-900/60'
-                }
-              `}
-              style={{
-                backdropFilter: 'blur(12px)',
-                border: '3px solid rgba(255,255,255,0.4)',
-              }}
+              className="absolute inset-0 rounded-xl bg-gradient-to-br from-zinc-800/60 to-zinc-900/60"
+              style={{ backdropFilter: 'blur(12px)', border: 'inherit' }}
             />
-            
-            {/* Inner prism refraction lines */}
-            {animationPhase >= 3 && (
-              <>
-                <div className="absolute inset-2 border border-white/20 rounded-lg" />
-                <div className="absolute inset-4 border border-cyan-400/30 rounded" />
-              </>
-            )}
             
             {/* Diagonal splitter surface */}
             <div 
-              className={`
-                absolute inset-0 transition-opacity duration-500
-                ${animationPhase >= 3 ? 'opacity-100' : 'opacity-20'}
-              `}
-              style={{
-                background: 'linear-gradient(135deg, transparent 35%, rgba(255,255,255,0.9) 50%, transparent 65%)',
-              }}
+              className="proj-splitter-surface absolute inset-0"
+              style={{ background: 'linear-gradient(135deg, transparent 35%, rgba(255,255,255,0.9) 50%, transparent 65%)' }}
             />
           </div>
           
-          {/* Impact glow effects */}
-          {animationPhase >= 3 && (
-            <>
-              <div 
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full animate-ping"
-                style={{
-                  background: 'radial-gradient(circle, white 0%, transparent 70%)',
-                }}
-              />
-              <div 
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full"
-                style={{
-                  background: 'radial-gradient(circle, white 0%, cyan 50%, transparent 100%)',
-                  animation: 'pulse 1s ease-in-out infinite',
-                }}
-              />
-            </>
-          )}
-          
           {/* Label */}
           <span 
-            className={`
-              absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs font-mono tracking-wider
-              transition-opacity duration-500 whitespace-nowrap
-              ${animationPhase >= 3 ? 'text-white/60' : 'text-white/20'}
-            `}
+            className="proj-splitter-surface absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs font-mono tracking-wider text-white/60 whitespace-nowrap"
             style={{ transform: 'translateX(-50%) rotate(-45deg)' }}
           >
             BEAM SPLITTER
@@ -311,11 +269,7 @@ export default function ProjectsSection() {
 
         {/* === TRANSMITTED BEAM (to CS Projects - Right) with PROMINENT Binary Stream === */}
         <div 
-          className={`
-            absolute top-[70%] h-3 md:h-4 -translate-y-1/2
-            transition-all duration-700 ease-out origin-left
-            ${animationPhase >= 4 ? 'scale-x-100' : 'scale-x-0'}
-          `}
+          className="proj-transmitted-beam absolute top-[70%] h-3 md:h-4 -translate-y-1/2 origin-left"
           style={{ 
             left: 'calc(50% + 2rem)',
             right: '9rem',
@@ -324,23 +278,19 @@ export default function ProjectsSection() {
             borderRadius: '4px',
           }}
         >
-          <BinaryStream active={animationPhase >= 4} />
+          <BinaryStream active={streamsActive} />
         </div>
 
         {/* === REFLECTED BEAM (to Physics - Up) with Wave Pattern === */}
         <div 
-          className={`
-            absolute left-1/2 -translate-x-1/2 w-4 md:w-5
-            transition-all duration-700 ease-out origin-bottom
-            ${animationPhase >= 4 ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'}
-          `}
+          className="proj-reflected-beam absolute left-1/2 -translate-x-1/2 w-4 md:w-5 origin-bottom"
           style={{ 
             top: '6rem',
             bottom: '30%',
             marginBottom: '0.5rem',
           }}
         >
-          <WaveBeam active={animationPhase >= 4} />
+          <WaveBeam active={streamsActive} />
           {/* Base glow */}
           <div 
             className="absolute inset-0 opacity-50"
@@ -354,95 +304,47 @@ export default function ProjectsSection() {
         {/* === CS PROJECTS TARGET (Right Edge) === */}
         <Link 
           href="/cs-projects"
-          className={`
-            absolute right-2 sm:right-4 md:right-6 top-[70%] -translate-y-1/2 z-20
-            flex flex-col items-center gap-2 p-2 sm:p-3 md:p-5 rounded-2xl
-            transition-all duration-500 cursor-pointer w-28 md:w-40
-            ${csLit 
-              ? 'bg-[var(--event-horizon)]/90 border-2 border-[var(--terminal-cyan)] shadow-[0_0_60px_rgba(0,255,157,0.5)]' 
-              : 'bg-[var(--event-horizon)]/50 border-2 border-zinc-800'
-            }
-            hover:scale-105 hover:shadow-[0_0_80px_rgba(0,255,157,0.7)]
-          `}
+          className="proj-cs-card absolute right-2 sm:right-4 md:right-6 top-[70%] -translate-y-1/2 z-20 flex flex-col items-center gap-2 p-2 sm:p-3 md:p-5 rounded-2xl cursor-pointer w-28 md:w-40 border-2 transition-transform hover:scale-105"
         >
-          <div className={`
-            w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center
-            transition-all duration-500
-            ${csLit 
-              ? 'bg-[var(--terminal-cyan)] shadow-[0_0_40px_var(--terminal-cyan)]' 
-              : 'bg-zinc-800 border border-zinc-700'
-            }
-          `}>
-            <span className="font-mono text-lg md:text-xl text-black">{'{ }'}</span>
+          <div className="proj-cs-icon w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center border">
+            <span className="font-mono text-lg md:text-xl text-[var(--photon-white)]">{'{ }'}</span>
           </div>
           
           <div className="text-center">
-            <h3 className={`
-              font-heading text-lg md:text-xl transition-colors duration-500
-              ${csLit ? 'text-[var(--terminal-cyan)]' : 'text-[var(--tungsten-gray)]'}
-            `}>
+            <h3 className="proj-cs-title font-heading text-lg md:text-xl">
               CS Projects
             </h3>
-            <span className={`
-              text-xs font-mono transition-all duration-500
-              ${csLit ? 'opacity-100 text-[var(--terminal-cyan)]' : 'opacity-0'}
-            `}>
+            <span className="proj-cs-text text-xs font-mono text-[var(--terminal-cyan)]">
               01010101
             </span>
           </div>
           
-          {csLit && (
-            <span className="text-[10px] md:text-xs text-[var(--tungsten-gray)] animate-pulse">
-              Click to explore →
-            </span>
-          )}
+          <span className="proj-cs-text text-[10px] md:text-xs text-[var(--tungsten-gray)] animate-pulse">
+            Click to explore →
+          </span>
         </Link>
 
         {/* === PHYSICS RESEARCH TARGET (Top) === */}
         <Link 
           href="/research"
-          className={`
-            absolute top-20 md:top-24 left-1/2 -translate-x-1/2 z-20
-            flex flex-col items-center gap-2 md:gap-3 p-2 sm:p-4 md:p-6 rounded-2xl
-            transition-all duration-500 cursor-pointer w-36 md:w-48
-            ${physicsLit 
-              ? 'bg-[var(--event-horizon)]/90 border-2 border-purple-500 shadow-[0_0_50px_rgba(139,92,246,0.4)]' 
-              : 'bg-[var(--event-horizon)]/50 border-2 border-zinc-800'
-            }
-            hover:scale-105 hover:shadow-[0_0_70px_rgba(139,92,246,0.6)]
-          `}
+          className="proj-physics-card absolute top-20 md:top-24 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 md:gap-3 p-2 sm:p-4 md:p-6 rounded-2xl cursor-pointer w-36 md:w-48 border-2 transition-transform hover:scale-105"
         >
-          <div className={`
-            w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center
-            transition-all duration-500
-            ${physicsLit 
-              ? 'bg-purple-500 shadow-[0_0_40px_#8F00FF]' 
-              : 'bg-zinc-800 border border-zinc-700'
-            }
-          `}>
+          <div className="proj-physics-icon w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center border">
             <span className="font-mono text-lg md:text-xl text-white">ψ</span>
           </div>
           
           <div className="text-center">
-            <h3 className={`
-              font-heading text-lg md:text-xl transition-colors duration-500
-              ${physicsLit ? 'text-purple-400' : 'text-[var(--tungsten-gray)]'}
-            `}>
+            <h3 className="proj-physics-title font-heading text-lg md:text-xl">
               Physics Research
             </h3>
-            <span className={`
-              text-xs font-mono transition-all duration-500
-              ${physicsLit ? 'opacity-100 text-purple-400' : 'opacity-0'}
-            `}>
+            <span className="proj-physics-text text-xs font-mono text-purple-400">
               ∇²ψ + k²ψ = 0
             </span>
           </div>
           
-          {physicsLit && (
-            <span className="text-[10px] md:text-xs text-[var(--tungsten-gray)] animate-pulse">
-              Click to explore ↑
-            </span>
-          )}
+          <span className="proj-physics-text text-[10px] md:text-xs text-[var(--tungsten-gray)] animate-pulse">
+            Click to explore ↑
+          </span>
         </Link>
 
         {/* Floating particles */}

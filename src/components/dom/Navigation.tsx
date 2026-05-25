@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useStore } from '@/store/useStore';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import NavLink from './NavLink';
 import MobileMenu from './MobileMenu';
 
@@ -23,6 +25,23 @@ export default function Navigation() {
   const activeSection = useActiveSection();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isIntroComplete = useStore((state) => state.isIntroComplete);
+  const navRef = useRef<HTMLElement>(null);
+  
+  useGSAP(() => {
+    if (isIntroComplete && navRef.current) {
+      gsap.fromTo(
+        navRef.current,
+        { y: -100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }
+      );
+      
+      gsap.fromTo(
+        '.nav-item',
+        { y: -20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.05, ease: 'power2.out', delay: 0.3 }
+      );
+    }
+  }, [isIntroComplete]);
   
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -47,13 +66,13 @@ export default function Navigation() {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 hidden md:block">
+      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 hidden md:block">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Fancy Logo */}
             <button
               onClick={() => scrollToSection('hero')}
-              className="group relative"
+              className="nav-item group relative"
             >
               {/* Animated glow background */}
               <div className="absolute -inset-2 bg-gradient-to-r from-[var(--terminal-cyan)] via-purple-500 to-[var(--terminal-cyan)] rounded-lg opacity-0 group-hover:opacity-30 blur-lg transition-all duration-500 group-hover:animate-pulse" />
@@ -81,7 +100,7 @@ export default function Navigation() {
             {/* Nav Links */}
             <ul className="flex items-center gap-8">
               {NAV_ITEMS.map(item => (
-                <li key={item.id}>
+                <li key={item.id} className="nav-item">
                   <NavLink
                     label={item.label}
                     isActive={activeSection === item.id}
@@ -90,10 +109,10 @@ export default function Navigation() {
                 </li>
               ))}
               {/* External Links Separator */}
-              <li className="h-4 w-px bg-[var(--tungsten-gray)]/30" />
+              <li className="nav-item h-4 w-px bg-[var(--tungsten-gray)]/30" />
               
               {/* Simple Profile Link */}
-              <li>
+              <li className="nav-item">
                 <Link 
                   href="/simple"
                   className="group relative px-3 py-1.5 text-sm font-mono uppercase tracking-widest text-[#8F00FF] hover:text-[var(--photon-white)] border border-[#8F00FF]/40 rounded-full hover:border-[#8F00FF] hover:bg-[#8F00FF]/10 transition-all duration-300"
@@ -102,7 +121,7 @@ export default function Navigation() {
                 </Link>
               </li>
               {/* Blog Link - External */}
-              <li>
+              <li className="nav-item">
                 <div 
                   className="group relative px-3 py-1.5 text-sm font-mono uppercase tracking-widest text-[var(--tungsten-gray)] cursor-not-allowed border border-[var(--tungsten-gray)]/20 rounded-full flex flex-col items-center justify-center transition-all duration-300"
                 >
@@ -111,7 +130,7 @@ export default function Navigation() {
                 </div>
               </li>
               {/* Misc Link - External */}
-              <li>
+              <li className="nav-item">
                 <Link 
                   href="/misc"
                   className="group relative px-3 py-1.5 text-sm font-mono uppercase tracking-widest

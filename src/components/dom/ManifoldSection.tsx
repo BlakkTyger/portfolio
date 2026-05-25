@@ -267,7 +267,8 @@ export default function ManifoldSection() {
     const updateDimensions = () => {
       if (sectionRef.current) {
         const width = sectionRef.current.clientWidth;
-        const height = sectionRef.current.clientHeight;
+        // Occupy less than 100vh to account for the heading and top header
+        const height = Math.min(window.innerHeight * 0.80, 750);
         setDimensions({ width, height });
         setPositions(calculatePositions(width, height));
       } else {
@@ -365,7 +366,7 @@ export default function ManifoldSection() {
     <section
       ref={sectionRef}
       id="manifold"
-      className="relative min-h-screen py-8 flex flex-col items-center"
+      className="relative py-16 flex flex-col items-center"
     >
       {/* Section heading */}
       <div 
@@ -749,7 +750,7 @@ export default function ManifoldSection() {
         )}
       </div>
       {/* Mobile View */}
-      <div className="md:hidden flex flex-col gap-6 mt-8">
+      <div className="md:hidden flex flex-col gap-6 mt-8 px-6 w-full max-w-lg">
         {Object.entries(
           nodes.reduce((acc, node) => {
             acc[node.category] = acc[node.category] || [];

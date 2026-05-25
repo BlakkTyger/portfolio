@@ -23,18 +23,6 @@ export interface Project {
 export const projects: Project[] = [
   // CS Projects
   {
-    id: 'portfolio',
-    title: 'This Portfolio',
-    description: 'A 3D interactive portfolio built with Next.js, Three.js, and GSAP.',
-    category: 'cs',
-    tags: ['Next.js', 'Three.js', 'GSAP', 'TypeScript'],
-    links: {
-      github: 'https://github.com/BlakkTyger/portfolio',
-    },
-    year: 2024,
-    image: '/images/projects/portfolio.png',
-  },
-  {
     id: 'transformer-dynamics',
     title: 'Geometric and Dynamical Analysis of Function Vector Representations in Transformer Models',
     description: 'Modeled internal transformer representations as trajectory dynamics in high-dimensional state space. Demonstrated representations lie on low-dimensional manifold, enabling long-horizon forecasting with low-rank state-space predictors, reducing compute by 22-50%. Developed orthogonal projection framework for behavioral steering.',
@@ -42,6 +30,17 @@ export const projects: Project[] = [
     tags: ['Machine Learning', 'Transformers', 'NLP', 'State-Space'],
     year: 2025,
     image: '/images/projects/transformer.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'web-server-nfs',
@@ -51,6 +50,17 @@ export const projects: Project[] = [
     tags: ['Rust', 'C', 'Networking', 'NFS', 'RPC'],
     year: '2024',
     image: '/images/projects/nfs.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'facial-reconstruction',
@@ -60,6 +70,17 @@ export const projects: Project[] = [
     tags: ['Computer Vision', 'GAN', 'YOLOv7', 'DeepSort', 'Deep Learning'],
     year: '2023 - 2024',
     image: '/images/projects/cctv.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'up-police-attendance',
@@ -69,6 +90,17 @@ export const projects: Project[] = [
     tags: ['Flutter', 'Docker', 'Python', 'Machine Learning', 'MediaPipe'],
     year: '2024',
     image: '/images/projects/police.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'agentic-rag',
@@ -78,6 +110,17 @@ export const projects: Project[] = [
     tags: ['RAG', 'LLM', 'Multi-Agent', 'LangGraph', 'MetaGPT'],
     year: '2024',
     image: '/images/projects/rag.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'steps-ai',
@@ -87,6 +130,17 @@ export const projects: Project[] = [
     tags: ['LlamaIndex', 'LangGraph', 'ETL', 'Milvus', 'Celery'],
     year: '2024 - 2025',
     image: '/images/projects/stepsai.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
 
   // Physics Research
@@ -98,6 +152,17 @@ export const projects: Project[] = [
     tags: ['Quantum Optics', 'Cavity-QED', 'Lindblad', 'Schrödinger Evolution'],
     year: '2025 - Ongoing',
     image: '/images/projects/cavity-qed.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'ibm-qgss',
@@ -107,6 +172,17 @@ export const projects: Project[] = [
     tags: ['Qiskit', 'Quantum Error Correction', 'VQE', 'Benchmarking'],
     year: '2025',
     image: '/images/projects/ibm-qgss.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'wgm-microring',
@@ -116,6 +192,17 @@ export const projects: Project[] = [
     tags: ['COMSOL', 'Nanophotonics', 'Quantum Optics'],
     year: 2024,
     image: '/images/projects/wgm.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'nbni2te2-synthesis',
@@ -125,6 +212,17 @@ export const projects: Project[] = [
     tags: ['Condensed Matter', 'Crystal Growth', 'Transport Properties'],
     year: 2025,
     image: '/images/projects/nbni2te2.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'vqe-qml',
@@ -134,6 +232,17 @@ export const projects: Project[] = [
     tags: ['Quantum Computing', 'Qiskit', 'QML'],
     year: 2025,
     image: '/images/projects/vqe.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   },
   {
     id: 'point-groups',
@@ -143,6 +252,17 @@ export const projects: Project[] = [
     tags: ['Crystallography', 'Group Theory', 'Semiconductors'],
     year: 2025,
     image: '/images/projects/point-groups.png',
+    assets: {
+        document: '/docs/my-project-report.pdf',
+        ppt: '/docs/my-project-slides.pptx',
+        link: 'https://example.com'
+      },
+      links: {
+        github: 'https://github.com/user/repo',
+        website: 'https://demo.example.com',
+        paper: '/docs/research-paper.pdf',
+        presentation: '/docs/slides.pdf'
+      }
   }
 ];
 

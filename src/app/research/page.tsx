@@ -77,112 +77,116 @@ export default function ResearchPage() {
                 </div>
                 
                 {/* Content */}
-                <div className="flex-1">
-                  {/* Year */}
-                  {project.year && (
-                    <span className="text-sm text-[var(--tungsten-gray)] font-mono">
-                      {project.year}
-                    </span>
+                <div className="flex-1 flex flex-col md:flex-row gap-6">
+                  {/* Image container on the left */}
+                  {project.image && (
+                    <div className="w-full md:w-1/3 flex-shrink-0">
+                      <div className="w-full h-48 overflow-hidden rounded-lg bg-[var(--void-black)] border border-[var(--tungsten-gray)]/30">
+                        <Link href={`/blog/${project.id}`} className="block w-full h-full">
+                          <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                        </Link>
+                      </div>
+                    </div>
                   )}
-                  
-                  {/* Image placeholder / Asset renderer */}
-              {project.image && (
-                <div className="w-full h-48 mb-4 overflow-hidden rounded-lg bg-zinc-900 border border-zinc-800">
-                  {/* Replace with next/image later if optimized images exist */}
-                  <Link href={`/blog/project/${project.id}`} className="block w-full h-full">
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                </div>
-              )}
 
-              {/* Title */}
-              <Link href={`/blog/project/${project.id}`} className="block">
-                <h2 className="font-heading text-2xl md:text-3xl text-[var(--photon-white)] mt-2 mb-3 transition-colors group-hover:text-[#8F00FF]">
-                  {project.title}
-                </h2>
-              </Link>
-                  
-                  {/* Description */}
-                  <p className="text-[var(--tungsten-gray)] mb-4 text-lg">
-                    {project.description}
-                  </p>
-                  
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-sm rounded-full bg-[var(--void-black)]"
-                        style={{ color: PURPLE, borderColor: `${PURPLE}30`, borderWidth: 1 }}
-                      >
-                        {tag}
+                  {/* Text content on the right */}
+                  <div className="flex-1 flex flex-col">
+                    {/* Year */}
+                    {project.year && (
+                      <span className="text-sm text-[var(--tungsten-gray)] font-mono mb-2 block">
+                        {project.year}
                       </span>
-                    ))}
-                  </div>
-                  
-                  {/* Assets */}
-              {project.assets && (
-                <div className="flex flex-wrap gap-4 mb-4">
-                  {project.assets.document && (
-                    <a href={project.assets.document} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><FileText size={14} /> Document</a>
-                  )}
-                  {project.assets.ppt && (
-                    <a href={project.assets.ppt} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><Presentation size={14} /> PPT</a>
-                  )}
-                  {project.assets.link && (
-                    <a href={project.assets.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><ExternalLink size={14} /> Link</a>
-                  )}
-                </div>
-              )}
+                    )}
 
-              <div className="flex-grow"></div>
+                    {/* Title */}
+                    <Link href={`/blog/${project.id}`} className="block">
+                      <h2 className="font-heading text-2xl md:text-3xl text-[var(--photon-white)] mb-3 transition-colors group-hover:text-[#8F00FF]">
+                        {project.title}
+                      </h2>
+                    </Link>
+                    
+                    {/* Description */}
+                    <p className="text-[var(--tungsten-gray)] mb-4 text-lg">
+                      {project.description}
+                    </p>
+                    
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 text-sm rounded-full bg-[var(--void-black)]"
+                          style={{ color: PURPLE, borderColor: `${PURPLE}30`, borderWidth: 1 }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* Assets */}
+                    {project.assets && (
+                      <div className="flex flex-wrap gap-4 mb-4">
+                        {project.assets.document && (
+                          <a href={project.assets.document} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-[var(--photon-white)]"><FileText size={14} /> Document</a>
+                        )}
+                        {project.assets.ppt && (
+                          <a href={project.assets.ppt} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-[var(--photon-white)]"><Presentation size={14} /> PPT</a>
+                        )}
+                        {project.assets.link && (
+                          <a href={project.assets.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-[var(--photon-white)]"><ExternalLink size={14} /> Link</a>
+                        )}
+                      </div>
+                    )}
 
-              {/* Links */}
-                  <div className="flex flex-wrap gap-6">
-                    {project.links?.github && (
-                      <a
-                    href={project.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
-                      >
-                        <Github size={18} />
-                        Repository
-                      </a>
-                    )}
-                    {project.links?.paper && (
-                      <a
-                    href={project.links.paper}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
-                      >
-                        <FileText size={18} />
-                        Paper
-                      </a>
-                    )}
-                    {project.links?.presentation && (
-                      <a
-                    href={project.links.presentation}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
-                      >
-                        <Presentation size={18} />
-                        Slides
-                      </a>
-                    )}
-                    {project.links?.website && (
-                      <a
-                    href={project.links.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
-                      >
-                        <ExternalLink size={18} />
-                        Demo
-                      </a>
-                    )}
+                    <div className="flex-grow"></div>
+
+                    {/* Links */}
+                    <div className="flex flex-wrap gap-6 mt-auto">
+                      {project.links?.github && (
+                        <a
+                          href={project.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
+                        >
+                          <Github size={18} />
+                          Repository
+                        </a>
+                      )}
+                      {project.links?.paper && (
+                        <a
+                          href={project.links.paper}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
+                        >
+                          <FileText size={18} />
+                          Paper
+                        </a>
+                      )}
+                      {project.links?.presentation && (
+                        <a
+                          href={project.links.presentation}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
+                        >
+                          <Presentation size={18} />
+                          Slides
+                        </a>
+                      )}
+                      {project.links?.website && (
+                        <a
+                          href={project.links.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
+                        >
+                          <ExternalLink size={18} />
+                          Demo
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

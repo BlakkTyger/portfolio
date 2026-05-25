@@ -13,37 +13,64 @@ const BLOCKS = [
   {
     year: '2018 – 2019',
     title: 'Foundations in Engineering & Advocacy',
-    body: 'Started tinkering with Arduinos, developing a soil-moisture irrigation system—later upgraded with an ML weed-detection algorithm, felicitated by CSIR in 2022. Simultaneously dove into MUN, winning multiple Best Delegate awards and leading sensitization initiatives for neurodivergent children.',
+    body: [
+      { subtitle: 'Smart Irrigation & Machine Learning:', text: 'Started tinkering with electronics and Arduinos, developing a soil moisture-based automated irrigation system. Upgraded it over the years to include an evapotranspiration-based scheduling algorithm and automated ML weed detection (Felicitated by CSIR in 2022).' },
+      { subtitle: 'Public Speaking & Leadership:', text: 'Dove into debating and Model United Nations, winning multiple Best Delegate awards and hosting several school-wide MUN conferences.' },
+      { subtitle: 'Social Impact:', text: 'Led tangible sensitization initiatives to integrate children with special needs into mainstream society, which included training professionals (like hairstylists) to adapt their techniques for neurodivergent children.' }
+    ],
   },
   {
     year: '2020',
     title: 'Sustainability, Design & Early Code',
-    body: 'Learned 3D modelling in Fusion 360 to prototype ADBHUT—a bioplastic food container that secured 3rd place nationally at ATL Marathon. Interned with Tech Mahindra & MIT on go-to-market strategy. Wrote first serious Python; transitioned into web development.',
+    body: [
+      { subtitle: 'Eco-Innovation (ADBHUT):', text: 'Learned 3D modeling (Fusion 360) to design and prototype a sustainable, bioplastic-based food container. Secured 3rd place nationally in the ATL Marathon.' },
+      { subtitle: 'Entrepreneurship:', text: 'Interned with Tech Mahindra and MIT to develop a working prototype and business plan for ADBHUT, receiving extensive training in go-to-market strategies, company setup, and legalities.' },
+      { subtitle: 'The Programming Shift:', text: 'Began serious software development, building a foundation in Python and transitioning into web development.' }
+    ],
   },
   {
     year: '2020 – 2021',
     title: 'Computational Neuroscience (AIM-SIRIUS)',
-    body: 'Led an Indo-Russian team of 6 under Sirius Institute researchers to build a web platform for parallel neuroimaging processing. Built EEG data pipelines, extracted source coordinates, and used Python (MNE) to visualise brain signals and evaluate connectivity metrics.',
+    body: [
+      { subtitle: 'Global Collaboration:', text: 'Led an Indo-Russian team of 6 students under researchers from the Sirius Institute to develop a web platform for the parallel processing of neuroimaging data.' },
+      { subtitle: 'Data Pipeline Construction:', text: 'Built pipelines to clean EEG Time Series data, obtain source coordinates, and convert data into graphs.' },
+      { subtitle: 'Algorithmic Optimization:', text: 'Later interned for the same lab to optimize the algorithms. Used Python (MNE library), data analysis tools, and graphing libraries to visualize brain signals and evaluate connectivity/clustering metrics for researchers.' }
+    ],
   },
   {
     year: '2020 – 2022',
     title: 'F1 in Schools & The Quantum Spark',
-    body: 'Represented India as Design Engineer & Research Analyst for Team Quantum Racing at the 2022 F1 in Schools World Finals (UK), after winning the 2021 Indian National Championship. Ran CFD & FEM simulations, devised a genetic algorithm for aerodynamic optimisation—and a DRDO article ignited a lasting fascination with Quantum Key Distribution.',
+    body: [
+      { subtitle: 'Engineering an F1 Car:', text: 'Represented India as Design Engineer & Research Analyst for Team Quantum Racing at the 2022 F1 in Schools World Finals (UK). Won the 2021 Indian National Championship, sweeping awards for Best Pit Display, Enterprise Portfolio, and Innovative Thinking.' },
+      { subtitle: 'Aerodynamics & Simulation:', text: 'Modeled miniature F1 cars in Fusion 360, iteratively testing them using Computational Fluid Dynamics (CFD), Finite Element Method (FEM), and physical wind/smoke tunnels. Devised a genetic algorithm to find the ideal aerodynamic configuration under strict weight constraints.' },
+      { subtitle: 'A New Interest:', text: 'A 2020 DRDO milestone article sparked a deep, lasting fascination with Quantum Computing and Quantum Key Distribution (QKD).' }
+    ],
   },
   {
     year: '2023 – 2024',
     title: 'IIT Kanpur & Technical Leadership',
-    body: 'Joined IIT Kanpur for a Physics degree, expanding into quantum computing, quantum optics, and condensed matter. Completed the IBM Quantum Challenge 2024 (Qiskit 1.0). Rose to Secretary of the Programming Club, overseeing ML & WebDev domains, and competed in Asian and British Parliamentary debates.',
+    body: [
+      { subtitle: 'Physics Major:', text: 'Joined IIT Kanpur to formally pursue a degree in Physics. Later expanded my academic focus with advanced courses in quantum computing, quantum optics, and condensed matter physics.' },
+      { subtitle: 'Quantum Milestones:', text: 'Completed the IBM Quantum Challenge 2024, demonstrating proficiency in Qiskit 1.0 for utility-scale quantum experiments. Later became a finalist in the IIT Bombay TechFest Quant Challenge (Dec 2024).' },
+      { subtitle: 'Campus Leadership:', text: 'Rose from Coordinator to Secretary of the Programming Club, overseeing the Machine Learning and Web Development domains. Additionally, joined the college Debating Society, participating in Asian and British Parliamentary formats.' }
+    ],
   },
   {
     year: '2025',
     title: 'AI Internals & Quantum Research',
-    body: 'Working with the LLM Center at Kyoto University on mechanistic interpretability—how language models process information internally. Completed Qiskit Global Summer School 2025. Joined IITK\'s Nanophotonics Group as an undergraduate researcher in Quantum Optics and Cavity QED.',
+    body: [
+      { subtitle: 'Mechanistic Interpretability:', text: 'Began working with the Large Language Model Center at Kyoto University (Dept. of Intelligence Science and Technology), researching LLM internals and how these models process information.' },
+      { subtitle: 'Advanced Quantum Circuits:', text: 'Completed the intensive Qiskit Global Summer School 2025, bridging physics, chemistry, and Python to work on state-of-the-art quantum computation.' },
+      { subtitle: 'Nanophotonics Group:', text: 'Joined IITK’s Nanophotonics Group as an undergraduate researcher in December, diving into Quantum Optics and Cavity QED.' }
+    ],
   },
   {
     year: '2026 & Beyond',
     title: 'Securing the Future',
-    body: 'Stepped into post-quantum cryptography in March 2026, building a tool to identify PQC vulnerabilities in Indian financial institutions for the PnB Hackathon. Currently conducting research across the Nanophotonics Group (EE, IITK), Photonic Devices Lab (EE, IITK), and the LLM Center at Kyoto University.',
+    body: [
+      { subtitle: 'Post-Quantum Cryptography:', text: 'Stepped into the cybersecurity realm in March 2026, building a tool to identify post-quantum vulnerabilities within Indian financial institutions for the PnB Hackathon.' },
+      { subtitle: 'Current Endeavors:', text: 'Actively working as a student researcher across three distinct labs: the Nanophotonics Group (EE, IITK), the Photonic Devices Lab (EE, IITK), and the Large Language Model Center at Kyoto University, synthesizing my expertise in classical AI and quantum physics.' }
+    ],
   },
 ];
 
@@ -106,9 +133,9 @@ export default function WorldlineSection() {
     ], { autoAlpha: 0 });
 
     /* ═══════════════════════════════════════════
-       BLOCK 1  Arduino + circuit traces (0–14%)
+       BLOCK 1  Arduino + circuit traces (top bottom – top top)
     ═══════════════════════════════════════════ */
-    const tl1 = gsap.timeline({ scrollTrigger: st('top top', '14% top') });
+    const tl1 = gsap.timeline({ scrollTrigger: st('top bottom', 'top top') });
 
     tl1
       .to('#jny-arduino-group', { autoAlpha: 1, duration: 0.3 })
@@ -126,13 +153,13 @@ export default function WorldlineSection() {
         { scale: 1, duration: 0.3, stagger: 0.04, ease: 'elastic.out(1,0.5)' }, 0.9);
 
     /* fade out at end of block 1 */
-    gsap.timeline({ scrollTrigger: st('12% top', '16% top') })
+    gsap.timeline({ scrollTrigger: st('top top', '14% top') })
       .to('#jny-arduino-group', { autoAlpha: 0, duration: 0.5 });
 
     /* ═══════════════════════════════════════════
-       BLOCK 2  Wireframe container + code spirals (14–28%)
+       BLOCK 2  Wireframe container + code spirals (top top – 14% top)
     ═══════════════════════════════════════════ */
-    const tl2 = gsap.timeline({ scrollTrigger: st('14% top', '28% top') });
+    const tl2 = gsap.timeline({ scrollTrigger: st('top top', '14% top') });
 
     tl2
       .to('#jny-container-group', { autoAlpha: 1, duration: 0.3 })
@@ -147,18 +174,18 @@ export default function WorldlineSection() {
     gsap.to('#jny-container-body', {
       rotationY: 360, svgOrigin: '500 300', duration: 5, ease: 'none', repeat: -1,
       scrollTrigger: {
-        trigger: section, start: '14% top', end: '28% top',
+        trigger: section, start: 'top top', end: '28.5% top',
         toggleActions: 'play pause resume pause',
       },
     });
 
-    gsap.timeline({ scrollTrigger: st('26% top', '30% top') })
+    gsap.timeline({ scrollTrigger: st('14% top', '28.5% top') })
       .to('#jny-container-group', { autoAlpha: 0, duration: 0.5 });
 
     /* ═══════════════════════════════════════════
-       BLOCK 3  Neural network (28–42%)
+       BLOCK 3  Neural network (14% top – 28.5% top)
     ═══════════════════════════════════════════ */
-    const tl3 = gsap.timeline({ scrollTrigger: st('28% top', '42% top') });
+    const tl3 = gsap.timeline({ scrollTrigger: st('14% top', '28.5% top') });
 
     tl3
       .to('#jny-neural-group', { autoAlpha: 1, duration: 0.3 })
@@ -174,18 +201,18 @@ export default function WorldlineSection() {
     gsap.to('#jny-neural-group', {
       rotation: -3, svgOrigin: '500 300', duration: 2.5, ease: 'sine.inOut', yoyo: true, repeat: -1,
       scrollTrigger: {
-        trigger: section, start: '28% top', end: '42% top',
+        trigger: section, start: '14% top', end: '43% top',
         toggleActions: 'play pause resume pause',
       },
     });
 
-    gsap.timeline({ scrollTrigger: st('40% top', '44% top') })
+    gsap.timeline({ scrollTrigger: st('28.5% top', '43% top') })
       .to('#jny-neural-group', { autoAlpha: 0, duration: 0.5 });
 
     /* ═══════════════════════════════════════════
-       BLOCK 4  F1 car + wind lines (42–56%)
+       BLOCK 4  F1 car + wind lines (28.5% top – 43% top)
     ═══════════════════════════════════════════ */
-    const tl4 = gsap.timeline({ scrollTrigger: st('42% top', '56% top') });
+    const tl4 = gsap.timeline({ scrollTrigger: st('28.5% top', '43% top') });
 
     tl4
       .to('#jny-f1-group', { autoAlpha: 1, duration: 0.2 })
@@ -201,13 +228,13 @@ export default function WorldlineSection() {
       .to('#jny-f1-car',
         { x: -120, duration: 3, ease: 'none' }, 0.9);
 
-    gsap.timeline({ scrollTrigger: st('54% top', '58% top') })
+    gsap.timeline({ scrollTrigger: st('43% top', '57% top') })
       .to('#jny-f1-group', { autoAlpha: 0, duration: 0.5 });
 
     /* ═══════════════════════════════════════════
-       BLOCK 5  Quantum circuit + gavel (56–70%)
+       BLOCK 5  Quantum circuit + gavel (43% top – 57% top)
     ═══════════════════════════════════════════ */
-    const tl5 = gsap.timeline({ scrollTrigger: st('56% top', '70% top') });
+    const tl5 = gsap.timeline({ scrollTrigger: st('43% top', '57% top') });
 
     tl5
       .to('#jny-quantum-group', { autoAlpha: 1, duration: 0.3 })
@@ -232,13 +259,13 @@ export default function WorldlineSection() {
         { opacity: 0, scale: 0 },
         { opacity: 0.7, scale: 1, x: () => gsap.utils.random(-200, 200), y: () => gsap.utils.random(-120, 120), duration: 0.6, stagger: 0.04, ease: 'power2.out' }, 1.9);
 
-    gsap.timeline({ scrollTrigger: st('68% top', '72% top') })
+    gsap.timeline({ scrollTrigger: st('57% top', '71.5% top') })
       .to('#jny-quantum-group', { autoAlpha: 0, duration: 0.5 });
 
     /* ═══════════════════════════════════════════
-       BLOCK 6  Optical lens + laser (70–84%)
+       BLOCK 6  Optical lens + laser (57% top – 71.5% top)
     ═══════════════════════════════════════════ */
-    const tl6 = gsap.timeline({ scrollTrigger: st('70% top', '84% top') });
+    const tl6 = gsap.timeline({ scrollTrigger: st('57% top', '71.5% top') });
 
     tl6
       .to('#jny-lens-group', { autoAlpha: 1, duration: 0.3 })
@@ -257,18 +284,18 @@ export default function WorldlineSection() {
     gsap.to('#jny-laser-beam', {
       opacity: 0.5, duration: 0.35, ease: 'sine.inOut', yoyo: true, repeat: -1,
       scrollTrigger: {
-        trigger: section, start: '70% top', end: '84% top',
+        trigger: section, start: '57% top', end: '85.5% top',
         toggleActions: 'play pause resume pause',
       },
     });
 
-    gsap.timeline({ scrollTrigger: st('82% top', '86% top') })
+    gsap.timeline({ scrollTrigger: st('71.5% top', '85.5% top') })
       .to('#jny-lens-group', { autoAlpha: 0, duration: 0.5 });
 
     /* ═══════════════════════════════════════════
-       BLOCK 7  Padlock → Shield (84–100%)
+       BLOCK 7  Padlock → Shield (71.5% top – 85.5% top)
     ═══════════════════════════════════════════ */
-    const tl7 = gsap.timeline({ scrollTrigger: st('84% top', '100% top') });
+    const tl7 = gsap.timeline({ scrollTrigger: st('71.5% top', '85.5% top') });
 
     tl7
       .to('#jny-shield-group', { autoAlpha: 1, duration: 0.3 })
@@ -293,7 +320,7 @@ export default function WorldlineSection() {
       filter: 'drop-shadow(0 0 22px #00FF9D)', scale: 1.06,
       duration: 1.1, ease: 'sine.inOut', yoyo: true, repeat: -1, transformOrigin: 'center center',
       scrollTrigger: {
-        trigger: section, start: '84% top', end: '100% top',
+        trigger: section, start: '71.5% top', end: '100% top',
         toggleActions: 'play pause resume pause',
       },
     });
@@ -301,7 +328,7 @@ export default function WorldlineSection() {
       scale: 2.8, opacity: 0, duration: 1.6, ease: 'power1.out', repeat: -1,
       stagger: { each: 0.5, repeat: -1 },
       scrollTrigger: {
-        trigger: section, start: '84% top', end: '100% top',
+        trigger: section, start: '71.5% top', end: '100% top',
         toggleActions: 'play pause resume pause',
       },
     });
@@ -704,65 +731,64 @@ export default function WorldlineSection() {
             }}
           >
             <div
-              className="max-w-[420px] pointer-events-auto"
+              className="max-w-[600px] pointer-events-auto"
               style={{
                 paddingLeft:  i % 2 === 0 ? 0     : '0',
                 paddingRight: i % 2 !== 0 ? 0 : '0',
+                background: 'rgba(26, 18, 8, 0.6)',
+                backdropFilter: 'blur(8px)',
+                padding: '30px',
+                borderRadius: '12px',
+                border: '1px solid rgba(200, 185, 138, 0.2)',
+                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.5)'
               }}
             >
               {/* Year tag */}
               <span
-                className="block mb-4 tracking-[0.2em] uppercase"
+                className="block mb-4 tracking-[0.2em] uppercase font-bold"
                 style={{
-                  fontFamily: 'Georgia, "Cormorant Garamond", serif',
-                  fontSize: 'clamp(10px, 1.1vw, 13px)',
-                  color: C.parchment,
-                  opacity: 0.6,
+                  fontFamily: 'monospace',
+                  fontSize: 'clamp(12px, 1.3vw, 15px)',
+                  color: C.cyan,
                   letterSpacing: '0.22em',
                 }}
               >
                 {block.year}
               </span>
 
-              {/* Rule */}
-              <div
-                style={{
-                  width: 32,
-                  height: 1,
-                  background: C.parchment,
-                  opacity: 0.35,
-                  marginBottom: 20,
-                }}
-              />
-
               {/* Title */}
               <h3
                 style={{
                   fontFamily: 'Georgia, "Cormorant Garamond", serif',
-                  fontWeight: 400,
-                  fontSize: 'clamp(22px, 2.8vw, 36px)',
-                  color: C.white,
+                  fontWeight: 600,
+                  fontSize: 'clamp(26px, 3.2vw, 42px)',
+                  color: '#ffffff',
                   lineHeight: 1.25,
-                  marginBottom: 16,
-                  letterSpacing: '-0.01em',
+                  marginBottom: 20,
+                  letterSpacing: '0.02em',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.8)'
                 }}
               >
                 {block.title}
               </h3>
 
               {/* Body */}
-              <p
+              <div
                 style={{
-                  fontFamily: 'var(--font-body), system-ui, sans-serif',
-                  fontSize: 'clamp(13px, 1.15vw, 15px)',
-                  color: C.parchment,
-                  opacity: 0.72,
-                  lineHeight: 1.75,
-                  maxWidth: 400,
+                  fontFamily: 'system-ui, sans-serif',
+                  fontSize: 'clamp(15px, 1.3vw, 17px)',
+                  color: '#e0e0e0',
+                  lineHeight: 1.7,
                 }}
               >
-                {block.body}
-              </p>
+                {Array.isArray(block.body) ? block.body.map((item, idx) => (
+                  <p key={idx} style={{ marginBottom: '16px' }}>
+                    <strong style={{ color: C.parchment, fontWeight: 600 }}>{item.subtitle}</strong> {item.text}
+                  </p>
+                )) : (
+                  <p>{block.body}</p>
+                )}
+              </div>
 
               {/* Block number indicator */}
               <div
