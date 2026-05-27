@@ -174,19 +174,6 @@ export default function HeroText() {
         <div className="w-16 md:w-24 h-px bg-gradient-to-r from-transparent via-[var(--tungsten-gray)]/30 to-transparent" />
       </div>
 
-      {/* Scroll indicator */}
-      <div className="hero-anim-item absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-auto">
-        <div className="flex flex-col items-center gap-2 opacity-50 hover:opacity-80 transition-opacity">
-          <span className="text-[10px] text-[var(--tungsten-gray)] uppercase tracking-[0.2em]">Explore</span>
-          <div className="w-5 h-8 rounded-full border border-[var(--tungsten-gray)]/40 flex justify-center p-1">
-            <div className={`w-1 h-2 rounded-full transition-colors duration-500 ${
-              displayText === 'Physicist' ? 'bg-purple-400' :
-              displayText === 'Developer' ? 'bg-[var(--terminal-cyan)]' :
-              'bg-amber-400'
-            } animate-bounce`} />
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/mdx';
 import { mdxComponents } from '@/components/mdx/MDXComponents';
+import ViewTracker from '@/components/mdx/ViewTracker';
 
 // === STATIC GENERATION ===
 
@@ -34,16 +35,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   
   return (
     <main className="min-h-screen py-20 px-6">
+      <ViewTracker slug={slug} />
       <article className="max-w-3xl mx-auto">
         {/* Header */}
         <header className="mb-12">
-          {/* Back link */}
-          <a 
-            href="/blog" 
-            className="text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] mb-8 inline-block"
-          >
-            ← Back to Blog
-          </a>
+          {/* Back links */}
+          <div className="flex items-center gap-4 mb-8">
+            <a 
+              href="/" 
+              className="text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors text-sm font-mono tracking-wide"
+            >
+              ← Portfolio
+            </a>
+            <span className="text-[var(--tungsten-gray)]/30">|</span>
+            <a 
+              href="/blog" 
+              className="text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors text-sm font-mono tracking-wide"
+            >
+              Blog Home
+            </a>
+          </div>
           
           {/* Meta */}
           <div className="flex items-center gap-4 text-sm text-[var(--tungsten-gray)] mb-4">

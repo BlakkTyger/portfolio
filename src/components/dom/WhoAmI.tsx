@@ -41,30 +41,7 @@ export default function WhoAmI() {
           </div>
         </div>
         
-        <div className="animate-item">
-          <h3 className="text-sm font-mono uppercase tracking-widest text-[var(--tungsten-gray)] mb-4">
-            Interests
-          </h3>
-          <div className="flex flex-wrap gap-3">
-            
-            {[
-              'Quantum Computing',
-              'Machine Learning',
-              'Absurdism',
-              'Web Development',
-              'Theoretical Physics',
-            ].map((interest) => (
-              <span
-                key={interest}
-                className="px-4 py-2 rounded-full bg-[var(--void-black)] border border-[var(--tungsten-gray)]/30 text-sm text-[var(--photon-white)] hover:border-[var(--terminal-cyan)]/50 transition-colors duration-300"
-                
-              >
-                {interest}
-              </span>
-            ))}
-          </div>
-        </div>
-        
+
       </div>
     </SectionWrapper>
   );

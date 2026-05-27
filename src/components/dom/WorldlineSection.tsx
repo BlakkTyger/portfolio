@@ -76,7 +76,7 @@ const BLOCKS = [
 
 // ─── Palette (Dark Academia × High-Tech) ────────────────────────────────────
 const C = {
-  espresso:   '#1a1208',
+  espresso:   '#020204', // var(--void-black)
   parchment:  '#c8b98a',
   dim:        '#8a7a62',
   violet:     '#8F00FF',
@@ -345,11 +345,11 @@ export default function WorldlineSection() {
       {/* ── Section header ────────────────────────────────────────────────── */}
       <div className="sticky top-0 z-0 h-screen w-full overflow-hidden pointer-events-none">
 
-        {/* Subtle parchment-grain texture overlay */}
+        {/* Subtle texture overlay unified with dark mode */}
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(ellipse 80% 60% at 50% 50%, #26190a 0%, ${C.espresso} 100%)`,
+            background: `radial-gradient(ellipse 80% 60% at 50% 50%, #0a0a0f 0%, ${C.espresso} 100%)`,
           }}
         />
 
@@ -358,7 +358,7 @@ export default function WorldlineSection() {
           ref={canvasRef}
           viewBox="0 0 1000 600"
           preserveAspectRatio="xMidYMid meet"
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full opacity-30"
           aria-hidden="true"
         >
           <defs>
@@ -731,16 +731,14 @@ export default function WorldlineSection() {
             }}
           >
             <div
-              className="max-w-[600px] pointer-events-auto"
+              className="max-w-[700px] pointer-events-auto"
               style={{
-                paddingLeft:  i % 2 === 0 ? 0     : '0',
-                paddingRight: i % 2 !== 0 ? 0 : '0',
-                background: 'rgba(26, 18, 8, 0.6)',
-                backdropFilter: 'blur(8px)',
-                padding: '30px',
-                borderRadius: '12px',
-                border: '1px solid rgba(200, 185, 138, 0.2)',
-                boxShadow: '0 4px 30px rgba(0, 0, 0, 0.5)'
+                background: 'rgba(10, 10, 15, 0.4)', // var(--event-horizon)
+                backdropFilter: 'blur(12px)',
+                padding: '40px',
+                borderRadius: '16px',
+                border: '1px solid rgba(136, 136, 136, 0.15)', // subtle tungsten-gray
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
               }}
             >
               {/* Year tag */}

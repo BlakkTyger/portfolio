@@ -32,13 +32,23 @@ export default function SubcategoryPage({ params }: SubcategoryPageProps) {
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <Link 
-          href="/blog"
-          className="inline-flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--terminal-cyan)] mb-12 transition-colors group"
-        >
-          <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-mono">Back to Blog</span>
-        </Link>
+        {/* Back links */}
+        <div className="flex items-center gap-4 mb-12">
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--terminal-cyan)] transition-colors group"
+          >
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            <span className="text-sm font-mono">Portfolio</span>
+          </Link>
+          <span className="text-[var(--tungsten-gray)]/30">|</span>
+          <Link 
+            href="/blog"
+            className="inline-flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--terminal-cyan)] transition-colors group"
+          >
+            <span className="text-sm font-mono">Blog Home</span>
+          </Link>
+        </div>
         
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">

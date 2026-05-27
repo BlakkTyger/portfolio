@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono, Great_Vibes } from "next/font/google";
+import { Outfit, Inter, JetBrains_Mono, Caveat, Tangerine, Bonheur_Royale } from "next/font/google";
 import "./globals.css";
 
 // Heading font
-const spaceGrotesk = Space_Grotesk({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-heading",  // Use as var(--font-heading) in CSS
   display: "swap",
@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 // Cursive font
-const greatVibes = Great_Vibes({
+const bonheurRoyale = Bonheur_Royale({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-cursive",
@@ -65,10 +65,10 @@ export default function RootLayout({
       <body
         suppressHydrationWarning
         className={`
-    ${spaceGrotesk.variable} 
+    ${outfit.variable} 
     ${inter.variable} 
     ${jetbrainsMono.variable}
-    ${greatVibes.variable}
+    ${bonheurRoyale.variable}
     antialiased
   `}
       >

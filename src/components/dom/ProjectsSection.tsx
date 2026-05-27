@@ -15,17 +15,17 @@ const CYAN = '#00FF9D';
 function BinaryStream({ active }: { active: boolean }) {
   const [bits, setBits] = useState<Array<{ char: string; key: number }>>([]);
   const keyRef = useRef(0);
-  
+
   useEffect(() => {
     if (!active) return;
-    
+
     // Generate initial bits
     const initial = Array.from({ length: 40 }, () => ({
       char: Math.random() > 0.5 ? '1' : '0',
       key: keyRef.current++,
     }));
     setBits(initial);
-    
+
     // Continuously add new bits
     const interval = setInterval(() => {
       setBits(prev => {
@@ -36,12 +36,12 @@ function BinaryStream({ active }: { active: boolean }) {
         return newBits;
       });
     }, 100);
-    
+
     return () => clearInterval(interval);
   }, [active]);
-  
+
   if (!active) return null;
-  
+
   return (
     <div className="absolute inset-0 flex items-center overflow-hidden" style={{ height: '40px', top: '-18px' }}>
       <div className="flex items-center gap-1 animate-pulse">
@@ -51,8 +51,8 @@ function BinaryStream({ active }: { active: boolean }) {
             className="text-lg md:text-2xl font-mono font-black"
             style={{
               color: bit.char === '1' ? '#00FF9D' : '#00AA7D',
-              textShadow: bit.char === '1' 
-                ? `0 0 15px ${CYAN}, 0 0 30px ${CYAN}, 0 0 45px ${CYAN}` 
+              textShadow: bit.char === '1'
+                ? `0 0 15px ${CYAN}, 0 0 30px ${CYAN}, 0 0 45px ${CYAN}`
                 : `0 0 8px ${CYAN}`,
               opacity: 0.95,
               animation: `fadeIn 0.2s ease-out`,
@@ -69,9 +69,9 @@ function BinaryStream({ active }: { active: boolean }) {
 // Wave beam component for Physics
 function WaveBeam({ active }: { active: boolean }) {
   if (!active) return null;
-  
+
   return (
-    <svg 
+    <svg
       className="absolute inset-0 w-full h-full"
       viewBox="0 0 10 100"
       preserveAspectRatio="none"
@@ -82,10 +82,10 @@ function WaveBeam({ active }: { active: boolean }) {
           <stop offset="100%" stopColor={PURPLE} />
         </linearGradient>
         <filter id="glow">
-          <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="1" result="coloredBlur" />
           <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
@@ -173,9 +173,9 @@ export default function ProjectsSection() {
   }, { scope: sectionRef });
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="projects" 
+      id="projects"
       className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-[var(--void-black)]"
     >
       {/* Background grid */}
@@ -201,7 +201,7 @@ export default function ProjectsSection() {
 
       {/* Main Animation Container - Full screen */}
       <div className="hidden md:block relative w-full h-full">
-        
+
         {/* === LASER SOURCE (Left Edge) === */}
         <div className="absolute left-2 sm:left-4 md:left-8 top-[70%] -translate-y-1/2 z-20">
           <div className="proj-laser-source relative w-16 md:w-24 h-10 md:h-14 bg-gradient-to-r from-zinc-900 to-zinc-800 rounded-r-lg border-2 border-zinc-700">
@@ -216,9 +216,9 @@ export default function ProjectsSection() {
         </div>
 
         {/* === INPUT BEAM (Laser to Center) === */}
-        <div 
+        <div
           className="proj-input-beam absolute top-[70%] h-1.5 sm:h-2 md:h-3 -translate-y-1/2 origin-left"
-          style={{ 
+          style={{
             left: '5rem',
             right: '50%',
             marginRight: '-1.5rem',
@@ -229,48 +229,47 @@ export default function ProjectsSection() {
         />
 
         {/* === BEAM SPLITTER (Center) - More elaborate prism design === */}
-        <div 
+        <div
           className="absolute left-1/2 top-[70%] -translate-x-1/2 -translate-y-1/2 z-10"
         >
           {/* Outer glow ring */}
-          <div 
+          <div
             className="proj-splitter-ring absolute -inset-8 rounded-full"
             style={{
               background: 'radial-gradient(circle, rgba(0,255,157,0.2) 0%, rgba(143,0,255,0.1) 50%, transparent 70%)',
               animation: 'pulse 2s ease-in-out infinite',
             }}
           />
-          
-          <div 
+
+          <div
             className="proj-splitter-cube relative w-20 h-20 md:w-28 md:h-28"
             style={{ transform: 'rotate(45deg)' }}
           >
             {/* Glass cube with rainbow edges */}
-            <div 
+            <div
               className="absolute inset-0 rounded-xl bg-gradient-to-br from-zinc-800/60 to-zinc-900/60"
               style={{ backdropFilter: 'blur(12px)', border: 'inherit' }}
             />
-            
+
             {/* Diagonal splitter surface */}
-            <div 
+            <div
               className="proj-splitter-surface absolute inset-0"
               style={{ background: 'linear-gradient(135deg, transparent 35%, rgba(255,255,255,0.9) 50%, transparent 65%)' }}
             />
           </div>
-          
+
           {/* Label */}
-          <span 
+          <span
             className="proj-splitter-surface absolute -bottom-10 left-1/2 -translate-x-1/2 text-xs font-mono tracking-wider text-white/60 whitespace-nowrap"
             style={{ transform: 'translateX(-50%) rotate(-45deg)' }}
           >
-            BEAM SPLITTER
           </span>
         </div>
 
         {/* === TRANSMITTED BEAM (to CS Projects - Right) with PROMINENT Binary Stream === */}
-        <div 
+        <div
           className="proj-transmitted-beam absolute top-[70%] h-3 md:h-4 -translate-y-1/2 origin-left"
-          style={{ 
+          style={{
             left: 'calc(50% + 2rem)',
             right: '9rem',
             background: `linear-gradient(90deg, white, ${CYAN}30)`,
@@ -282,9 +281,9 @@ export default function ProjectsSection() {
         </div>
 
         {/* === REFLECTED BEAM (to Physics - Up) with Wave Pattern === */}
-        <div 
+        <div
           className="proj-reflected-beam absolute left-1/2 -translate-x-1/2 w-4 md:w-5 origin-bottom"
-          style={{ 
+          style={{
             top: '6rem',
             bottom: '30%',
             marginBottom: '0.5rem',
@@ -292,7 +291,7 @@ export default function ProjectsSection() {
         >
           <WaveBeam active={streamsActive} />
           {/* Base glow */}
-          <div 
+          <div
             className="absolute inset-0 opacity-50"
             style={{
               background: `linear-gradient(to top, white, ${PURPLE})`,
@@ -302,14 +301,14 @@ export default function ProjectsSection() {
         </div>
 
         {/* === CS PROJECTS TARGET (Right Edge) === */}
-        <Link 
+        <Link
           href="/cs-projects"
           className="proj-cs-card absolute right-2 sm:right-4 md:right-6 top-[70%] -translate-y-1/2 z-20 flex flex-col items-center gap-2 p-2 sm:p-3 md:p-5 rounded-2xl cursor-pointer w-28 md:w-40 border-2 transition-transform hover:scale-105"
         >
           <div className="proj-cs-icon w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center border">
             <span className="font-mono text-lg md:text-xl text-[var(--photon-white)]">{'{ }'}</span>
           </div>
-          
+
           <div className="text-center">
             <h3 className="proj-cs-title font-heading text-lg md:text-xl">
               CS Projects
@@ -318,21 +317,21 @@ export default function ProjectsSection() {
               01010101
             </span>
           </div>
-          
+
           <span className="proj-cs-text text-[10px] md:text-xs text-[var(--tungsten-gray)] animate-pulse">
             Click to explore →
           </span>
         </Link>
 
         {/* === PHYSICS RESEARCH TARGET (Top) === */}
-        <Link 
+        <Link
           href="/research"
           className="proj-physics-card absolute top-20 md:top-24 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 md:gap-3 p-2 sm:p-4 md:p-6 rounded-2xl cursor-pointer w-36 md:w-48 border-2 transition-transform hover:scale-105"
         >
           <div className="proj-physics-icon w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center border">
             <span className="font-mono text-lg md:text-xl text-white">ψ</span>
           </div>
-          
+
           <div className="text-center">
             <h3 className="proj-physics-title font-heading text-lg md:text-xl">
               Physics Research
@@ -341,7 +340,7 @@ export default function ProjectsSection() {
               ∇²ψ + k²ψ = 0
             </span>
           </div>
-          
+
           <span className="proj-physics-text text-[10px] md:text-xs text-[var(--tungsten-gray)] animate-pulse">
             Click to explore ↑
           </span>
@@ -377,7 +376,7 @@ export default function ProjectsSection() {
           <p className="text-[var(--tungsten-gray)] text-sm mb-4">Software development, machine learning, and web applications</p>
           <div className="font-mono text-xs text-[var(--terminal-cyan)] opacity-60">01010101 →</div>
         </Link>
-        
+
         <Link
           href="/research"
           className="group relative flex flex-col p-6 rounded-2xl bg-gradient-to-br from-[var(--event-horizon)] to-[var(--void-black)] border border-zinc-800 hover:border-[#8F00FF] transition-all shadow-lg"

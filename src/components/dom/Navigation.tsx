@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useStore } from '@/store/useStore';
 import { useGSAP } from '@gsap/react';
@@ -26,6 +27,7 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isIntroComplete = useStore((state) => state.isIntroComplete);
   const navRef = useRef<HTMLElement>(null);
+  const router = useRouter();
   
   useGSAP(() => {
     if (isIntroComplete && navRef.current) {

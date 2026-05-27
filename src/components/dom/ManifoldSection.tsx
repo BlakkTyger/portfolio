@@ -616,16 +616,32 @@ export default function ManifoldSection() {
                   opacity={0.15}
                 />
                 
-                {/* Label with shadow */}
+                {/* Text Outline for readability */}
                 <text
                   x={currentX}
-                  y={currentY + radius + 20}
+                  y={currentY + radius + 24}
                   textAnchor="middle"
-                  fill={isHovered || isDragging ? '#FFFFFF' : '#E2E8F0'}
-                  fontSize={node.isHub ? '14' : '11'}
-                  fontWeight={node.isHub ? '700' : '600'}
-                  className="font-mono transition-colors duration-200 pointer-events-none select-none"
-                  filter={isHovered ? 'url(#textGlow)' : undefined}
+                  stroke="var(--void-black)"
+                  strokeWidth="4"
+                  strokeLinejoin="round"
+                  fill="none"
+                  fontSize={node.isHub ? '16' : '13'}
+                  fontWeight={node.isHub ? '800' : '700'}
+                  className="font-body tracking-wide pointer-events-none select-none opacity-80"
+                >
+                  {node.label}
+                </text>
+                
+                {/* Label */}
+                <text
+                  x={currentX}
+                  y={currentY + radius + 24}
+                  textAnchor="middle"
+                  fill={isHovered || isDragging ? '#FFFFFF' : '#F8FAFC'}
+                  fontSize={node.isHub ? '16' : '13'}
+                  fontWeight={node.isHub ? '800' : '700'}
+                  className="font-body tracking-wide transition-colors duration-200 pointer-events-none select-none"
+                  filter="url(#textGlow)"
                 >
                   {node.label}
                 </text>
