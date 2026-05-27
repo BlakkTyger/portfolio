@@ -120,13 +120,13 @@ export default function MobileMenu({
               }
             `}
           >
-            <div 
-              className="relative block text-3xl font-heading font-medium tracking-wide
-                text-[var(--tungsten-gray)] cursor-not-allowed flex items-center gap-4 transition-all"
+            <Link 
+              href="/blog"
+              onClick={() => onToggle()}
+              className="relative block text-3xl font-heading font-medium tracking-wide text-[#00FF9D] hover:text-[var(--photon-white)] hover:translate-x-4 transition-all"
             >
               Blog
-              <span className="text-xs font-mono uppercase tracking-widest opacity-70 mt-1">under construction</span>
-            </div>
+            </Link>
           </li>
           {/* Misc Link - External */}
           <li

@@ -122,12 +122,12 @@ export default function Navigation() {
               </li>
               {/* Blog Link - External */}
               <li className="nav-item">
-                <div 
-                  className="group relative px-3 py-1.5 text-sm font-mono uppercase tracking-widest text-[var(--tungsten-gray)] cursor-not-allowed border border-[var(--tungsten-gray)]/20 rounded-full flex flex-col items-center justify-center transition-all duration-300"
+                <Link 
+                  href="/blog"
+                  className="group relative px-3 py-1.5 text-sm font-mono uppercase tracking-widest text-[#00FF9D] hover:text-[var(--photon-white)] border border-[#00FF9D]/40 rounded-full hover:border-[#00FF9D] hover:bg-[#00FF9D]/10 transition-all duration-300"
                 >
                   <span className="relative z-10">Blog</span>
-                  <span className="text-[8px] tracking-tighter opacity-70 mt-0.5 lowercase">under construction</span>
-                </div>
+                </Link>
               </li>
               {/* Misc Link - External */}
               <li className="nav-item">

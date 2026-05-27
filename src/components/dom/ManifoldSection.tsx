@@ -24,7 +24,7 @@ const calculatePositions = (width: number, height: number): Record<string, NodeP
   
   // Calculate node radius for collision detection
   const getRadius = (node: typeof nodes[0]) => {
-    const baseRadius = node.isHub ? 32 : 12;
+    const baseRadius = node.isHub ? 38 : 16;
     return baseRadius + node.size * 14 + 35; // Good spacing between nodes
   };
   
@@ -268,7 +268,7 @@ export default function ManifoldSection() {
       if (sectionRef.current) {
         const width = sectionRef.current.clientWidth;
         // Occupy less than 100vh to account for the heading and top header
-        const height = Math.min(window.innerHeight * 0.80, 750);
+        const height = Math.min(window.innerHeight * 0.90, 850);
         setDimensions({ width, height });
         setPositions(calculatePositions(width, height));
       } else {
@@ -366,7 +366,7 @@ export default function ManifoldSection() {
     <section
       ref={sectionRef}
       id="manifold"
-      className="relative py-16 flex flex-col items-center"
+      className="relative py-24 flex flex-col items-center min-h-[90vh]"
     >
       {/* Section heading */}
       <div 
@@ -513,7 +513,7 @@ export default function ManifoldSection() {
             if (!pos) return null;
             
             const color = categoryColors[node.category];
-            const baseRadius = node.isHub ? 32 : 12;
+            const baseRadius = node.isHub ? 38 : 16;
             const radius = baseRadius + node.size * 14;
             const progress = animationProgress[node.id] || 0;
             const isHovered = hoveredNode?.id === node.id;
@@ -621,9 +621,9 @@ export default function ManifoldSection() {
                   x={currentX}
                   y={currentY + radius + 20}
                   textAnchor="middle"
-                  fill={isHovered || isDragging ? '#FFFFFF' : '#AAAAAA'}
-                  fontSize={node.isHub ? '11' : '9'}
-                  fontWeight={node.isHub ? '600' : '500'}
+                  fill={isHovered || isDragging ? '#FFFFFF' : '#E2E8F0'}
+                  fontSize={node.isHub ? '14' : '11'}
+                  fontWeight={node.isHub ? '700' : '600'}
                   className="font-mono transition-colors duration-200 pointer-events-none select-none"
                   filter={isHovered ? 'url(#textGlow)' : undefined}
                 >

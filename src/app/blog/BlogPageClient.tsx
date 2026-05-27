@@ -1,25 +1,43 @@
 'use client'
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Search, X, Filter, Tag, BookOpen } from 'lucide-react';
+import { ArrowLeft, Search, X, Filter, Tag, BookOpen, TrendingUp, Clock, FolderTree } from 'lucide-react';
 import type { PostMeta } from '@/lib/mdx';
 
 interface BlogPageClientProps {
   posts: PostMeta[];
   allTags: string[];
   allTopics: string[];
+  categoryHierarchy: Record<string, string[]>;
 }
 
-export default function BlogPageClient({ posts, allTags, allTopics }: BlogPageClientProps) {
+export default function BlogPageClient({ posts, allTags, allTopics, categoryHierarchy }: BlogPageClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState(false);
+  const [viewsMap, setViewsMap] = useState<Record<string, number>>({});
+  const [sortMode, setSortMode] = useState<'latest' | 'top'>('top');
 
-  // Filter posts based on search and filters
-  const filteredPosts = useMemo(() => {
-    return posts.filter(post => {
+  // Fetch views on mount
+  useEffect(() => {
+    const fetchViews = async () => {
+      try {
+        const res = await fetch('/api/views');
+        if (res.ok) {
+          const data = await res.json();
+          setViewsMap(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch views:', err);
+      }
+    };
+    fetchViews();
+  }, []);
+
+  // Filter and sort posts
+  const filteredAndSortedPosts = useMemo(() => {
+    const filtered = posts.filter(post => {
       // Search filter
       const matchesSearch = searchQuery === '' || 
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -30,13 +48,23 @@ export default function BlogPageClient({ posts, allTags, allTopics }: BlogPageCl
       const matchesTags = selectedTags.length === 0 || 
         selectedTags.every(tag => post.tags?.includes(tag));
       
-      // Topic filter
-      const matchesTopic = !selectedTopic || 
-        (post as any).topic === selectedTopic;
-      
-      return matchesSearch && matchesTags && matchesTopic;
+      return matchesSearch && matchesTags;
     });
-  }, [posts, searchQuery, selectedTags, selectedTopic]);
+
+    return filtered.sort((a, b) => {
+      if (sortMode === 'latest') {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      } else {
+        const viewsA = viewsMap[a.slug] || 0;
+        const viewsB = viewsMap[b.slug] || 0;
+        // fallback to date if views are equal
+        if (viewsA === viewsB) {
+            return new Date(b.date).getTime() - new Date(a.date).getTime();
+        }
+        return viewsB - viewsA;
+      }
+    });
+  }, [posts, searchQuery, selectedTags, sortMode, viewsMap]);
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev => 
@@ -49,19 +77,15 @@ export default function BlogPageClient({ posts, allTags, allTopics }: BlogPageCl
   const clearFilters = () => {
     setSearchQuery('');
     setSelectedTags([]);
-    setSelectedTopic(null);
   };
 
-  const hasActiveFilters = searchQuery || selectedTags.length > 0 || selectedTopic;
+  const hasActiveFilters = searchQuery || selectedTags.length > 0;
 
   return (
     <main className="min-h-screen relative overflow-hidden">
       {/* Background elements */}
       <div className="fixed inset-0 -z-10">
-        {/* Gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--void-black)] via-[#0a0a1a] to-[var(--void-black)]" />
-        
-        {/* Grid pattern */}
         <div 
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -72,8 +96,6 @@ export default function BlogPageClient({ posts, allTags, allTopics }: BlogPageCl
             backgroundSize: '50px 50px',
           }}
         />
-        
-        {/* Floating orbs */}
         <div className="absolute top-20 left-10 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
         <div className="absolute bottom-40 right-20 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl" />
@@ -106,6 +128,39 @@ export default function BlogPageClient({ posts, allTags, allTopics }: BlogPageCl
               Deep dives into quantum mechanics, programming tutorials, and philosophical musings.
             </p>
           </header>
+
+          {/* Categories & Subcategories Section */}
+          <section className="mb-16">
+            <div className="flex items-center gap-2 mb-6">
+              <FolderTree className="text-purple-400" size={24} />
+              <h2 className="font-heading text-3xl text-[var(--photon-white)]">Categories</h2>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {Object.entries(categoryHierarchy).map(([category, subcategories]) => (
+                <div key={category} className="p-6 bg-[var(--event-horizon)]/80 backdrop-blur-sm rounded-2xl border border-[var(--tungsten-gray)]/10 hover:border-[var(--terminal-cyan)]/30 transition-all">
+                  <h3 className="font-heading text-xl text-[var(--photon-white)] mb-4 pb-2 border-b border-[var(--tungsten-gray)]/10">
+                    {category}
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    {subcategories.map(sub => (
+                      <Link 
+                        key={sub} 
+                        href={`/blog/category/${encodeURIComponent(category.toLowerCase())}/${encodeURIComponent(sub.toLowerCase())}`}
+                        className="group flex items-center justify-between py-1.5 px-3 rounded-lg hover:bg-[var(--void-black)] transition-colors"
+                      >
+                        <span className="text-[var(--tungsten-gray)] group-hover:text-[var(--terminal-cyan)] transition-colors">
+                          {sub}
+                        </span>
+                        <ArrowLeft size={14} className="rotate-135 text-[var(--tungsten-gray)]/30 group-hover:text-[var(--terminal-cyan)] transition-colors" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <hr className="border-[var(--tungsten-gray)]/10 mb-12" />
 
           {/* Search and Filter Bar */}
           <div className="mb-8 space-y-4">
@@ -191,57 +246,69 @@ export default function BlogPageClient({ posts, allTags, allTopics }: BlogPageCl
                     </div>
                   </div>
                 )}
-
-                {/* Topics */}
-                {allTopics.length > 0 && (
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <BookOpen size={14} className="text-purple-400" />
-                      <span className="text-sm font-mono text-[var(--tungsten-gray)]">Topics</span>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {allTopics.map(topic => (
-                        <button
-                          key={topic}
-                          onClick={() => setSelectedTopic(selectedTopic === topic ? null : topic)}
-                          className={`
-                            px-3 py-1.5 text-sm rounded-full transition-all
-                            ${selectedTopic === topic
-                              ? 'bg-purple-500 text-white'
-                              : 'bg-[var(--void-black)] text-[var(--tungsten-gray)] hover:text-[var(--photon-white)]'
-                            }
-                          `}
-                        >
-                          {topic}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             )}
           </div>
 
-          {/* Results count */}
-          <div className="mb-6 text-sm text-[var(--tungsten-gray)] font-mono">
-            {filteredPosts.length} {filteredPosts.length === 1 ? 'post' : 'posts'} found
+          {/* Posts Toggle and Results Count */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div className="flex gap-2 p-1 bg-[var(--event-horizon)] rounded-xl border border-[var(--tungsten-gray)]/10">
+              <button
+                onClick={() => setSortMode('top')}
+                className={`
+                  flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-mono transition-all
+                  ${sortMode === 'top' 
+                    ? 'bg-[var(--terminal-cyan)]/10 text-[var(--terminal-cyan)] border border-[var(--terminal-cyan)]/30' 
+                    : 'text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] border border-transparent'
+                  }
+                `}
+              >
+                <TrendingUp size={16} />
+                Top Blogs
+              </button>
+              <button
+                onClick={() => setSortMode('latest')}
+                className={`
+                  flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-mono transition-all
+                  ${sortMode === 'latest' 
+                    ? 'bg-purple-500/10 text-purple-400 border border-purple-500/30' 
+                    : 'text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] border border-transparent'
+                  }
+                `}
+              >
+                <Clock size={16} />
+                Latest
+              </button>
+            </div>
+            
+            <div className="text-sm text-[var(--tungsten-gray)] font-mono">
+              {filteredAndSortedPosts.length} {filteredAndSortedPosts.length === 1 ? 'post' : 'posts'} found
+            </div>
           </div>
 
           {/* Posts Grid */}
           <div className="grid gap-6 md:grid-cols-2">
-            {filteredPosts.length > 0 ? (
-              filteredPosts.map(post => (
+            {filteredAndSortedPosts.length > 0 ? (
+              filteredAndSortedPosts.map(post => (
                 <Link key={post.slug} href={`/blog/${post.slug}`}>
                   <article className="group h-full p-6 bg-[var(--event-horizon)]/80 backdrop-blur-sm rounded-2xl border border-[var(--tungsten-gray)]/10 hover:border-[var(--terminal-cyan)]/30 transition-all hover:shadow-lg hover:shadow-[var(--terminal-cyan)]/5">
                     {/* Date and reading time */}
-                    <div className="flex items-center gap-3 text-xs text-[var(--tungsten-gray)] mb-4 font-mono">
-                      <time>{new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                      })}</time>
-                      <span className="w-1 h-1 rounded-full bg-[var(--tungsten-gray)]" />
-                      <span>{post.readingTime}</span>
+                    <div className="flex items-center justify-between mb-4 font-mono">
+                      <div className="flex items-center gap-3 text-xs text-[var(--tungsten-gray)]">
+                        <time>{new Date(post.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}</time>
+                        <span className="w-1 h-1 rounded-full bg-[var(--tungsten-gray)]" />
+                        <span>{post.readingTime}</span>
+                      </div>
+                      {viewsMap[post.slug] !== undefined && (
+                        <div className="flex items-center gap-1.5 text-xs text-[var(--terminal-cyan)] opacity-80">
+                          <TrendingUp size={12} />
+                          {viewsMap[post.slug]} views
+                        </div>
+                      )}
                     </div>
                     
                     {/* Title */}
@@ -303,11 +370,6 @@ export default function BlogPageClient({ posts, allTags, allTopics }: BlogPageCl
               <div>
                 <span className="font-mono text-purple-400">{allTags.length}</span> tags
               </div>
-              {allTopics.length > 0 && (
-                <div>
-                  <span className="font-mono text-amber-400">{allTopics.length}</span> topics
-                </div>
-              )}
             </div>
           </footer>
         </div>

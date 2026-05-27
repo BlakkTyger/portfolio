@@ -13,6 +13,9 @@ export interface PostMeta {
   tags: string[];
   readingTime: string;
   published: boolean;
+  category: string;
+  subCategory: string;
+  views?: number;
 }
 
 export interface Post extends PostMeta {
@@ -102,6 +105,9 @@ export function getPostBySlug(slug: string): Post {
     tags: data.tags || [],
     readingTime: readTime,
     published: data.published !== false,  // Default to true
+    category: data.category || 'Miscellaneous',
+    subCategory: data.subCategory || 'General',
+    views: data.views || 0,
     content,
   };
 }
@@ -122,4 +128,44 @@ export function getAllTags(): string[] {
   const posts = getAllPostsMeta();
   const tags = posts.flatMap(post => post.tags);
   return [...new Set(tags)];  // Remove duplicates
+}
+
+/**
+ * Get category hierarchy
+ * Returns an object mapping categories to arrays of their subcategories
+ */
+export function getCategoryHierarchy(): Record<string, string[]> {
+  const posts = getAllPostsMeta();
+  const hierarchy: Record<string, Set<string>> = {};
+  
+  posts.forEach(post => {
+    const cat = post.category || 'Miscellaneous';
+    const subCat = post.subCategory || 'General';
+    
+    if (!hierarchy[cat]) {
+      hierarchy[cat] = new Set<string>();
+    }
+    hierarchy[cat].add(subCat);
+  });
+  
+  // Convert Sets to Arrays
+  const result: Record<string, string[]> = {};
+  Object.keys(hierarchy).forEach(cat => {
+    result[cat] = Array.from(hierarchy[cat]);
+  });
+  
+  return result;
+}
+
+/**
+ * Get posts by category and optional subcategory
+ */
+export function getPostsByCategory(category: string, subCategory?: string): PostMeta[] {
+  return getAllPostsMeta().filter(post => {
+    const matchesCategory = (post.category || 'Miscellaneous').toLowerCase() === category.toLowerCase();
+    const matchesSubCategory = subCategory 
+      ? (post.subCategory || 'General').toLowerCase() === subCategory.toLowerCase() 
+      : true;
+    return matchesCategory && matchesSubCategory;
+  });
 }
