@@ -22,7 +22,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -31,7 +31,7 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
   line-height: 1.7;
   letter-spacing: 0.01em;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 
@@ -67,6 +67,24 @@ code, pre {
 ::selection {
   background: var(--spectral-violet);
   color: var(--photon-white);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--event-horizon);
+  border: 1px solid var(--tungsten-gray);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-cyan);
+  border-color: var(--terminal-cyan);
 }
 
 /* Timeline animations */

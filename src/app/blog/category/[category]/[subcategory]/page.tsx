@@ -1,17 +1,18 @@
 import { getPostsByCategory } from '@/lib/mdx';
 import Link from 'next/link';
-import { ArrowLeft, Tag, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Tag, Clock } from 'lucide-react';
 
 interface SubcategoryPageProps {
-  params: {
+  params: Promise<{
     category: string;
     subcategory: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: SubcategoryPageProps) {
-  const decodedCat = decodeURIComponent(params.category);
-  const decodedSub = decodeURIComponent(params.subcategory);
+  const { category, subcategory } = await params;
+  const decodedCat = decodeURIComponent(category);
+  const decodedSub = decodeURIComponent(subcategory);
   
   return {
     title: `${decodedSub} (${decodedCat}) | Blog`,
@@ -19,9 +20,10 @@ export async function generateMetadata({ params }: SubcategoryPageProps) {
   };
 }
 
-export default function SubcategoryPage({ params }: SubcategoryPageProps) {
-  const decodedCat = decodeURIComponent(params.category);
-  const decodedSub = decodeURIComponent(params.subcategory);
+export default async function SubcategoryPage({ params }: SubcategoryPageProps) {
+  const { category, subcategory } = await params;
+  const decodedCat = decodeURIComponent(category);
+  const decodedSub = decodeURIComponent(subcategory);
   
   const posts = getPostsByCategory(decodedCat, decodedSub);
 
@@ -33,20 +35,20 @@ export default function SubcategoryPage({ params }: SubcategoryPageProps) {
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Back links */}
-        <div className="flex items-center gap-4 mb-12">
-          <Link 
-            href="/"
-            className="inline-flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--terminal-cyan)] transition-colors group"
-          >
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm font-mono">Portfolio</span>
-          </Link>
-          <span className="text-[var(--tungsten-gray)]/30">|</span>
+        <div className="flex items-center justify-between mb-12">
           <Link 
             href="/blog"
             className="inline-flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--terminal-cyan)] transition-colors group"
           >
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span className="text-sm font-mono">Blog Home</span>
+          </Link>
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--terminal-cyan)] transition-colors group"
+          >
+            <span className="text-sm font-mono">Back to Portfolio</span>
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
         

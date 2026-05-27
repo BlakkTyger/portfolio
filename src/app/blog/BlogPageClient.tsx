@@ -172,10 +172,7 @@ export default function BlogPageClient({ posts, allTags, allTopics, categoryHier
                 placeholder="Search posts by title, description, or tags..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-[var(--event-horizon)] border border-[var(--tungsten-gray)]/20 
-                         rounded-xl text-[var(--photon-white)] placeholder-[var(--tungsten-gray)]/50
-                         focus:outline-none focus:border-[var(--terminal-cyan)]/50 focus:ring-1 focus:ring-[var(--terminal-cyan)]/30
-                         transition-all"
+                className="w-full pl-12 pr-4 py-4 bg-[var(--event-horizon)] border border-[var(--tungsten-gray)]/20 rounded-xl text-[var(--photon-white)] placeholder-[var(--tungsten-gray)]/50 focus:outline-none focus:border-[var(--terminal-cyan)]/50 focus:ring-1 focus:ring-[var(--terminal-cyan)]/30 transition-all"
               />
               {searchQuery && (
                 <button

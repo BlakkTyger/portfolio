@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { getAllPostSlugs } from '@/lib/mdx';
 
-const VIEWS_FILE = path.join(process.cwd(), 'data', 'views.json');
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   try {
@@ -12,24 +11,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Slug is required' }, { status: 400 });
     }
 
-    // Ensure data directory exists
-    const dataDir = path.join(process.cwd(), 'data');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
+    // Call counterapi.dev v1 to increment
+    const res = await fetch(`https://api.counterapi.dev/v1/himanshu-portfolio/${slug}/up`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) {
+      console.error('Failed to increment view counter from counterapi.dev:', res.statusText);
+      return NextResponse.json({ error: 'Failed to increment view counter' }, { status: 500 });
     }
-
-    let views: Record<string, number> = {};
-    
-    if (fs.existsSync(VIEWS_FILE)) {
-      const data = fs.readFileSync(VIEWS_FILE, 'utf8');
-      views = JSON.parse(data);
-    }
-    
-    views[slug] = (views[slug] || 0) + 1;
-    
-    fs.writeFileSync(VIEWS_FILE, JSON.stringify(views, null, 2));
-    
-    return NextResponse.json({ views: views[slug] });
+    const data = await res.json();
+    return NextResponse.json({ views: data.count || 0 });
   } catch (error) {
     console.error('Error updating views:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -38,13 +29,31 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    let views: Record<string, number> = {};
-    if (fs.existsSync(VIEWS_FILE)) {
-      const data = fs.readFileSync(VIEWS_FILE, 'utf8');
-      views = JSON.parse(data);
-    }
+    const slugs = getAllPostSlugs();
+    const views: Record<string, number> = {};
+
+    await Promise.all(
+      slugs.map(async (slug) => {
+        try {
+          const res = await fetch(`https://api.counterapi.dev/v1/himanshu-portfolio/${slug}/`, {
+            cache: 'no-store'
+          });
+          if (res.ok) {
+            const data = await res.json();
+            views[slug] = data.count || 0;
+          } else {
+            views[slug] = 0;
+          }
+        } catch (err) {
+          console.error(`Error fetching views for slug ${slug}:`, err);
+          views[slug] = 0;
+        }
+      })
+    );
+
     return NextResponse.json(views);
   } catch (error) {
+    console.error('Error in GET /api/views:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
