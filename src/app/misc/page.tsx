@@ -8,28 +8,27 @@ export const metadata = {
 
 // Sample data - replace with your actual data
 const books = [
-  { title: 'Gödel, Escher, Bach', author: 'Douglas Hofstadter', year: 2024 },
-  { title: 'The Elegant Universe', author: 'Brian Greene', year: 2023 },
-  { title: 'Structure and Interpretation of Computer Programs', author: 'Abelson & Sussman', year: 2023 },
-  { title: 'Quantum Computation and Quantum Information', author: 'Nielsen & Chuang', year: 2022 },
+  { title: 'On the Geneology of Morals', author: 'Friedrich Nietzsche', year: 1887 },
+  { title: 'Think: A Compelling Introduction to Philosophy', author: 'Simon Blackburn', year: 1999 },
+  { title: 'What do you care what other people think?', author: 'Richard Feynman', year: 1988 },
 ];
 
 const courses = [
-  { name: 'CS231n: Deep Learning for Computer Vision', institution: 'Stanford', link: 'https://github.com/yourusername/cs231n' },
-  { name: 'CS229: Machine Learning', institution: 'Stanford', link: 'https://github.com/yourusername/cs229' },
-  { name: 'Quantum Computing', institution: 'MIT OpenCourseWare', link: 'https://github.com/yourusername/quantum' },
+  { name: 'Quantum Computing and Communications', institution: 'IIT Kanpur', link: '' },
+  { name: 'Quantum Optics', institution: 'IIT Kanpur', link: '' },
+  { name: 'Quantum Processes for Low Dimensional Semiconductors', institution: 'IIT Kanpur', link: '' },
 ];
 
 const problemStatements = [
-  { title: 'Intro to ML Workshop', event: 'PClub Winter Camp 2024', description: 'Introductory problem set for ML workshop.' },
-  { title: 'Quantum Computing Hackathon', event: 'Science Fest 2024', description: 'Problem statement for quantum algorithm implementation.' },
-  { title: 'Web Dev Challenge', event: 'PClub Summer Camp 2023', description: 'Full-stack development challenge.' },
+  { title: '', event: '', description: '' },
+  { title: '', event: '', description: '' },
+  { title: '', event: '', description: '' },
 ];
 
 const researchArticles = [
-  { title: 'Attention Is All You Need', authors: 'Vaswani et al.', year: 2017, field: 'NLP' },
-  { title: 'Deep Residual Learning for Image Recognition', authors: 'He et al.', year: 2015, field: 'CV' },
-  { title: 'Quantum Supremacy Using a Programmable Superconducting Processor', authors: 'Arute et al.', year: 2019, field: 'Quantum' },
+  { title: '', authors: '', year: 2017, field: '' },
+  { title: '', authors: '', year: 2015, field: '' },
+  { title: '', authors: '', year: 2019, field: '' },
 ];
 
 export default function MiscPage() {
@@ -37,14 +36,14 @@ export default function MiscPage() {
     <main className="min-h-screen py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Back Button */}
-        <Link 
+        <Link
           href="/"
           className="inline-flex items-center gap-2 text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] mb-8 transition-colors"
         >
           <ArrowLeft size={20} />
           Back to Portfolio
         </Link>
-        
+
         {/* Header */}
         <div className="mb-16">
           <span className="text-[var(--terminal-cyan)] text-sm font-mono uppercase tracking-widest mb-4 block">
@@ -57,7 +56,7 @@ export default function MiscPage() {
             A collection of books, courses, problem statements, and research articles.
           </p>
         </div>
-        
+
         {/* Grid Layout */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Books Section */}
@@ -77,7 +76,7 @@ export default function MiscPage() {
               ))}
             </ul>
           </section>
-          
+
           {/* Courses Section */}
           <section className="bg-[var(--event-horizon)] rounded-xl p-6 border border-[var(--tungsten-gray)]/10">
             <div className="flex items-center gap-3 mb-6">
@@ -87,7 +86,7 @@ export default function MiscPage() {
             <ul className="space-y-4">
               {courses.map((course, i) => (
                 <li key={i} className="border-b border-[var(--tungsten-gray)]/10 pb-3 last:border-0">
-                  <a 
+                  <a
                     href={course.link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -100,7 +99,7 @@ export default function MiscPage() {
               ))}
             </ul>
           </section>
-          
+
           {/* Problem Statements Section */}
           <section className="bg-[var(--event-horizon)] rounded-xl p-6 border border-[var(--tungsten-gray)]/10">
             <div className="flex items-center gap-3 mb-6">
@@ -117,7 +116,7 @@ export default function MiscPage() {
               ))}
             </ul>
           </section>
-          
+
           {/* Research Articles Section */}
           <section className="bg-[var(--event-horizon)] rounded-xl p-6 border border-[var(--tungsten-gray)]/10">
             <div className="flex items-center gap-3 mb-6">

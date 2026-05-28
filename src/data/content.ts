@@ -29,21 +29,13 @@ export const personalInfo = {
   tagline: "Physicist • Developer • Philosopher",
   email: "himans23@iitk.ac.in",
   location: "Delhi, India",
-  
+
   // Short bio for the WhoAmI section
   bio: `
-    Here I will add a short bio
+    Enthralled by how the universe functions and driven by a desire to understand the mechanics of it all, a confused, but highly motivated explorer set into the world of physics to understand it all. As one who forever gravitated towards the world of bits and programs, he found his true calling at the intersection of these fields: using the natural laws of quantum physics to revolutionize computation. With Richard Feynman and Chad Rigetti as his inspirations, his work at IIT Kanpur is dedicated to a singular dream: contributing to the development of a fault-tolerant, practically useful quantum computer. 
+
+    Beyond the lab, his intellectual curiosity extends into the abstract. The philosophies of Camus and Nietzsche provide a space for deep reflection, while an active engagement with social issues via debating keeps him firmly grounded in reality. An avid builder, he finds solace in developing Machine Learning models and dissecting their inner workings. Currently, his work sits at the intersection of these passions, focusing on Cavity Quantum Electrodynamics for quantum computing applications and the mechanistic interpretability of Large Language Models.
   `,
-  
-  // Longer bio paragraphs (for expanded view)
-  bioExtended: [
-    `My journey began with a fascination for the quantum world — 
-     the strange realm where particles can be in multiple states at once.`,
-    `This led me to physics research, where I developed simulations 
-     for quantum systems and explored the boundaries of computation.`,
-    `Along the way, I discovered that software development is its own 
-     form of creation - building abstract machines that solve real problems.`,
-  ],
 };
 
 // === SKILLS ===
@@ -55,13 +47,13 @@ export const skills: Skill[] = [
   { name: 'React/Next.js', level: 80, category: 'development' },
   { name: 'Three.js/R3F', level: 70, category: 'development' },
   { name: 'Node.js', level: 75, category: 'development' },
-  
+
   // Research
   { name: 'Quantum Computing', level: 80, category: 'research' },
   { name: 'Machine Learning', level: 75, category: 'research' },
   { name: 'Data Analysis', level: 85, category: 'research' },
   { name: 'Scientific Writing', level: 80, category: 'research' },
-  
+
   // Tools
   { name: 'Git', level: 85, category: 'tools' },
   { name: 'Docker', level: 65, category: 'tools' },

@@ -203,7 +203,7 @@ export default function ProjectsSection() {
       <div className="hidden md:block relative w-full h-full">
 
         {/* === LASER SOURCE (Left Edge) === */}
-        <div className="absolute left-2 sm:left-4 md:left-8 top-[70%] -translate-y-1/2 z-20">
+        <div className="absolute left-[calc(15vw-6rem)] top-[70%] -translate-y-1/2 z-20">
           <div className="proj-laser-source relative w-16 md:w-24 h-10 md:h-14 bg-gradient-to-r from-zinc-900 to-zinc-800 rounded-r-lg border-2 border-zinc-700">
             {/* LED indicators */}
             <div className="absolute top-1.5 left-2 w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-900" />
@@ -219,7 +219,7 @@ export default function ProjectsSection() {
         <div
           className="proj-input-beam absolute top-[70%] h-1.5 sm:h-2 md:h-3 -translate-y-1/2 origin-left"
           style={{
-            left: '5rem',
+            left: '15vw',
             right: '50%',
             marginRight: '-1.5rem',
             background: `linear-gradient(90deg, ${CYAN}, white)`,
@@ -270,8 +270,8 @@ export default function ProjectsSection() {
         <div
           className="proj-transmitted-beam absolute top-[70%] h-3 md:h-4 -translate-y-1/2 origin-left"
           style={{
-            left: 'calc(50% + 2rem)',
-            right: '9rem',
+            left: 'calc(50% + 2.5rem)',
+            right: '15vw',
             background: `linear-gradient(90deg, white, ${CYAN}30)`,
             boxShadow: `0 0 15px ${CYAN}, 0 0 30px ${CYAN}80`,
             borderRadius: '4px',
@@ -303,7 +303,7 @@ export default function ProjectsSection() {
         {/* === CS PROJECTS TARGET (Right Edge) === */}
         <Link
           href="/cs-projects"
-          className="proj-cs-card absolute right-2 sm:right-4 md:right-6 top-[70%] -translate-y-1/2 z-20 flex flex-col items-center gap-2 p-2 sm:p-3 md:p-5 rounded-2xl cursor-pointer w-28 md:w-40 border-2 transition-transform hover:scale-105"
+          className="proj-cs-card absolute right-[calc(15vw-10rem)] top-[70%] -translate-y-1/2 z-20 flex flex-col items-center gap-2 p-2 sm:p-3 md:p-5 rounded-2xl cursor-pointer w-28 md:w-40 border-2 transition-transform hover:scale-105"
         >
           <div className="proj-cs-icon w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center border">
             <span className="font-mono text-lg md:text-xl text-[var(--photon-white)]">{'{ }'}</span>

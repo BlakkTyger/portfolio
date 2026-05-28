@@ -39,7 +39,7 @@ export default function SimpleProfile() {
             {personalInfo.tagline}
           </p>
           <div className="prose prose-invert max-w-none text-lg text-[#aaa] leading-relaxed">
-            {personalInfo.bioExtended.map((p, i) => <p key={i}>{p}</p>)}
+            {personalInfo.bio.split('\n\n').map((p, i) => <p key={i}>{p.trim()}</p>)}
           </div>
           
           <div className="flex flex-wrap gap-4 pt-4">

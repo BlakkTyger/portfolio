@@ -29,18 +29,18 @@ export const projects: Project[] = [
     category: 'cs',
     tags: ['Machine Learning', 'Transformers', 'NLP', 'State-Space'],
     year: 2025,
-    image: '/images/projects/transformer.png',
+    image: '/images/projects/transformer.jpg',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'web-server-nfs',
@@ -51,16 +51,16 @@ export const projects: Project[] = [
     year: '2024',
     image: '/images/projects/nfs.png',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'facial-reconstruction',
@@ -69,18 +69,18 @@ export const projects: Project[] = [
     category: 'cs',
     tags: ['Computer Vision', 'GAN', 'YOLOv7', 'DeepSort', 'Deep Learning'],
     year: '2023 - 2024',
-    image: '/images/projects/cctv.png',
+    image: '/images/projects/cctv.jpg',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'up-police-attendance',
@@ -89,18 +89,18 @@ export const projects: Project[] = [
     category: 'cs',
     tags: ['Flutter', 'Docker', 'Python', 'Machine Learning', 'MediaPipe'],
     year: '2024',
-    image: '/images/projects/police.png',
+    image: '/images/projects/police.jpg',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'agentic-rag',
@@ -109,18 +109,18 @@ export const projects: Project[] = [
     category: 'cs',
     tags: ['RAG', 'LLM', 'Multi-Agent', 'LangGraph', 'MetaGPT'],
     year: '2024',
-    image: '/images/projects/rag.png',
+    image: '/images/projects/rag.jpeg',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'steps-ai',
@@ -131,16 +131,16 @@ export const projects: Project[] = [
     year: '2024 - 2025',
     image: '/images/projects/stepsai.png',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
 
   // Physics Research
@@ -149,20 +149,20 @@ export const projects: Project[] = [
     title: 'Quantum Optics Simulations, Cavity-QED Research',
     description: 'Developed a unified framework to study light-matter interaction in confined quantum systems. Analyzed RWA breakdown in driven regimes. Compared Rabi Hamiltonian with Jaynes-Cummings model. Studied open quantum dynamics via Lindblad master equations. Constructed photonic qubit representations.',
     category: 'physics',
-    tags: ['Quantum Optics', 'Cavity-QED', 'Lindblad', 'Schrödinger Evolution'],
+    tags: ['Quantum Optics', 'Cavity-QED', 'Open Quantum Systems'],
     year: '2025 - Ongoing',
-    image: '/images/projects/cavity-qed.png',
+    image: '/images/projects/cavity-qed.jpg',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'ibm-qgss',
@@ -173,16 +173,16 @@ export const projects: Project[] = [
     year: '2025',
     image: '/images/projects/ibm-qgss.png',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'wgm-microring',
@@ -193,16 +193,16 @@ export const projects: Project[] = [
     year: 2024,
     image: '/images/projects/wgm.png',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'nbni2te2-synthesis',
@@ -211,18 +211,18 @@ export const projects: Project[] = [
     category: 'physics',
     tags: ['Condensed Matter', 'Crystal Growth', 'Transport Properties'],
     year: 2025,
-    image: '/images/projects/nbni2te2.png',
+    image: '/images/projects/nbni2te2.jpg',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'vqe-qml',
@@ -233,16 +233,16 @@ export const projects: Project[] = [
     year: 2025,
     image: '/images/projects/vqe.png',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   },
   {
     id: 'point-groups',
@@ -253,23 +253,23 @@ export const projects: Project[] = [
     year: 2025,
     image: '/images/projects/point-groups.png',
     assets: {
-        document: '/docs/my-project-report.pdf',
-        ppt: '/docs/my-project-slides.pptx',
-        link: 'https://example.com'
-      },
-      links: {
-        github: 'https://github.com/user/repo',
-        website: 'https://demo.example.com',
-        paper: '/docs/research-paper.pdf',
-        presentation: '/docs/slides.pdf'
-      }
+      document: '/docs/my-project-report.pdf',
+      ppt: '/docs/my-project-slides.pptx',
+      link: 'https://example.com'
+    },
+    links: {
+      github: 'https://github.com/user/repo',
+      website: 'https://demo.example.com',
+      paper: '/docs/research-paper.pdf',
+      presentation: '/docs/slides.pdf'
+    }
   }
 ];
 
 export const binaryColors = {
-  primary: '#00FF9D',    
-  secondary: '#00CC7D',  
-  glow: '#00FF9D33',     
+  primary: '#00FF9D',
+  secondary: '#00CC7D',
+  glow: '#00FF9D33',
 };
 
 export const physicsColor = '#8F00FF';

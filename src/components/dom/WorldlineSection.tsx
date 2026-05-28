@@ -14,8 +14,8 @@ const BLOCKS = [
     year: '2018 – 2019',
     title: 'Foundations in Engineering & Advocacy',
     body: [
-      { subtitle: 'Smart Irrigation & Machine Learning:', text: 'Started tinkering with electronics and Arduinos, developing a soil moisture-based automated irrigation system. Upgraded it over the years to include an evapotranspiration-based scheduling algorithm and automated ML weed detection (Felicitated by CSIR in 2022).' },
-      { subtitle: 'Public Speaking & Leadership:', text: 'Dove into debating and Model United Nations, winning multiple Best Delegate awards and hosting several school-wide MUN conferences.' },
+      { subtitle: 'Smart Irrigation & Machine Learning:', text: 'Started tinkering with electronics and Arduinos, developing a soil moisture-based automated irrigation system. Upgraded it over the years to include an evapotranspiration-based scheduling algorithm and automated ML weed detection.' },
+      { subtitle: 'Leadership:', text: 'Dove into debating and Model United Nations, winning multiple Best Delegate awards and hosting several school-wide MUN conferences.' },
       { subtitle: 'Social Impact:', text: 'Led tangible sensitization initiatives to integrate children with special needs into mainstream society, which included training professionals (like hairstylists) to adapt their techniques for neurodivergent children.' }
     ],
   },
@@ -76,29 +76,29 @@ const BLOCKS = [
 
 // ─── Palette (Dark Academia × High-Tech) ────────────────────────────────────
 const C = {
-  espresso:   '#020204', // var(--void-black)
-  parchment:  '#c8b98a',
-  dim:        '#8a7a62',
-  violet:     '#8F00FF',
-  cyan:       '#00FF9D',
-  white:      '#F0F0F0',
-  orange:     '#F97316',
-  grid:       'rgba(200,185,138,0.12)',
+  espresso: '#020204', // var(--void-black)
+  parchment: '#c8b98a',
+  dim: '#8a7a62',
+  violet: '#8F00FF',
+  cyan: '#00FF9D',
+  white: '#F0F0F0',
+  orange: '#F97316',
+  grid: 'rgba(200,185,138,0.12)',
 };
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function WorldlineSection() {
-  const sectionRef  = useRef<HTMLDivElement>(null);
-  const canvasRef   = useRef<SVGSVGElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<SVGSVGElement>(null);
 
   // Keep the 3-D scene aware of scroll progress
   useEffect(() => {
     const onScroll = () => {
       scrollState.pageScrollY = window.scrollY;
       if (!sectionRef.current) return;
-      const rect   = sectionRef.current.getBoundingClientRect();
-      const h      = sectionRef.current.offsetHeight;
-      const vh     = window.innerHeight;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const h = sectionRef.current.offsetHeight;
+      const vh = window.innerHeight;
       const scrolled = -rect.top;
       scrollState.progress = Math.max(0, Math.min(1, scrolled / (h - vh)));
     };
@@ -365,19 +365,19 @@ export default function WorldlineSection() {
             {/* Glow filter — cyan */}
             <filter id="glow-cyan" x="-40%" y="-40%" width="180%" height="180%">
               <feGaussianBlur stdDeviation="5" result="blur" />
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
             {/* Glow filter — violet */}
             <filter id="glow-violet" x="-40%" y="-40%" width="180%" height="180%">
               <feColorMatrix type="matrix"
-                values="0.2 0 0 0 0.56  0 0 0 0 0  0 0.8 0 0 1  0 0 0 1 0" result="colored"/>
-              <feGaussianBlur in="colored" stdDeviation="6" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                values="0.2 0 0 0 0.56  0 0 0 0 0  0 0.8 0 0 1  0 0 0 1 0" result="colored" />
+              <feGaussianBlur in="colored" stdDeviation="6" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
             {/* Glow filter — orange */}
             <filter id="glow-orange" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="4" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
             {/* Laser gradient */}
             <linearGradient id="laser-grad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -442,8 +442,8 @@ export default function WorldlineSection() {
             ))}
             {/* Endpoint dots on traces */}
             {[
-              [420,230],[400,350],[440,400],[920,240],[950,340],[920,390],[640,140],[780,130]
-            ].map(([cx,cy], i) => (
+              [420, 230], [400, 350], [440, 400], [920, 240], [950, 340], [920, 390], [640, 140], [780, 130]
+            ].map(([cx, cy], i) => (
               <circle key={i} className="jny-pulse-dot"
                 cx={cx} cy={cy} r="3.5"
                 fill={C.cyan} filter="url(#glow-cyan)" opacity="0.8" />
@@ -460,16 +460,16 @@ export default function WorldlineSection() {
               <ellipse cx="500" cy="210" rx="120" ry="30"
                 fill="none" stroke={C.parchment} strokeWidth="1.2" opacity="0.7" />
               {/* Side lines */}
-              {[-120,-80,-40,0,40,80,120].map((dx, i) => (
+              {[-120, -80, -40, 0, 40, 80, 120].map((dx, i) => (
                 <line key={i}
-                  x1={500+dx} y1="210" x2={500 + dx * 0.6} y2="400"
+                  x1={500 + dx} y1="210" x2={500 + dx * 0.6} y2="400"
                   stroke={C.parchment} strokeWidth="0.8" opacity="0.4" />
               ))}
               {/* Bottom ellipse */}
               <ellipse cx="500" cy="400" rx="72" ry="18"
                 fill="none" stroke={C.parchment} strokeWidth="1.2" opacity="0.7" />
               {/* Horizontal rings */}
-              {[250,300,350].map((cy, i) => {
+              {[250, 300, 350].map((cy, i) => {
                 const scale = 1 - (cy - 210) / 240;
                 return (
                   <ellipse key={i} cx="500" cy={cy}
@@ -526,7 +526,7 @@ export default function WorldlineSection() {
                     layers[li + 1].ys.forEach((y2, ni2) => {
                       edges.push(
                         <line key={`e${li}-${ni}-${ni2}`} className="jny-edge"
-                          x1={layer.x} y1={y} x2={layers[li+1].x} y2={y2}
+                          x1={layer.x} y1={y} x2={layers[li + 1].x} y2={y2}
                           stroke={C.parchment} strokeWidth="0.6"
                           strokeDasharray="150" strokeDashoffset="150" />
                       );

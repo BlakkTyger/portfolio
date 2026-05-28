@@ -8,26 +8,22 @@ export default function CV() {
     return (
         <SectionWrapper id="cv" animation="fade-up" stagger={true}>
             <div className="relative w-full max-w-4xl mx-auto py-24 px-8 md:px-12 rounded-2xl border border-[var(--tungsten-gray)]/10 bg-[var(--event-horizon)]/20 backdrop-blur-md overflow-hidden">
-                
+
                 {/* Minimalist Ambient Light */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-[var(--terminal-cyan)]/20 to-transparent"></div>
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-[var(--spectral-violet)]/20 to-transparent"></div>
 
                 <div className="relative z-10 text-center flex flex-col items-center">
-                    {/* Section Label */}
-                    <span className="animate-item inline-block text-[var(--terminal-cyan)] text-xs md:text-sm font-mono uppercase tracking-widest mb-6">
-                        Curriculum Vitae
-                    </span>
+
 
                     {/* Main Heading */}
                     <h2 className="animate-item font-heading font-light text-4xl md:text-5xl lg:text-6xl mb-6 text-[var(--photon-white)] tracking-wide">
-                        My Journey on Paper
+                        Curriculum Vitae
                     </h2>
 
                     {/* Description */}
                     <p className="animate-item text-base md:text-lg text-[var(--tungsten-gray)]/80 mb-12 max-w-xl mx-auto leading-relaxed">
-                        A detailed exposition of my academic background, technical expertise, and professional evolution. 
-                        Download the full document to explore my trajectory.
+                        A detailed exposition of my academic background, technical expertise, and professional evolution.
                     </p>
 
                     {/* CV Button */}

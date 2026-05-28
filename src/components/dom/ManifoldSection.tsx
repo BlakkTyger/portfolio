@@ -370,7 +370,7 @@ export default function ManifoldSection() {
     >
       {/* Section heading */}
       <div 
-        className={`text-center mb-4 transition-all duration-700 ${
+        className={`text-center mb-16 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}
       >

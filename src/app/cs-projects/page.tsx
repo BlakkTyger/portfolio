@@ -101,25 +101,10 @@ export default function CSProjectsPage() {
                 ))}
               </div>
               
-              {/* Assets */}
-              {project.assets && (
-                <div className="flex flex-wrap gap-4 mb-4">
-                  {project.assets.document && (
-                    <a href={project.assets.document} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><FileText size={14} /> Document</a>
-                  )}
-                  {project.assets.ppt && (
-                    <a href={project.assets.ppt} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><Presentation size={14} /> PPT</a>
-                  )}
-                  {project.assets.link && (
-                    <a href={project.assets.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-[var(--tungsten-gray)] hover:text-white"><ExternalLink size={14} /> Link</a>
-                  )}
-                </div>
-              )}
-
               <div className="flex-grow"></div>
 
-              {/* Links */}
-              <div className="flex flex-wrap gap-4">
+              {/* Consolidated Links */}
+              <div className="flex flex-wrap gap-4 mt-6 pt-4 border-t border-[var(--tungsten-gray)]/5">
                 {project.links?.github && (
                   <a
                     href={project.links.github}
@@ -131,37 +116,37 @@ export default function CSProjectsPage() {
                     Code
                   </a>
                 )}
-                {project.links?.website && (
+                {(project.links?.paper || project.assets?.document) && (
                   <a
-                    href={project.links.website}
+                    href={project.links?.paper || project.assets?.document}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
                   >
-                    <ExternalLink size={16} />
-                    Website
+                    <FileText size={16} />
+                    Paper
                   </a>
                 )}
-                {project.links?.docs && (
+                {(project.links?.presentation || project.assets?.ppt) && (
                   <a
-                    href={project.links.docs}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
-                  >
-                    <BookOpen size={16} />
-                    Docs
-                  </a>
-                )}
-                {project.links?.presentation && (
-                  <a
-                    href={project.links.presentation}
+                    href={project.links?.presentation || project.assets?.ppt}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
                   >
                     <Presentation size={16} />
                     Slides
+                  </a>
+                )}
+                {(project.links?.website || project.assets?.link) && (
+                  <a
+                    href={project.links?.website || project.assets?.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
+                  >
+                    <ExternalLink size={16} />
+                    Demo
                   </a>
                 )}
               </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Inter, JetBrains_Mono, Caveat, Tangerine, Bonheur_Royale } from "next/font/google";
+import { Outfit, Inter, JetBrains_Mono, Arizonia } from "next/font/google";
 import "./globals.css";
 
 // Heading font
@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 // Cursive font
-const bonheurRoyale = Bonheur_Royale({
+const arizonia = Arizonia({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-cursive",
@@ -68,7 +68,7 @@ export default function RootLayout({
     ${outfit.variable} 
     ${inter.variable} 
     ${jetbrainsMono.variable}
-    ${bonheurRoyale.variable}
+    ${arizonia.variable}
     antialiased
   `}
       >
