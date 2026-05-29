@@ -87,6 +87,7 @@ export default function SectionWrapper({
         py-20 px-6
         md:py-32 md:px-12
         lg:px-24
+        scroll-mt-20
         ${className}
       `}
     >

@@ -115,6 +115,117 @@ code, pre {
 }
 
 
+/* ============================
+   WhoAmI Background Graphics
+   ============================ */
+
+/* Quantum symbol drift paths */
+@keyframes whoami-drift-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(12px, -18px) rotate(5deg); }
+  50% { transform: translate(-8px, -30px) rotate(-3deg); }
+  75% { transform: translate(-15px, -12px) rotate(6deg); }
+}
+@keyframes whoami-drift-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-18px, -12px) rotate(-4deg); }
+  50% { transform: translate(12px, -25px) rotate(3deg); }
+  75% { transform: translate(8px, -18px) rotate(-6deg); }
+}
+@keyframes whoami-drift-3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(20px, -15px) rotate(7deg); }
+  66% { transform: translate(-12px, -28px) rotate(-5deg); }
+}
+
+.whoami-drift-1 { animation: whoami-drift-1 12s ease-in-out infinite; }
+.whoami-drift-2 { animation: whoami-drift-2 14s ease-in-out infinite; }
+.whoami-drift-3 { animation: whoami-drift-3 16s ease-in-out infinite; }
+
+.whoami-quantum-active {
+  animation-duration: 3s !important;
+  filter: drop-shadow(0 0 14px currentColor) !important;
+}
+
+/* Coffee steam rising */
+@keyframes whoami-steam {
+  0% { opacity: 0; transform: translateY(0) scaleX(1); }
+  20% { opacity: 0.6; }
+  60% { opacity: 0.3; transform: translateY(-20px) scaleX(1.4); }
+  100% { opacity: 0; transform: translateY(-45px) scaleX(1.8); }
+}
+.whoami-steam {
+  animation: whoami-steam 2.5s ease-out infinite;
+}
+
+/* Coffee pour */
+@keyframes whoami-pour {
+  0% { transform: scaleY(0); opacity: 0; }
+  20% { opacity: 0.9; }
+  100% { transform: scaleY(1); opacity: 0.8; }
+}
+.whoami-pour {
+  transform-origin: top center;
+  animation: whoami-pour 0.8s ease-out forwards;
+}
+
+/* Splash droplets */
+@keyframes whoami-splash {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(var(--sx, 5px), var(--sy, 20px)) scale(0.3); opacity: 0; }
+}
+.whoami-splash {
+  animation: whoami-splash 1s ease-out infinite;
+}
+
+/* Latte heart pulse */
+@keyframes whoami-latte-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.whoami-latte-heart {
+  animation: whoami-latte-pulse 1.2s ease-in-out infinite;
+}
+
+/* Book page flutter */
+@keyframes whoami-page-flutter {
+  0%, 100% { transform: skewY(0deg); }
+  50% { transform: skewY(3deg); }
+}
+.whoami-page-flutter {
+  animation: whoami-page-flutter 3s ease-in-out infinite;
+}
+
+/* Neural network signal */
+@keyframes whoami-signal {
+  0% { stroke-dashoffset: 100; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+.whoami-signal {
+  stroke-dasharray: 8 92;
+  animation: whoami-signal 2s linear infinite;
+}
+
+/* Bloch sphere rotation */
+@keyframes whoami-bloch-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Quantum pulse for symbols */
+@keyframes whoami-quantum-pulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.6; }
+}
+
+/* Emphasis text glow on hover */
+.whoami-emphasis-glow:hover {
+  text-shadow: 0 0 12px currentColor, 0 0 30px currentColor;
+}
+
 /* Mobile optimizations */
 @media (max-width: 640px) {
   html, body {

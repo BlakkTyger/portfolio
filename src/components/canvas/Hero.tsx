@@ -46,6 +46,7 @@ export default function Hero() {
     const mouse3D = useRef(new THREE.Vector3(0, 0, 0));
     const clickRipples = useRef<ClickRipple[]>([]);
     const currentOpacity = useRef(0.4);                 //opacity
+    const collapseProgress = useRef(0.0);               // collapse animation progress
     const time = useRef(0);
     const dummy = useMemo(() => new THREE.Object3D(), []);
     const colorArray = useRef<Float32Array | null>(null);
@@ -143,19 +144,50 @@ export default function Hero() {
         
         time.current += delta;
 
-        // Fade based on scroll
-        const viewportHeight = window.innerHeight;
-        const scrollY = scrollState.pageScrollY;
-        const fadeStart = viewportHeight * 0.5;
-        const fadeEnd = viewportHeight * 2.5;
-        
+        // ── Dynamic Section Fade & Collapse ──
         let targetOpacity = 0.4;
-        if (scrollY > fadeStart) {
-            const fadeProgress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
-            targetOpacity = Math.max(0.1, 0.4 * (1 - fadeProgress));
+        let targetCollapse = 0.0;
+        
+        if (typeof document !== 'undefined') {
+            const whoamiEl = document.getElementById('whoami');
+            const worldlineEl = document.getElementById('worldline');
+            const contactEl = document.getElementById('contact');
+            
+            if (whoamiEl) {
+                const wRect = whoamiEl.getBoundingClientRect();
+                const vh = window.innerHeight;
+                if (wRect.top < vh * 0.8 && wRect.bottom > vh * 0.2) {
+                    targetCollapse = 1.0;
+                    targetOpacity = 0.0;
+                }
+            }
+            
+            if (worldlineEl) {
+                const wRect = worldlineEl.getBoundingClientRect();
+                if (wRect.top < window.innerHeight && wRect.bottom > 0) {
+                    const fadeProgress = Math.min(1, Math.max(0, (window.innerHeight - wRect.top) / 400));
+                    if (fadeProgress > 0) {
+                       targetOpacity = 0.4 * (1 - fadeProgress);
+                       targetCollapse = fadeProgress;
+                    }
+                } else if (wRect.bottom <= 0) {
+                    targetOpacity = 0.0;
+                    targetCollapse = 1.0;
+                }
+            }
+            
+            if (contactEl) {
+                const cRect = contactEl.getBoundingClientRect();
+                if (cRect.top < window.innerHeight) {
+                    const fadeProgress = Math.min(1, Math.max(0, (window.innerHeight - cRect.top) / 400));
+                    targetOpacity = 0.4 * fadeProgress;
+                    targetCollapse = 1.0 - fadeProgress;
+                }
+            }
         }
         
         currentOpacity.current = THREE.MathUtils.lerp(currentOpacity.current, targetOpacity, 0.08);
+        collapseProgress.current = THREE.MathUtils.lerp(collapseProgress.current, targetCollapse, 0.05);
         
         if (materialRef.current) {
             materialRef.current.opacity = currentOpacity.current;
@@ -211,6 +243,13 @@ export default function Hero() {
 
             // Damping
             particle.velocity.multiplyScalar(0.96);
+            
+            // Collapse effect
+            if (collapseProgress.current > 0.01) {
+                const pullStrength = collapseProgress.current * 0.15;
+                const toCenter = new THREE.Vector3().subVectors(new THREE.Vector3(0,0,0), particle.position);
+                particle.velocity.lerp(toCenter.multiplyScalar(pullStrength), 0.1);
+            }
 
             // Update position
             particle.position.add(particle.velocity);
@@ -226,9 +265,11 @@ export default function Hero() {
                 particle.velocity.z *= -0.5;
             }
 
-            // Update instance matrix with size variation
+            // Update instance matrix with size variation and collapse scale
             dummy.position.copy(particle.position);
-            dummy.scale.setScalar(particle.size / CONFIG.MIN_SIZE);
+            const baseScale = particle.size / CONFIG.MIN_SIZE;
+            const collapseScale = baseScale * (1.0 - collapseProgress.current * 0.95);
+            dummy.scale.setScalar(collapseScale);
             dummy.updateMatrix();
             meshRef.current!.setMatrixAt(index, dummy.matrix);
         });

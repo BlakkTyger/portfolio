@@ -32,10 +32,11 @@ export const personalInfo = {
 
   // Short bio for the WhoAmI section
   bio: `
-    Enthralled by how the universe functions and driven by a desire to understand the mechanics of it all, a confused, but highly motivated explorer set into the world of physics to understand it all. As one who forever gravitated towards the world of bits and programs, he found his true calling at the intersection of these fields: using the natural laws of quantum physics to revolutionize computation. With Richard Feynman and Chad Rigetti as his inspirations, his work at IIT Kanpur is dedicated to a singular dream: contributing to the development of a fault-tolerant, practically useful quantum computer. 
+    I’m a third-year Physics major at IIT Kanpur driven by the ambition of building a fault-tolerant, practically useful Quantum Computer. Fascinated by the fundamental laws of the universe and computer systems, my research sits at their intersection, currently focusing on Cavity Quantum Electrodynamics and the simulation of open quantum systems for information processing.
 
-    Beyond the lab, his intellectual curiosity extends into the abstract. The philosophies of Camus and Nietzsche provide a space for deep reflection, while an active engagement with social issues via debating keeps him firmly grounded in reality. An avid builder, he finds solace in developing Machine Learning models and dissecting their inner workings. Currently, his work sits at the intersection of these passions, focusing on Cavity Quantum Electrodynamics for quantum computing applications and the mechanistic interpretability of Large Language Models.
-  `,
+    I have an insatiable desire to understand this world, it's workings and it's purpose; and wish to acquire as much knowledge about as many things possible. Beyond physics, my intellectual curiosity frequently spills over into the Statistics, Machine Learning, Large Lanaguage Models and thier interpretabiliy.
+
+    When I’m not running quantum circuits or debugging neural networks, you’ll likely find me actively debating social issues, or exploring the philosophies of Camus and Nietzsche while sipping on a cup of cappuccino.`,
 };
 
 // === SKILLS ===

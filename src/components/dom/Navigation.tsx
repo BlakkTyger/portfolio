@@ -50,7 +50,12 @@ export default function Navigation() {
     if (element) {
       // Calculate position with offset for navbar height
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - NAVBAR_HEIGHT;
+      let offsetPosition = elementPosition - NAVBAR_HEIGHT;
+      
+      if (id === 'whoami') {
+        // Scroll 70px further down to perfectly center the optimized card in the viewport
+        offsetPosition += 70;
+      }
       
       window.scrollTo({
         top: offsetPosition,

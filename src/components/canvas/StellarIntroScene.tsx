@@ -497,6 +497,15 @@ export default function StellarIntroScene({ onFlash, onComplete, onPhaseChange }
     }
   });
 
+  // Calculate dynamic scale factor: shrink star on mobile so it doesn't overflow phone screens
+  const starScale = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 768;
+      return isMobile ? 0.55 : 1.0;
+    }
+    return 1.0;
+  }, []);
+
   return (
     <>
       {/* Background + black hole (rendered behind everything) */}
@@ -505,15 +514,18 @@ export default function StellarIntroScene({ onFlash, onComplete, onPhaseChange }
       {/* Background starfield */}
       <BackgroundStars time={elapsed} cameraDistance={cameraDistance} />
 
-      {/* Star glow core */}
-      <StarGlowCore uniforms={glowUniforms} />
+      {/* Responsive star group */}
+      <group scale={starScale}>
+        {/* Star glow core */}
+        <StarGlowCore uniforms={glowUniforms} />
 
-      {/* Shockwave ring */}
-      <ShockwaveRing uniforms={shockwaveUniforms} />
+        {/* Shockwave ring */}
+        <ShockwaveRing uniforms={shockwaveUniforms} />
 
-      {/* Star particle systems */}
-      <CoronaParticles uniforms={coronaUniforms} />
-      <StarParticles uniforms={starUniforms} />
+        {/* Star particle systems */}
+        <CoronaParticles uniforms={coronaUniforms} />
+        <StarParticles uniforms={starUniforms} />
+      </group>
 
       {/* Post-processing: Dynamic Bloom */}
       <EffectComposer>

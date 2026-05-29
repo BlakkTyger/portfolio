@@ -44,11 +44,11 @@ export default function StellarIntro() {
   // -> To restore showing it only once: Uncomment lines 47-49.
   useEffect(() => {
     setHasMounted(true);
-    try {
-      if (localStorage.getItem(LOCALSTORAGE_KEY) === 'true') {
-        setIntroComplete(true);
-      }
-    } catch {}
+    //  try {
+    //    if (localStorage.getItem(LOCALSTORAGE_KEY) === 'true') {
+    //      setIntroComplete(true);
+    //    }
+    //  } catch {}
   }, [setIntroComplete]);
 
   // Supernova flash handler — warm white with longer duration
@@ -80,13 +80,13 @@ export default function StellarIntro() {
     // 1. Camera is deep inside the black hole (singularity is pure black).
     // Start CSS fade-out of the entire intro page to let landing page appear.
     setFadeOutIntro(true);
-    
+
     // 2. Mark complete in global state (renders landing page components underneath)
     setIntroComplete(true);
 
     // ── DEVELOPER REFERENCE: SAVE SEEN STATE IN LOCALSTORAGE ──
     // -> Comment out the line below to stop saving 'seen' state (intro will play on every reload).
-    try { localStorage.setItem(LOCALSTORAGE_KEY, 'true'); } catch {}
+    try { localStorage.setItem(LOCALSTORAGE_KEY, 'true'); } catch { }
 
     // 3. Completely unmount intro component once the 1.2s CSS transition completes
     setTimeout(() => {
@@ -98,8 +98,8 @@ export default function StellarIntro() {
   const handleSkip = useCallback(() => {
     setFadeOutIntro(true);
     setIntroComplete(true);
-    try { localStorage.setItem(LOCALSTORAGE_KEY, 'true'); } catch {}
-    
+    try { localStorage.setItem(LOCALSTORAGE_KEY, 'true'); } catch { }
+
     setTimeout(() => {
       setDismissed(true);
     }, 1000);
@@ -212,7 +212,7 @@ export default function StellarIntro() {
             key={i}
             className="rounded-full transition-all duration-500"
             style={{
-              width:  currentPhase === i ? '6px' : '3px',
+              width: currentPhase === i ? '6px' : '3px',
               height: currentPhase === i ? '6px' : '3px',
               backgroundColor: currentPhase === i
                 ? 'rgba(255, 255, 255, 0.6)'
