@@ -156,3 +156,48 @@ The Miscellaneous section contains curated lists.
    ```
 4. **To add a new subsection:**
    Scroll down to the `grid` layout in the JSX. Copy an existing `<section>` block and paste it below. Update the icon, title, and map over your new data array.
+
+---
+
+## 8. Turning Intro Animation On/Off (Cinematic Star Intro)
+
+The portfolio features a high-fidelity **Stellar Collapse & Black Hole Intro** animation on initial load. By default, it is configured to run **only once per user session** by storing a seen state in `localStorage` to avoid repeating it on subsequent visits.
+
+During development or debugging, you can easily toggle this behavior on or off:
+
+### To play the Intro on EVERY page refresh (Recommended for development):
+1. Open the file [StellarIntro.tsx](file:///home/blakktyger/Documents/BlakkTyger/Projects/portfolio/portfolio/src/components/dom/StellarIntro.tsx).
+2. Look for the `useEffect` hook near line 40:
+   ```typescript
+   // ── DEVELOPER REFERENCE: INTRO REPEAT VISITS BYPASS ──
+   // By default, the intro animation is shown only ONCE per user. A key is saved in localStorage.
+   // -> To force the intro on EVERY refresh: Comment out lines 47-49.
+   // -> To restore showing it only once: Uncomment lines 47-49.
+   useEffect(() => {
+     setHasMounted(true);
+     try {
+       if (localStorage.getItem(LOCALSTORAGE_KEY) === 'true') {
+         setIntroComplete(true);
+       }
+     } catch {}
+   }, [setIntroComplete]);
+   ```
+3. **Comment out** the `if (localStorage.getItem(...) === 'true')` check to bypass the cache.
+
+### To prevent saving the 'seen' state in production:
+1. In the same [StellarIntro.tsx](file:///home/blakktyger/Documents/BlakkTyger/Projects/portfolio/portfolio/src/components/dom/StellarIntro.tsx) file, locate the `handleComplete` callback:
+   ```typescript
+   const handleComplete = useCallback(() => {
+     // ...
+     // ── DEVELOPER REFERENCE: SAVE SEEN STATE IN LOCALSTORAGE ──
+     // -> Comment out the line below to stop saving the seen key in localStorage:
+     try { localStorage.setItem(LOCALSTORAGE_KEY, 'true'); } catch {}
+     // ...
+   });
+   ```
+2. **Comment out** the `try { localStorage.setItem(...) }` line. 
+
+To clear your browser cache manually during testing without editing files, run this command in your browser's developer tools console:
+```javascript
+localStorage.removeItem('stellar-intro-seen')
+```

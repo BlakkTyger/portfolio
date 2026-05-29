@@ -1,4 +1,4 @@
-import IntroAnimation from '@/components/dom/IntroAnimation';
+import StellarIntro from '@/components/dom/StellarIntro';
 import SceneWrapper from '@/components/canvas/SceneWrapper';
 import WhoAmI from '@/components/dom/WhoAmI';
 import CV from '@/components/dom/CV';
@@ -12,8 +12,8 @@ import HeroText from '@/components/dom/HeroText';
 export default function Home() {
   return (
     <main className="relative w-full max-w-[100vw] ">
-      {/* Intro Animation (plays once) */}
-      <IntroAnimation />
+      {/* Stellar Collapse → Black Hole Intro (plays once, skips on repeat visits) */}
+      <StellarIntro />
       
       {/* Navigation (fixed) */}
       <Navigation />
