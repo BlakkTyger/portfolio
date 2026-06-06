@@ -160,7 +160,7 @@ export default function HeroText() {
       </div>
 
       {/* Decorative elements */}
-      <div className="hero-anim-item mt-10 md:mt-14 flex items-center justify-center gap-4">
+      <div className="hero-anim-item mt-10 md:mt-12 flex items-center justify-center gap-4">
         <div className="w-16 md:w-24 h-px bg-gradient-to-r from-transparent via-[var(--tungsten-gray)]/30 to-transparent" />
         <div className={`w-1.5 h-1.5 rounded-full transition-colors duration-500 ${
           displayText === 'Physicist' ? 'bg-purple-400' :
@@ -168,6 +168,21 @@ export default function HeroText() {
           'bg-amber-400'
         }`} />
         <div className="w-16 md:w-24 h-px bg-gradient-to-r from-transparent via-[var(--tungsten-gray)]/30 to-transparent" />
+      </div>
+
+      {/* Sleek Lab status card */}
+      <div className="hero-anim-item mt-10 max-w-3xl mx-auto relative z-20 pointer-events-auto">
+        <div className="relative p-6 rounded-2xl bg-[var(--event-horizon)]/40 border border-[var(--tungsten-gray)]/10 backdrop-blur-md shadow-[0_0_50px_rgba(0,0,0,0.3)] hover:border-purple-500/20 hover:shadow-[0_0_40px_rgba(143,0,255,0.05)] transition-all duration-700 group">
+          {/* Subtle glowing corners */}
+          <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-purple-500/30 rounded-tl-lg group-hover:border-purple-500/80 transition-colors duration-500" />
+          <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[var(--terminal-cyan)]/30 rounded-br-lg group-hover:border-[var(--terminal-cyan)]/80 transition-colors duration-500" />
+          
+          <p className="text-sm md:text-[18px] text-[var(--tungsten-gray)] leading-relaxed tracking-wide">
+            Bridging <span className="text-purple-400 font-medium">quantum light-matter interaction</span> and <span className="text-[var(--terminal-cyan)] font-medium">classical AI</span>.
+            <br className="hidden sm:inline" />
+            {' '}Actively researching across three groups - <span className="text-[var(--photon-white)]/90 font-medium">Nanophotonics, IITK</span>, <span className="text-[var(--photon-white)]/90 font-medium">Photonic Devices, IITK</span>, and <span className="text-[var(--photon-white)]/90 font-medium">Kyoto University&apos;s LLM Center</span> - investigating <span className="text-purple-400 font-semibold">Cavity-QED</span>, <span className="text-purple-400 font-semibold">Single-Photon Sources</span>, and <span className="text-[var(--terminal-cyan)] font-semibold">Mechanistic Interpretability</span>.
+          </p>
+        </div>
       </div>
 
     </div>

@@ -75,6 +75,13 @@ export default function SimpleProfile() {
           <p className="text-xl text-[#00FF9D] font-mono">
             {personalInfo.tagline}
           </p>
+          
+          {/* Highlighted lab research focus */}
+          <div className="p-5 border-l-2 border-[#8F00FF] bg-[#0c0c14] rounded-r-md text-sm md:text-[15px] leading-relaxed tracking-wide font-mono shadow-[0_0_15px_rgba(143,0,255,0.05)] border-t border-b border-r border-[#222]/40">
+            <span className="text-[#8F00FF] font-bold uppercase tracking-wider block text-xs mb-2">Research Focus & Affiliations</span>
+            Bridging <span className="text-[#8F00FF] font-medium">quantum light-matter interaction</span> and <span className="text-[#00FF9D] font-medium">classical AI</span>. Actively researching across three groups - <span className="text-white font-medium">Nanophotonics, IITK</span>, <span className="text-white font-medium">Photonic Devices, IITK</span>, and <span className="text-white font-medium">Kyoto University&apos;s LLM Center</span> - investigating <span className="text-[#8F00FF] font-semibold">Cavity-QED</span>, <span className="text-[#8F00FF] font-semibold">Single-Photon Sources</span>, and <span className="text-[#00FF9D] font-semibold">Mechanistic Interpretability</span>.
+          </div>
+
           <div className="prose prose-invert max-w-none text-lg text-[#aaa] leading-relaxed">
             {personalInfo.bio.split('\n\n').map((p, i) => <p key={i}>{p.trim()}</p>)}
           </div>
