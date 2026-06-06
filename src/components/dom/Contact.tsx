@@ -53,8 +53,8 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Right Column: System Status Display Card */}
-              <div className="flex flex-col space-y-6">
+              {/* Right Column: System Status Display Card — desktop only */}
+              <div className="hidden lg:flex flex-col space-y-6">
                 <h3 className="text-xs font-mono uppercase tracking-widest text-[var(--tungsten-gray)]/60 opacity-0 hidden lg:block">
                   System Status
                 </h3>

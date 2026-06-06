@@ -143,7 +143,7 @@ export default function WorldlineSection() {
       ref={sectionRef}
       id="worldline"
       className="relative"
-      style={{ height: '700vh', background: 'transparent' }}
+      style={{ height: '800vh', background: 'transparent' }}
     >
       {/* ── Sticky vignette so the WebGL stages read clearly ────────────────── */}
       <div className="sticky top-0 z-0 h-screen w-full overflow-hidden pointer-events-none">
@@ -163,9 +163,13 @@ export default function WorldlineSection() {
             key={i}
             className="relative flex items-center"
             style={{
-              minHeight: '100vh',
+              // AI Internals (index 5) gets 2× scroll space to match canvas stage
+              minHeight: i === 5 ? '200vh' : '100vh',
               padding: '0 clamp(24px, 8vw, 120px)',
               justifyContent: i % 2 === 0 ? 'flex-start' : 'flex-end',
+              // Vertically pin the card to the top half of the extra space
+              alignItems: i === 5 ? 'flex-start' : 'center',
+              paddingTop: i === 5 ? '12vh' : undefined,
             }}
           >
             <div
