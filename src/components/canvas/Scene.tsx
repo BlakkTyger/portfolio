@@ -5,49 +5,48 @@ import { Canvas } from '@react-three/fiber'
 import { Preload } from '@react-three/drei'
 import Hero from './Hero';
 import WorldlineScene from './WorldlineScene';
+import { useActiveSection } from '@/hooks/useActiveSection';
 
 interface SceneProps {
   children?: React.ReactNode;
 }
 
 export default function Scene({ children }: SceneProps) {
+  const activeSection = useActiveSection();
+  const isManifold = activeSection === 'manifold';
+
   useEffect(() => {
     console.log('[Scene] mounted')
   }, [])
 
   return (
     <div className="fixed inset-0 -z-10" style={{ background: '#020204' }}>
-      <Canvas
-        camera={{
-          position: [0, 0, 10],
-          fov: 50,
-          near: 0.1,
-          far: 200,
-        }}
-        dpr={[1, 2]}
+      <div 
+        className="w-full h-full transition-opacity duration-1000"
+        style={{ opacity: isManifold ? 0.08 : 1 }}
       >
-        <ambientLight intensity={0.5} />
+        <Canvas
+          camera={{
+            position: [0, 0, 10],
+            fov: 50,
+            near: 0.1,
+            far: 200,
+          }}
+          dpr={[1, 2]}
+        >
+          <ambientLight intensity={0.5} />
 
-        {/* Hero particles for landing */}
-        <Hero />
+          {/* Hero particles for landing */}
+          <Hero />
 
-        {/* Worldline timeline */}
-        <WorldlineScene />
+          {/* Worldline timeline */}
+          <WorldlineScene />
 
-        {children}
+          {children}
 
-        {/*
-        <EffectComposer>
-          <Bloom
-            intensity={0.4}          // how strong the glow is
-            luminanceThreshold={0.0} // 0 = glow even on darker stuff
-            luminanceSmoothing={0.6}
-            radius={0.5}             // how wide/soft the halo is
-          />
-        </EffectComposer>*/}
-
-        <Preload all />
-      </Canvas>
+          <Preload all />
+        </Canvas>
+      </div>
     </div>
   );
 }

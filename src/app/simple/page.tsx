@@ -3,12 +3,49 @@ import Link from 'next/link';
 import { ArrowLeft, Github, Mail, ExternalLink, FileText, Presentation } from 'lucide-react';
 import { personalInfo, skills } from '@/data/content';
 import { projects } from '@/data/projects';
-import { milestones } from '@/data/timeline';
 
 export const metadata = {
   title: 'Himanshu Sharma | Minimal Website',
   description: 'Academic and professional profile of Himanshu Sharma.',
 };
+
+const ACADEMIC_JOURNEY = [
+  {
+    year: '2018 – 2019',
+    title: 'Foundations in Engineering & Advocacy',
+    description: 'Began tinkering with electronics and Arduinos. Chaired MUN debating conferences and led social impact initiatives for neurodivergent children.',
+  },
+  {
+    year: '2020',
+    title: 'Sustainability, Design & Early Code',
+    description: 'Prototyped sustainable models in Fusion 360, winning national ATL Marathon. Trained in tech entrepreneurship and transitioned to Python programming.',
+  },
+  {
+    year: '2020 – 2021',
+    title: 'Computational Neuroscience (AIM-SIRIUS)',
+    description: 'Led an Indo-Russian team under the Sirius Institute, designing a web platform and data pipelines for EEG signal processing and neural connectivity.',
+  },
+  {
+    year: '2020 – 2022',
+    title: 'F1 in Schools & The Quantum Spark',
+    description: 'Served as Design Engineer for Team Quantum Racing at the F1 in Schools World Finals (UK). Sparked interest in Quantum Computing and QKD.',
+  },
+  {
+    year: '2023 – 2024',
+    title: 'IIT Kanpur & Technical Leadership',
+    description: 'Enrolled in Physics at IIT Kanpur, focusing on Quantum Computing, Quantum Optics, and Machine Learning. Coordinated the Programming Club ML domain.',
+  },
+  {
+    year: '2025',
+    title: 'AI Internals & Quantum Research',
+    description: 'Researched LLM mechanics at Kyoto University and Quantum Optics / Cavity QED at the Nanophotonics Group, IIT Kanpur.',
+  },
+  {
+    year: '2026 & Beyond',
+    title: 'Lattices & The Quantum Frontier',
+    description: 'Assessing lattice-based cryptographic vulnerabilities and publishing research bridging classical AI and Quantum Physics.',
+  },
+];
 
 export default function SimpleProfile() {
   const physicsProjects = projects.filter(p => p.category === 'physics');
@@ -72,26 +109,30 @@ export default function SimpleProfile() {
                   ))}
                 </div>
                 <p className="text-[#999] leading-relaxed mb-4">{project.description}</p>
-                {project.assets && (
-                  <div className="flex gap-4 text-sm text-[#888] mb-2">
-                    {project.assets.document && <a href={project.assets.document} className="hover:text-[#8F00FF] flex items-center gap-1"><FileText size={14}/> Document</a>}
-                    {project.assets.ppt && <a href={project.assets.ppt} className="hover:text-[#8F00FF] flex items-center gap-1"><Presentation size={14}/> PPT</a>}
-                    {project.assets.link && <a href={project.assets.link} className="hover:text-[#8F00FF] flex items-center gap-1"><ExternalLink size={14}/> Link</a>}
-                  </div>
-                )}
-                {project.assets && (
-                  <div className="flex gap-4 text-sm text-[#666] mb-2">
-                    {project.assets.document && <a href={project.assets.document} className="hover:text-[#00FF9D] flex items-center gap-1"><FileText size={14}/> Document</a>}
-                    {project.assets.ppt && <a href={project.assets.ppt} className="hover:text-[#00FF9D] flex items-center gap-1"><Presentation size={14}/> PPT</a>}
-                    {project.assets.link && <a href={project.assets.link} className="hover:text-[#00FF9D] flex items-center gap-1"><ExternalLink size={14}/> Link</a>}
-                  </div>
-                )}
-                {project.links && (
-                  <div className="flex gap-4 text-sm text-[#888]">
-                    {project.links.paper && <a href={project.links.paper} className="hover:text-[#8F00FF] flex items-center gap-1"><FileText size={14}/> Paper</a>}
-                    {project.links.github && <a href={project.links.github} className="hover:text-[#8F00FF] flex items-center gap-1"><Github size={14}/> Code</a>}
-                  </div>
-                )}
+                
+                {/* Consolidated Links */}
+                <div className="flex flex-wrap gap-4 text-sm mt-4">
+                  {project.links?.github && (
+                    <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
+                      <Github size={14} /> Repository
+                    </a>
+                  )}
+                  {(project.links?.paper || project.assets?.document) && (
+                    <a href={project.links?.paper || project.assets?.document} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
+                      <FileText size={14} /> Paper
+                    </a>
+                  )}
+                  {(project.links?.presentation || project.assets?.ppt) && (
+                    <a href={project.links?.presentation || project.assets?.ppt} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
+                      <Presentation size={14} /> Slides
+                    </a>
+                  )}
+                  {(project.links?.website || project.assets?.link) && (
+                    <a href={project.links?.website || project.assets?.link} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
+                      <ExternalLink size={14} /> Demo
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -114,11 +155,30 @@ export default function SimpleProfile() {
                     </span>
                   ))}
                 </div>
-                {project.links && (
-                  <div className="flex gap-4 text-sm text-[#666]">
-                    {project.links.github && <a href={project.links.github} className="hover:text-[#00FF9D] flex items-center gap-1"><Github size={14}/> Repo</a>}
-                  </div>
-                )}
+
+                {/* Consolidated Links */}
+                <div className="flex flex-wrap gap-4 text-sm mt-4">
+                  {project.links?.github && (
+                    <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
+                      <Github size={14} /> Repository
+                    </a>
+                  )}
+                  {(project.links?.paper || project.assets?.document) && (
+                    <a href={project.links?.paper || project.assets?.document} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
+                      <FileText size={14} /> Paper
+                    </a>
+                  )}
+                  {(project.links?.presentation || project.assets?.ppt) && (
+                    <a href={project.links?.presentation || project.assets?.ppt} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
+                      <Presentation size={14} /> Slides
+                    </a>
+                  )}
+                  {(project.links?.website || project.assets?.link) && (
+                    <a href={project.links?.website || project.assets?.link} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
+                      <ExternalLink size={14} /> Demo
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -153,7 +213,7 @@ export default function SimpleProfile() {
         <section>
           <h2 className="text-2xl font-bold border-b border-[#222] pb-4 mb-8 text-white">Academic Journey</h2>
           <div className="space-y-8 border-l border-[#333] pl-6 ml-3 relative">
-            {milestones.filter(m => ['education', 'work'].includes(m.category)).map((milestone, idx) => (
+            {ACADEMIC_JOURNEY.map((milestone, idx) => (
               <div key={idx} className="relative">
                 <div className="absolute -left-[31px] top-1.5 w-3 h-3 bg-[#333] rounded-full ring-4 ring-[#050505]" />
                 <span className="text-sm font-mono text-[#888] mb-1 block">{milestone.year}</span>

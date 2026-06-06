@@ -14,62 +14,62 @@ const BLOCKS = [
     year: '2018 – 2019',
     title: 'Foundations in Engineering & Advocacy',
     body: [
-      { subtitle: 'Electronics & Machine Learning:', text: 'Started tinkering with electronics and Arduinos, developing a soil-moisture-based automated irrigation system. Upgraded it over the years to include an evapotranspiration-based scheduling algorithm and automated ML weed detection.' },
-      { subtitle: 'Leadership:', text: 'Dove into debating and Model United Nations, winning multiple Best Delegate awards and hosting several school-wide MUN conferences.' },
-      { subtitle: 'Social Impact:', text: 'Led tangible sensitization initiatives to integrate children with special needs into mainstream society, which included training professionals (like hairstylists) to adapt their techniques for neurodivergent children.' },
+      { subtitle: 'Electronics & Machine Learning', text: 'Tinkered with electronics and Arduinos, developing automated soil-moisture and ML weed detection systems.' },
+      { subtitle: 'Leadership & MUNs', text: 'Chaired and hosted school-wide Model United Nations (MUN) debating conferences, securing multiple Best Delegate awards.' },
+      { subtitle: 'Social Impact', text: 'Led advocacy initiatives integrating neurodivergent children into mainstream society via adaptive sensory techniques.' },
     ],
   },
   {
     year: '2020',
     title: 'Sustainability, Design & Early Code',
     body: [
-      { subtitle: '3D Modelling & Sustainability:', text: 'Learned 3D modelling (Fusion 360) to design and prototype a sustainable, bioplastic-based food container. Secured 3rd place nationally in the ATL Marathon.' },
-      { subtitle: 'Entrepreneurship:', text: 'Interned with Tech Mahindra and MIT to develop a working prototype and business plan, receiving extensive training in go-to-market strategies, company setup, and legalities.' },
-      { subtitle: 'The Programming Shift:', text: 'Began serious software development, building a foundation in Python and transitioning into web development.' },
+      { subtitle: '3D Modelling & Prototyping', text: 'Modelled sustainable bioplastic structures in Fusion 360, winning 3rd place nationally in the ATL Marathon.' },
+      { subtitle: 'Tech Entrepreneurship', text: 'Trained with Tech Mahindra and MIT to build go-to-market strategies, business plans, and commercial frameworks.' },
+      { subtitle: 'Programming & Software Shift', text: 'Began rigorous software engineering, establishing core competencies in Python and web architectures.' },
     ],
   },
   {
     year: '2020 – 2021',
     title: 'Computational Neuroscience (AIM-SIRIUS)',
     body: [
-      { subtitle: 'Global Collaboration:', text: 'Led an Indo-Russian team of 6 students under researchers from the Sirius Institute to develop a web platform for the parallel processing of neuroimaging data.' },
-      { subtitle: 'Data Pipeline Construction:', text: 'Built pipelines to clean EEG Time Series data, obtain source coordinates, and convert data into graphs.' },
-      { subtitle: 'Algorithmic Optimization:', text: 'Later interned for the same lab to optimize the algorithms. Used Python (MNE library), data analysis tools, and graphing libraries to visualize brain signals and evaluate connectivity/clustering metrics for researchers.' },
+      { subtitle: 'Global Neuroimaging Platform', text: 'Led an Indo-Russian team of 6 under researchers from the Sirius Institute, designing a web platform for EEG signal analysis.' },
+      { subtitle: 'Data Pipelines', text: 'Engineered pipeline architectures to clean EEG Time Series streams, compute brain source coordinates, and construct functional graph maps.' },
+      { subtitle: 'Algorithmic Optimization', text: 'Optimized neuroimaging pipelines using Python MNE to extract and visualize neural connectivity clusters for scientific analysis.' },
     ],
   },
   {
     year: '2020 – 2022',
     title: 'F1 in Schools & The Quantum Spark',
     body: [
-      { subtitle: 'Engineering an F1 Car:', text: 'Represented India as Design Engineer & Research Analyst for Team Quantum Racing at the 2022 F1 in Schools World Finals (UK). Won the 2021 Indian National Championship, sweeping awards for Best Pit Display, Enterprise Portfolio, and Innovative Thinking.' },
-      { subtitle: 'Aerodynamics & Simulation:', text: 'Modelled miniature F1 cars in Fusion 360, iteratively testing them using Computational Fluid Dynamics (CFD), Finite Element Method (FEM), and physical wind/smoke tunnels. Devised a genetic algorithm to find the ideal aerodynamic configuration under strict weight constraints.' },
-      { subtitle: 'A New Interest:', text: 'A 2020 DRDO milestone article sparked a deep, lasting fascination with Quantum Computing and Quantum Key Distribution (QKD).' },
+      { subtitle: 'Engineering an F1 Car', text: 'Served as Design Engineer and Research Analyst for Team Quantum Racing at the 2022 F1 in Schools World Finals (UK) after winning the Indian National Championship.' },
+      { subtitle: 'Aerodynamics & Simulation', text: 'Iterated aerodynamic models in Fusion 360. Conducted Computational Fluid Dynamics (CFD), FEM structural analysis, and physical wind tunnel tests. Optimized airflow using genetic algorithms.' },
+      { subtitle: 'The Quantum Spark', text: 'Read a DRDO milestone article that ignited a deep, lifelong fascination with Quantum Computing and Quantum Key Distribution (QKD).' },
     ],
   },
   {
     year: '2023 – 2024',
     title: 'IIT Kanpur & Technical Leadership',
     body: [
-      { subtitle: 'Physics Major:', text: 'Joined IIT Kanpur to formally pursue a degree in Physics. Later expanded my academic focus with advanced courses in quantum computing, quantum optics, and condensed matter physics.' },
-      { subtitle: 'Quantum Milestones:', text: 'Completed the IBM Quantum Challenge 2024, demonstrating proficiency in Qiskit 1.0 for utility-scale quantum experiments. Later became a finalist in the IIT Bombay TechFest Quant Challenge (Dec 2024).' },
-      { subtitle: 'Campus Leadership:', text: 'Rose from Coordinator to Secretary of the Programming Club, overseeing the Machine Learning and Web Development domains. Additionally, joined the college Debating Society, participating in Asian and British Parliamentary formats.' },
+      { subtitle: 'Physics Major at IIT Kanpur', text: 'Enrolled in Physics at IIT Kanpur, focusing coursework on Quantum Computing, Quantum Optics, and Condensed Matter Physics.' },
+      { subtitle: 'Quantum Milestones & Qiskit', text: 'Completed the IBM Quantum Challenge 2024 using Qiskit 1.0. Placed as a finalist in the IIT Bombay TechFest Quant Challenge.' },
+      { subtitle: 'Campus & Tech Leadership', text: 'Served as Secretary of the Programming Club, coordinating the Machine Learning domain, and debated in parliamentary formats.' },
     ],
   },
   {
     year: '2025',
     title: 'AI Internals & Quantum Research',
     body: [
-      { subtitle: 'Mechanistic Interpretability:', text: 'Began working with the Large Language Model Center at Kyoto University (Dept. of Intelligence Science and Technology), researching LLM internals and how these models process information.' },
-      { subtitle: 'Advanced Quantum Circuits:', text: 'Completed the intensive Qiskit Global Summer School 2025, bridging physics, chemistry, and Python to work on state-of-the-art quantum computation.' },
-      { subtitle: 'Nanophotonics Group:', text: 'Joined IITK’s Nanophotonics Group as an undergraduate researcher in December, diving into Quantum Optics and Cavity QED.' },
+      { subtitle: 'Mechanistic Interpretability', text: 'Researched LLM internals and information processing representations at the Kyoto University Large Language Model Center.' },
+      { subtitle: 'Advanced Quantum Circuits', text: 'Completed the Qiskit Global Summer School 2025, bridging quantum algorithms, chemistry simulation, and hardware implementation.' },
+      { subtitle: 'Quantum Optics & Nanophotonics', text: 'Joined the Nanophotonics Group at IITK as an undergraduate researcher in Quantum Optics and Cavity QED.' },
     ],
   },
   {
     year: '2026 & Beyond',
     title: 'Lattices & The Quantum Frontier',
     body: [
-      { subtitle: 'Lattice-Based Cryptography:', text: 'Stepped into post-quantum security in March 2026, building a tool to identify post-quantum (lattice-based) vulnerabilities within Indian financial institutions for the PnB Hackathon.' },
-      { subtitle: 'Current Endeavors:', text: 'Actively working as a student researcher across three distinct labs: the Nanophotonics Group (EE, IITK), the Photonic Devices Lab (EE, IITK), and the Large Language Model Center at Kyoto University — synthesizing my expertise in classical AI and quantum physics.' },
+      { subtitle: 'Lattice-Based Cryptography', text: 'Built post-quantum security assessment tools to identify lattice-based cryptographic vulnerabilities for the PnB Hackathon.' },
+      { subtitle: 'Current Academic Research', text: 'Actively publishing research across three labs: Nanophotonics (IITK), Photonic Devices (IITK), and the Kyoto University LLM Center, bridging classical AI and Quantum Physics.' },
     ],
   },
 ];
@@ -88,6 +88,30 @@ const C = {
 {/*─── Component ────────────────────────────────────────────────────────────────*/}
 export default function WorldlineSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  const renderTextWithHighlights = (text: string) => {
+    const regex = /(Quantum Computing|Quantum Optics|Quantum Key Distribution|QKD|Post-Quantum|Quantum|Physics|Research|Computational Neuroscience|Lattice-Based Cryptography|Qiskit|Nanophotonics|Cavity QED|Arduinos|Machine Learning|ML|EEG|F1 Car|Aerodynamics)/g;
+    const parts = text.split(regex);
+    return parts.map((part, idx) => {
+      if (regex.test(part)) {
+        return (
+          <span
+            key={idx}
+            style={{
+              fontFamily: 'var(--font-heading), sans-serif',
+              fontWeight: 800,
+              color: C.cyan,
+              padding: '0 2px',
+              textShadow: `0 0 12px ${C.cyan}50, 0 0 24px ${C.cyan}20`,
+            }}
+          >
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
+  };
 
   {/*Keep the 3-D scene aware of scroll progress through this section.*/}
   useEffect(() => {
@@ -173,7 +197,7 @@ export default function WorldlineSection() {
             }}
           >
             <div
-              className="jny-card max-w-[600px] pointer-events-auto relative overflow-hidden"
+              className="jny-card max-w-[700px] pointer-events-auto relative overflow-hidden"
               style={{
                 background: 'rgba(6, 7, 12, 0.72)',
                 backdropFilter: 'blur(22px)',
@@ -236,13 +260,16 @@ export default function WorldlineSection() {
                   <div key={idx} className="jny-reveal">
                     <span
                       style={{
-                        display: 'block',
-                        fontFamily: 'monospace',
-                        fontSize: 'clamp(11px, 1.1vw, 13px)',
+                        display: 'inline-block',
+                        fontFamily: 'var(--font-heading), monospace',
+                        fontSize: 'clamp(14px, 1.3vw, 17px)',
+                        fontWeight: 700,
                         color: C.parchment,
-                        letterSpacing: '0.12em',
+                        letterSpacing: '0.08em',
                         textTransform: 'uppercase',
                         marginBottom: 6,
+                        borderBottom: '1px solid rgba(200, 185, 138, 0.22)',
+                        paddingBottom: '2px',
                       }}
                     >
                       {item.subtitle.replace(/:$/, '')}
@@ -250,13 +277,13 @@ export default function WorldlineSection() {
                     <p
                       style={{
                         fontFamily: 'system-ui, sans-serif',
-                        fontSize: 'clamp(14px, 1.25vw, 16.5px)',
+                        fontSize: 'clamp(15.5px, 1.35vw, 18.5px)',
                         color: '#d6d6dc',
-                        lineHeight: 1.65,
+                        lineHeight: 1.75,
                         margin: 0,
                       }}
                     >
-                      {item.text}
+                      {renderTextWithHighlights(item.text)}
                     </p>
                   </div>
                 ))}

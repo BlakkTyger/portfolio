@@ -963,39 +963,49 @@ function BlochStage({ index }: StageProps) {
 // ════════════════════════════════════════════════════════════════════════════
 function NeuralQuantumStage({ index }: StageProps) {
   const group  = useRef<THREE.Group>(null!);
+  const groupA = useRef<THREE.Group>(null!);
+  const groupB = useRef<THREE.Group>(null!);
   const hoverT = useRef(0);
 
   // ── Sub-stage A: Attention heatmap cells ─────────────────────────────────
-  // 8×8 grid of small cube meshes; brightness driven per-frame
   const GRID = 8;
   const cellRefs = useRef<(THREE.Mesh | null)[]>([]);
 
-  // ── Sub-stage B: Quantum circuit ─────────────────────────────────────────
-  // 3 qubits × N_COLS gate slots
+  // ── Sub-stage B: Quantum circuit (3-qubit Quantum Fourier Transform) ──────
   const N_QUBITS = 3;
+  const N_GATE_COLS = 8; // Slot 0 to 6 for gates, Slot 7 for measurement
+  
+  // QFT gates: H, controlled-R2, controlled-R3, H, controlled-R2, H, SWAP
   const GATES: { col: number; qubit: number; label: string; col3: THREE.Color }[] = [
-    { col: 0, qubit: 0, label: 'H',    col3: new THREE.Color('#3b82f6') },
-    { col: 0, qubit: 1, label: 'H',    col3: new THREE.Color('#3b82f6') },
-    { col: 0, qubit: 2, label: 'H',    col3: new THREE.Color('#3b82f6') },
-    { col: 1, qubit: 0, label: 'Rz',   col3: new THREE.Color('#8F00FF') },
-    { col: 1, qubit: 2, label: 'Rz',   col3: new THREE.Color('#8F00FF') },
-    { col: 2, qubit: 0, label: 'CNOT', col3: new THREE.Color('#00FF9D') },
-    { col: 2, qubit: 1, label: 'CNOT', col3: new THREE.Color('#00FF9D') },
-    { col: 3, qubit: 1, label: 'X',    col3: new THREE.Color('#F97316') },
-    { col: 3, qubit: 2, label: 'Rz',   col3: new THREE.Color('#8F00FF') },
-    { col: 4, qubit: 0, label: 'H',    col3: new THREE.Color('#3b82f6') },
-    { col: 4, qubit: 1, label: 'CNOT', col3: new THREE.Color('#00FF9D') },
-    { col: 5, qubit: 2, label: 'X',    col3: new THREE.Color('#F97316') },
+    { col: 0, qubit: 0, label: 'H',    col3: new THREE.Color('#3b6fff') }, // H on q0
+    { col: 1, qubit: 0, label: 'R2',   col3: new THREE.Color('#8F00FF') }, // CR2 on q0 (controlled by q1)
+    { col: 2, qubit: 0, label: 'R3',   col3: new THREE.Color('#8F00FF') }, // CR3 on q0 (controlled by q2)
+    { col: 3, qubit: 1, label: 'H',    col3: new THREE.Color('#3b6fff') }, // H on q1
+    { col: 4, qubit: 1, label: 'R2',   col3: new THREE.Color('#8F00FF') }, // CR2 on q1 (controlled by q2)
+    { col: 5, qubit: 2, label: 'H',    col3: new THREE.Color('#3b6fff') }, // H on q2
+    { col: 6, qubit: 0, label: 'SWAP', col3: new THREE.Color('#00FF9D') }, // SWAP on q0
+    { col: 6, qubit: 2, label: 'SWAP', col3: new THREE.Color('#00FF9D') }, // SWAP on q2
   ];
-  const N_GATE_COLS = 7; // total columns (last = measure)
+
+  const CONNECTORS = [
+    { col: 1, q1: 0, q2: 1 }, // vertical connection between q0 and q1 for CR2
+    { col: 2, q1: 0, q2: 2 }, // vertical connection between q0 and q2 for CR3
+    { col: 4, q1: 1, q2: 2 }, // vertical connection between q1 and q2 for CR2
+    { col: 6, q1: 0, q2: 2 }, // SWAP vertical line
+  ];
+
+  const CONTROL_DOTS = [
+    { col: 1, qubit: 1 }, // control dot on q1 for CR2
+    { col: 2, qubit: 2 }, // control dot on q2 for CR3
+    { col: 4, qubit: 2 }, // control dot on q2 for CR2
+  ];
+
   const gateRefs = useRef<(THREE.Mesh | null)[]>([]);
   const wireRefs = useRef<(THREE.LineSegments | null)[]>([]);  // one per qubit
   const cursorRef = useRef<THREE.Mesh>(null!);
 
-  // ── Attention heatmap geometry (pre-bake baked weights) ───────────────────
-  // 8×8 attention matrix; weights simulate a causal-attention pattern
+  // ── Attention heatmap geometry ───────────────────────────────────────────
   const { attnWeights, wireGeos } = useMemo(() => {
-    // Baked causal attention weights: lower-triangular with diagonal peaks
     const W = GRID * GRID;
     const weights = new Float32Array(W);
     for (let row = 0; row < GRID; row++) {
@@ -1008,7 +1018,6 @@ function NeuralQuantumStage({ index }: StageProps) {
       for (let col = 0; col <= row; col++) weights[row * GRID + col] /= sum;
     }
 
-    // Quantum circuit wire geometries (one per qubit)
     const WIRE_LEN = 11.0;
     const wireGeos = Array.from({ length: N_QUBITS }, (_, qi) => {
       const y = (qi - (N_QUBITS - 1) / 2) * -1.1;
@@ -1040,39 +1049,37 @@ function NeuralQuantumStage({ index }: StageProps) {
     // Sub-stage visibility ranges
     const aVis   = smoothstep(0.00, 0.10, t) * (1 - smoothstep(0.44, 0.54, t)); // 0–0.48
     const bVis   = smoothstep(0.52, 0.62, t) * (1 - smoothstep(0.92, 1.0,  t)); // 0.52–1.0
-    const dissolve = smoothstep(0.92, 1.0, t);
 
-    // No rotation — flat-on for readability
+    // Subtle ambient sway
     g.rotation.y = 0.03 * Math.sin(time * 0.2);
     g.rotation.x = 0;
     g.scale.setScalar(1.0);
 
+    // Apply sub-group opacities
+    if (groupA.current) applyOpacity(groupA.current, aVis * vis);
+    if (groupB.current) applyOpacity(groupB.current, bVis * vis);
+
     // ── Sub-stage A: Attention heatmap ──
-    // Active "query" row sweeps from row 0 to row 7 continuously
     const queryRow = Math.floor(((time * (0.5 + h * 0.5)) % 1) * GRID);
     cellRefs.current.forEach((cell, idx) => {
       if (!cell) return;
       const row = Math.floor(idx / GRID);
       const col = idx % GRID;
       const w = attnWeights[row * GRID + col];
-      // Highlight if this is the active query row
       const isActive = row === queryRow;
       const glow = w * (isActive ? 2.5 + h * 1.0 : 0.9) * aVis * vis;
       const mat = cell.material as THREE.MeshStandardMaterial;
-      // Colour: bright cyan for high attention, dim violet for low
       mat.emissive.lerpColors(COL.violet, COL.cyan, Math.min(1, w * 3.5));
       mat.emissiveIntensity = glow;
       mat.opacity = (0.55 + w * 0.45) * aVis * vis;
       mat.transparent = true;
-      // Pulse height: cells stretch up slightly when active
       const scY = 0.85 + (isActive ? 0.6 * w : 0) * aVis;
       cell.scale.set(1, scY, 1);
     });
 
     // ── Sub-stage B: Quantum circuit ──
-    // Execution cursor sweeps left→right in a loop (speed up on hover)
     const cursorSpeed = 0.35 + h * 0.25;
-    const cursorPos = ((time * cursorSpeed) % 1) * N_GATE_COLS;  // 0 → N_GATE_COLS
+    const cursorPos = ((time * cursorSpeed) % 1) * N_GATE_COLS;
     const GATE_PITCH = 11.0 / N_GATE_COLS;
     const GATE_X0    = -5.0;
 
@@ -1082,7 +1089,7 @@ function NeuralQuantumStage({ index }: StageProps) {
       (wire.material as THREE.LineBasicMaterial).opacity = 0.55 * bVis * vis;
     });
 
-    // Gate flash: each gate pulses when cursor is near its column
+    // Gate flash
     gateRefs.current.forEach((mesh, gi) => {
       if (!mesh) return;
       const gate = GATES[gi];
@@ -1095,17 +1102,14 @@ function NeuralQuantumStage({ index }: StageProps) {
       mat.transparent = true;
     });
 
-    // Cursor plane position
+    // Cursor position
     if (cursorRef.current) {
       cursorRef.current.position.x = GATE_X0 + cursorPos * GATE_PITCH;
       const cursorMat = cursorRef.current.material as THREE.MeshBasicMaterial;
       cursorMat.opacity = 0.22 * bVis * vis;
     }
-
-    void dissolve; // used implicitly by aVis / bVis
   });
 
-  // Layout constants (also needed in JSX)
   const CELL_SIZE = 0.44;
   const CELL_GAP  = 0.52;
   const GRID_OFFSET_X = -(GRID - 1) * CELL_GAP * 0.5;
@@ -1118,207 +1122,195 @@ function NeuralQuantumStage({ index }: StageProps) {
 
   return (
     <group ref={group}>
-
+      
       {/* ══ Sub-stage A: LLM Attention Pattern ══════════════════════════════ */}
-
-      {/* Section label */}
-      <Text
-        position={[0, GRID_OFFSET_Y + 1.4, 0]}
-        fontSize={0.30}
-        color={COL.cyan}
-        anchorX="center"
-        anchorY="bottom"
-        letterSpacing={0.12}
-        userData={{ baseOpacity: 0.8 }}
-      >
-        ATTENTION PATTERN
-      </Text>
-
-      {/* Row axis label */}
-      <Text
-        position={[GRID_OFFSET_X - 1.3, 0, 0]}
-        fontSize={0.20}
-        color={COL.parchment}
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, 0, Math.PI / 2]}
-        letterSpacing={0.08}
-        userData={{ baseOpacity: 0.55 }}
-      >
-        QUERY TOKEN
-      </Text>
-
-      {/* Col axis label */}
-      <Text
-        position={[0, GRID_OFFSET_Y - CELL_GAP * GRID - 0.6, 0]}
-        fontSize={0.20}
-        color={COL.parchment}
-        anchorX="center"
-        anchorY="top"
-        letterSpacing={0.08}
-        userData={{ baseOpacity: 0.55 }}
-      >
-        KEY TOKEN
-      </Text>
-
-      {/* 8×8 heatmap cells */}
-      {Array.from({ length: GRID * GRID }).map((_, idx) => {
-        const row = Math.floor(idx / GRID);
-        const col = idx % GRID;
-        const x = GRID_OFFSET_X + col * CELL_GAP;
-        const y = GRID_OFFSET_Y - row * CELL_GAP;
-        return (
-          <mesh
-            key={idx}
-            ref={(el) => { cellRefs.current[idx] = el; }}
-            position={[x, y, 0]}
-            userData={{ baseOpacity: 1 }}
-          >
-            <boxGeometry args={[CELL_SIZE, CELL_SIZE, 0.12]} />
-            <meshStandardMaterial
-              color={'#04080f'}
-              emissive={COL.violet}
-              emissiveIntensity={0.1}
-              metalness={0.2}
-              roughness={0.6}
-              transparent
-            />
-          </mesh>
-        );
-      })}
-
-      {/* Column / Row index ticks */}
-      {Array.from({ length: GRID }).map((_, i) => (
+      <group ref={groupA}>
+        {/* Row axis label */}
         <Text
-          key={`ct${i}`}
-          position={[GRID_OFFSET_X + i * CELL_GAP, GRID_OFFSET_Y + 0.65, 0.1]}
-          fontSize={0.16}
+          position={[GRID_OFFSET_X - 1.3, 0, 0]}
+          fontSize={0.20}
           color={COL.parchment}
           anchorX="center"
-          anchorY="bottom"
-          userData={{ baseOpacity: 0.45 }}
-        >{String(i)}</Text>
-      ))}
+          anchorY="middle"
+          rotation={[0, 0, Math.PI / 2]}
+          letterSpacing={0.08}
+          userData={{ baseOpacity: 0.55 }}
+        >
+          QUERY TOKEN
+        </Text>
 
-      <BigYear text="2025" position={[5.5, GRID_OFFSET_Y + 0.5, -2]} size={1.5} color={COL.cyan} opacity={0.14} />
+        {/* Col axis label */}
+        <Text
+          position={[0, GRID_OFFSET_Y - CELL_GAP * GRID - 0.6, 0]}
+          fontSize={0.20}
+          color={COL.parchment}
+          anchorX="center"
+          anchorY="top"
+          letterSpacing={0.08}
+          userData={{ baseOpacity: 0.55 }}
+        >
+          KEY TOKEN
+        </Text>
 
-      {/* ══ Sub-stage B: Quantum Circuit ══════════════════════════════════════ */}
-
-      {/* Section label */}
-      <Text
-        position={[0, QUBIT_Y(0) + 1.6, 0]}
-        fontSize={0.30}
-        color={COL.violet}
-        anchorX="center"
-        anchorY="bottom"
-        letterSpacing={0.12}
-        userData={{ baseOpacity: 0.85 }}
-      >
-        QUANTUM CIRCUIT
-      </Text>
-
-      {/* Qubit wires + |0> labels */}
-      {wireGeos.map(({ geo, y }, qi) => (
-        <group key={`q${qi}`}>
-          <lineSegments
-            ref={(el) => { wireRefs.current[qi] = el; }}
-            geometry={geo}
-            userData={{ baseOpacity: 1 }}
-          >
-            <lineBasicMaterial color={COL.parchment} transparent />
-          </lineSegments>
-          {/* |0> initial state label */}
-          <Text
-            position={[GATE_X0 - 1.1, y, 0]}
-            fontSize={0.28}
-            color={COL.cyan}
-            anchorX="right"
-            anchorY="middle"
-            userData={{ baseOpacity: 0.9 }}
-          >
-            {`|0>`}
-          </Text>
-          {/* Qubit index */}
-          <Text
-            position={[GATE_X0 - 1.1, y - 0.36, 0]}
-            fontSize={0.16}
-            color={COL.parchment}
-            anchorX="right"
-            anchorY="middle"
-            userData={{ baseOpacity: 0.5 }}
-          >
-            {`q${qi}`}
-          </Text>
-          {/* Measurement symbol at end (M in a box) */}
-          <mesh position={[GATE_X0 + (N_GATE_COLS - 0.5) * GATE_PITCH, y, 0]} userData={{ baseOpacity: 0.9 }}>
-            <boxGeometry args={[GATE_H * 0.9, GATE_H * 0.9, 0.06]} />
-            <meshStandardMaterial color={'#14202e'} emissive={COL.gold} emissiveIntensity={0.7} metalness={0.3} roughness={0.4} transparent />
-          </mesh>
-          <Text
-            position={[GATE_X0 + (N_GATE_COLS - 0.5) * GATE_PITCH, y, 0.07]}
-            fontSize={0.22}
-            color={COL.gold}
-            anchorX="center"
-            anchorY="middle"
-            userData={{ baseOpacity: 0.95 }}
-          >M</Text>
-        </group>
-      ))}
-
-      {/* CNOT vertical connectors (between qubit 0 and qubit 1 at col 2) */}
-      {[{ col: 2, q1: 0, q2: 1 }, { col: 4, q1: 1, q2: 2 }].map(({ col, q1, q2 }, ci) => {
-        const x = GATE_X0 + col * GATE_PITCH;
-        const y1 = QUBIT_Y(q1); const y2 = QUBIT_Y(q2);
-        const mid = (y1 + y2) / 2;
-        const h2  = Math.abs(y1 - y2);
-        return (
-          <mesh key={`cnot-v${ci}`} position={[x, mid, 0.01]} userData={{ baseOpacity: 0.8 }}>
-            <boxGeometry args={[0.025, h2, 0.01]} />
-            <meshBasicMaterial color={COL.cyan} blending={THREE.AdditiveBlending} transparent />
-          </mesh>
-        );
-      })}
-
-      {/* Gate boxes */}
-      {GATES.map((gate, gi) => {
-        const x = GATE_X0 + gate.col * GATE_PITCH;
-        const y = QUBIT_Y(gate.qubit);
-        return (
-          <group key={gi}>
+        {/* 8×8 heatmap cells */}
+        {Array.from({ length: GRID * GRID }).map((_, idx) => {
+          const row = Math.floor(idx / GRID);
+          const col = idx % GRID;
+          const x = GRID_OFFSET_X + col * CELL_GAP;
+          const y = GRID_OFFSET_Y - row * CELL_GAP;
+          return (
             <mesh
-              ref={(el) => { gateRefs.current[gi] = el; }}
-              position={[x, y, 0.02]}
+              key={idx}
+              ref={(el) => { cellRefs.current[idx] = el; }}
+              position={[x, y, 0]}
               userData={{ baseOpacity: 1 }}
             >
-              <boxGeometry args={[GATE_H * 0.85, GATE_H * 0.85, 0.10]} />
+              <boxGeometry args={[CELL_SIZE, CELL_SIZE, 0.12]} />
               <meshStandardMaterial
-                color={'#060d1a'}
-                emissive={gate.col3}
-                emissiveIntensity={0.8}
-                metalness={0.25}
-                roughness={0.5}
+                color={'#04080f'}
+                emissive={COL.violet}
+                emissiveIntensity={0.1}
+                metalness={0.2}
+                roughness={0.6}
                 transparent
               />
             </mesh>
+          );
+        })}
+
+        {/* Column / Row index ticks */}
+        {Array.from({ length: GRID }).map((_, i) => (
+          <Text
+            key={`ct${i}`}
+            position={[GRID_OFFSET_X + i * CELL_GAP, GRID_OFFSET_Y + 0.65, 0.1]}
+            fontSize={0.16}
+            color={COL.parchment}
+            anchorX="center"
+            anchorY="bottom"
+            userData={{ baseOpacity: 0.45 }}
+          >{String(i)}</Text>
+        ))}
+
+        <BigYear text="2025" position={[5.5, GRID_OFFSET_Y + 0.5, -2]} size={1.5} color={COL.cyan} opacity={0.14} />
+      </group>
+
+      {/* ══ Sub-stage B: Quantum Fourier Transform Circuit ══════════════════ */}
+      <group ref={groupB}>
+        {/* Qubit wires + |0> labels */}
+        {wireGeos.map(({ geo, y }, qi) => (
+          <group key={`q${qi}`}>
+            <lineSegments
+              ref={(el) => { wireRefs.current[qi] = el; }}
+              geometry={geo}
+              userData={{ baseOpacity: 1 }}
+            >
+              <lineBasicMaterial color={COL.parchment} transparent />
+            </lineSegments>
+            {/* |0> initial state label */}
             <Text
-              position={[x, y, 0.10]}
-              fontSize={gate.label.length > 1 ? 0.16 : 0.22}
-              color={'#ffffff'}
+              position={[GATE_X0 - 1.1, y, 0]}
+              fontSize={0.28}
+              color={COL.cyan}
+              anchorX="right"
+              anchorY="middle"
+              userData={{ baseOpacity: 0.9 }}
+            >
+              {`|0>`}
+            </Text>
+            {/* Qubit index */}
+            <Text
+              position={[GATE_X0 - 1.1, y - 0.36, 0]}
+              fontSize={0.16}
+              color={COL.parchment}
+              anchorX="right"
+              anchorY="middle"
+              userData={{ baseOpacity: 0.5 }}
+            >
+              {`q${qi}`}
+            </Text>
+            {/* Measurement symbol at end (M in a box) */}
+            <mesh position={[GATE_X0 + (N_GATE_COLS - 0.5) * GATE_PITCH, y, 0]} userData={{ baseOpacity: 0.9 }}>
+              <boxGeometry args={[GATE_H * 0.9, GATE_H * 0.9, 0.06]} />
+              <meshStandardMaterial color={'#14202e'} emissive={COL.gold} emissiveIntensity={0.7} metalness={0.3} roughness={0.4} transparent />
+            </mesh>
+            <Text
+              position={[GATE_X0 + (N_GATE_COLS - 0.5) * GATE_PITCH, y, 0.07]}
+              fontSize={0.22}
+              color={COL.gold}
               anchorX="center"
               anchorY="middle"
               userData={{ baseOpacity: 0.95 }}
-            >
-              {gate.label}
-            </Text>
+            >M</Text>
           </group>
-        );
-      })}
+        ))}
 
-      {/* Execution cursor (thin vertical plane) */}
-      <mesh ref={cursorRef} userData={{ baseOpacity: 1 }}>
-        <boxGeometry args={[0.04, 4.5, 0.04]} />
-        <meshBasicMaterial color={COL.white} blending={THREE.AdditiveBlending} transparent depthWrite={false} />
-      </mesh>
+        {/* QFT control connectors */}
+        {CONNECTORS.map(({ col, q1, q2 }, ci) => {
+          const x = GATE_X0 + col * GATE_PITCH;
+          const y1 = QUBIT_Y(q1); const y2 = QUBIT_Y(q2);
+          const mid = (y1 + y2) / 2;
+          const h2  = Math.abs(y1 - y2);
+          return (
+            <mesh key={`qft-v${ci}`} position={[x, mid, 0.01]} userData={{ baseOpacity: 0.8 }}>
+              <boxGeometry args={[0.025, h2, 0.01]} />
+              <meshBasicMaterial color={COL.cyan} blending={THREE.AdditiveBlending} transparent />
+            </mesh>
+          );
+        })}
+
+        {/* QFT control dots */}
+        {CONTROL_DOTS.map(({ col, qubit }, i) => {
+          const x = GATE_X0 + col * GATE_PITCH;
+          const y = QUBIT_Y(qubit);
+          return (
+            <mesh key={`dot-${i}`} position={[x, y, 0.05]} userData={{ baseOpacity: 0.9 }}>
+              <sphereGeometry args={[0.08, 16, 16]} />
+              <meshBasicMaterial color={COL.cyan} transparent />
+            </mesh>
+          );
+        })}
+
+        {/* Gate boxes */}
+        {GATES.map((gate, gi) => {
+          const x = GATE_X0 + gate.col * GATE_PITCH;
+          const y = QUBIT_Y(gate.qubit);
+          return (
+            <group key={gi}>
+              <mesh
+                ref={(el) => { gateRefs.current[gi] = el; }}
+                position={[x, y, 0.02]}
+                userData={{ baseOpacity: 1 }}
+              >
+                <boxGeometry args={[GATE_H * 0.85, GATE_H * 0.85, 0.10]} />
+                <meshStandardMaterial
+                  color={'#060d1a'}
+                  emissive={gate.col3}
+                  emissiveIntensity={0.8}
+                  metalness={0.25}
+                  roughness={0.5}
+                  transparent
+                />
+              </mesh>
+              <Text
+                position={[x, y, 0.10]}
+                fontSize={gate.label.length > 1 ? 0.16 : 0.22}
+                color={'#ffffff'}
+                anchorX="center"
+                anchorY="middle"
+                userData={{ baseOpacity: 0.95 }}
+              >
+                {gate.label}
+              </Text>
+            </group>
+          );
+        })}
+
+        {/* Execution cursor (thin vertical plane) */}
+        <mesh ref={cursorRef} userData={{ baseOpacity: 1 }}>
+          <boxGeometry args={[0.04, 4.5, 0.04]} />
+          <meshBasicMaterial color={COL.white} blending={THREE.AdditiveBlending} transparent depthWrite={false} />
+        </mesh>
+      </group>
 
     </group>
   );

@@ -13,9 +13,9 @@ const NAV_ITEMS = [
   { id: 'hero', label: 'Home' },
   { id: 'whoami', label: 'About' },
   { id: 'cv', label: 'CV' },
+  { id: 'projects', label: 'Projects' },
   { id: 'worldline', label: 'Journey' },
   { id: 'manifold', label: 'Interests' },
-  { id: 'projects', label: 'Projects' },
   { id: 'contact', label: 'Contact' },
 ];
 

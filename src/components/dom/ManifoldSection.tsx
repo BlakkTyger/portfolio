@@ -184,6 +184,7 @@ export default function ManifoldSection() {
   const [animationProgress, setAnimationProgress] = useState<Record<string, number>>({});
   const [edgesVisible, setEdgesVisible] = useState<Set<string>>(new Set());
   const [draggingNode, setDraggingNode] = useState<string | null>(null);
+  const [promptOffset, setPromptOffset] = useState({ x: 0, y: 0 });
   const dragOffset = useRef({ x: 0, y: 0 });
   const animationRef = useRef<number | null>(null);
   const timeRef = useRef(0);
@@ -234,6 +235,11 @@ export default function ManifoldSection() {
     
     const animate = () => {
       timeRef.current += 0.015;
+      
+      // Calculate slow floating offsets for prompt text and arrow to avoid reading refs during render
+      const px = Math.sin(timeRef.current * 0.3) * 10;
+      const py = Math.cos(timeRef.current * 0.25) * 10;
+      setPromptOffset({ x: px, y: py });
       
       setPositions(prev => {
         const newPositions = { ...prev };
@@ -532,7 +538,11 @@ export default function ManifoldSection() {
               <g 
                 key={node.id} 
                 className={`cursor-grab ${isDragging ? 'cursor-grabbing' : ''}`}
-                onMouseEnter={() => !draggingNode && setHoveredNode(node)}
+                onMouseEnter={() => {
+                  if (!draggingNode) {
+                    setHoveredNode(node);
+                  }
+                }}
                 onMouseLeave={() => setHoveredNode(null)}
                 onMouseDown={(e) => handleMouseDown(e, node.id)}
                 style={{ opacity: progress }}
@@ -619,15 +629,15 @@ export default function ManifoldSection() {
                 {/* Text Outline for readability */}
                 <text
                   x={currentX}
-                  y={currentY + radius + 24}
+                  y={currentY + (node.isHub ? radius + 26 : radius + 22)}
                   textAnchor="middle"
-                  stroke="var(--void-black)"
-                  strokeWidth="4"
+                  stroke="#020204"
+                  strokeWidth="6"
                   strokeLinejoin="round"
                   fill="none"
-                  fontSize={node.isHub ? '16' : '13'}
+                  fontSize={node.isHub ? '17' : '14'}
                   fontWeight={node.isHub ? '800' : '700'}
-                  className="font-body tracking-wide pointer-events-none select-none opacity-80"
+                  className="font-heading tracking-wide pointer-events-none select-none opacity-95"
                 >
                   {node.label}
                 </text>
@@ -635,13 +645,16 @@ export default function ManifoldSection() {
                 {/* Label */}
                 <text
                   x={currentX}
-                  y={currentY + radius + 24}
+                  y={currentY + (node.isHub ? radius + 26 : radius + 22)}
                   textAnchor="middle"
-                  fill={isHovered || isDragging ? '#FFFFFF' : '#F8FAFC'}
-                  fontSize={node.isHub ? '16' : '13'}
+                  fill={isHovered || isDragging ? '#FFFFFF' : '#E2E8F0'}
+                  fontSize={node.isHub ? '17' : '14'}
                   fontWeight={node.isHub ? '800' : '700'}
-                  className="font-body tracking-wide transition-colors duration-200 pointer-events-none select-none"
-                  filter="url(#textGlow)"
+                  className="font-heading tracking-wide transition-colors duration-200 pointer-events-none select-none"
+                  filter={isHovered || isDragging ? "url(#textGlow)" : undefined}
+                  style={{
+                    textShadow: isHovered || isDragging ? `0 0 10px ${color}` : 'none'
+                  }}
                 >
                   {node.label}
                 </text>
@@ -662,6 +675,70 @@ export default function ManifoldSection() {
               </g>
             );
           })}
+
+          {/* Interactive prompt overlay with curly arrow */}
+          {(() => {
+            const targetNodeId = 'physics';
+            const targetPos = positions[targetNodeId];
+            const targetNode = nodes.find(n => n.id === targetNodeId);
+            if (!isVisible || !targetPos || !targetNode) return null;
+            
+            const progress = animationProgress[targetNodeId] || 0;
+            if (progress < 0.8) return null;
+            
+            const targetX = targetPos.startX + (targetPos.x - targetPos.startX) * progress;
+            const targetY = targetPos.startY + (targetPos.y - targetPos.startY) * progress;
+            const baseRadius = targetNode.isHub ? 38 : 16;
+            const targetRadius = baseRadius + targetNode.size * 14;
+            
+            const promptX = 60 + promptOffset.x;
+            const promptY = 120 + promptOffset.y;
+            
+            const arrowStartX = promptX + 300;
+            const arrowStartY = promptY + 45;
+            
+            const arrowEndX = targetX - (targetRadius * 0.7);
+            const arrowEndY = targetY - (targetRadius * 0.7);
+            
+            // Elegant sweeping curve control points
+            const control1X = arrowStartX + (arrowEndX - arrowStartX) * 0.4;
+            const control1Y = arrowStartY + (arrowEndY - arrowStartY) * 0.1;
+            const control2X = arrowStartX + (arrowEndX - arrowStartX) * 0.7;
+            const control2Y = arrowEndY - 30;
+            
+            const pathD = `M ${arrowStartX} ${arrowStartY} C ${control1X} ${control1Y}, ${control2X} ${control2Y}, ${arrowEndX} ${arrowEndY}`;
+            
+            const angle = Math.atan2(arrowEndY - control2Y, arrowEndX - control2X);
+            const arrowHeadSize = 8;
+            const headX1 = arrowEndX - arrowHeadSize * Math.cos(angle - Math.PI / 6);
+            const headY1 = arrowEndY - arrowHeadSize * Math.sin(angle - Math.PI / 6);
+            const headX2 = arrowEndX - arrowHeadSize * Math.cos(angle + Math.PI / 6);
+            const headY2 = arrowEndY - arrowHeadSize * Math.sin(angle + Math.PI / 6);
+            
+            return (
+              <g className="transition-opacity duration-700 pointer-events-none">
+                {/* Curly Arrow */}
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="#ffffff"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeDasharray="4 3"
+                  opacity="0.85"
+                />
+                <path
+                  d={`M ${headX1} ${headY1} L ${arrowEndX} ${arrowEndY} L ${headX2} ${headY2}`}
+                  fill="none"
+                  stroke="#ffffff"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity="0.85"
+                />
+              </g>
+            );
+          })()}
           
           {/* Global filters and gradients */}
           <defs>
@@ -697,6 +774,41 @@ export default function ManifoldSection() {
             </filter>
           </defs>
         </svg>
+ 
+        {/* Cursive Floating Prompt */}
+        {(() => {
+          const targetNodeId = 'physics';
+          const targetPos = positions[targetNodeId];
+          const targetNode = nodes.find(n => n.id === targetNodeId);
+          if (!isVisible || !targetPos || !targetNode) return null;
+          
+          const progress = animationProgress[targetNodeId] || 0;
+          if (progress < 0.8) return null;
+          
+          const promptX = 60 + promptOffset.x;
+          const promptY = 120 + promptOffset.y;
+          
+          return (
+            <div
+              className="absolute pointer-events-none transition-all duration-700 select-none text-left"
+              style={{
+                left: `${promptX}px`,
+                top: `${promptY}px`,
+                width: '320px',
+                fontFamily: 'var(--font-cursive), cursive',
+                fontSize: '26px',
+                lineHeight: '1.4',
+                color: '#FFFFFF',
+                textShadow: '0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.15)',
+                opacity: isVisible ? 0.95 : 0,
+              }}
+            >
+              Hover on nodes for info,<br />
+              edges for relationships,<br />
+              & drag nodes for fun!
+            </div>
+          );
+        })()}
 
         {/* Node Tooltip */}
         {hoveredNode && !hoveredEdge && (

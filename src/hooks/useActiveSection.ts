@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-const SECTIONS = ['hero', 'whoami', 'cv', 'worldline', 'manifold', 'projects', 'contact'];
+const SECTIONS = ['hero', 'whoami', 'cv', 'projects', 'worldline', 'manifold', 'contact'];
 
 // Tall sections that need special handling (scroll-based rather than intersection)
 const TALL_SECTIONS = ['worldline'];

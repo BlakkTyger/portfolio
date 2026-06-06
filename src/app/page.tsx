@@ -29,11 +29,18 @@ export default function Home() {
         </section>
         
         {/* WhoAmI Section */}
-        <WhoAmI />
+        <div className="pointer-events-auto">
+          <WhoAmI />
+        </div>
         
         {/* CV Section */}
         <div className="pointer-events-auto">
           <CV />
+        </div>
+        
+        {/* Projects Section */}
+        <div className="pointer-events-auto">
+          <ProjectsSection />
         </div>
         
         {/* Worldline Timeline Section */}
@@ -42,11 +49,6 @@ export default function Home() {
         {/* Interests Manifold Section */}
         <div className="pointer-events-auto">
           <ManifoldSection />
-        </div>
-        
-        {/* Projects Section */}
-        <div className="pointer-events-auto">
-          <ProjectsSection />
         </div>
         
         {/* Contact Section */}
