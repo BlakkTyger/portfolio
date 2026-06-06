@@ -139,13 +139,9 @@ export default function IntroAnimation() {
   // Generate stars
   const stars = useMemo(() => Array.from({ length: 50 }, (_, i) => ({
     id: i,
-    // eslint-disable-next-line react-hooks/purity
     left: `${Math.random() * 100}%`,
-    // eslint-disable-next-line react-hooks/purity
     top: `${Math.random() * 100}%`,
-    // eslint-disable-next-line react-hooks/purity
     size: 1 + Math.random() * 2,
-    // eslint-disable-next-line react-hooks/purity
     color: ['#00FF9D', '#8F00FF', '#FFFFFF'][Math.floor(Math.random() * 3)],
   })), []);
 

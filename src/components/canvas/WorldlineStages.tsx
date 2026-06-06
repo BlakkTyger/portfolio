@@ -91,13 +91,9 @@ function AmbientField() {
     const pos = new Float32Array(N * 3);
     const col = new Float32Array(N * 3);
     for (let i = 0; i < N; i++) {
-      // eslint-disable-next-line react-hooks/purity
       pos[i * 3] = (Math.random() - 0.5) * 26;
-      // eslint-disable-next-line react-hooks/purity
       pos[i * 3 + 1] = (Math.random() - 0.5) * 16;
-      // eslint-disable-next-line react-hooks/purity
       pos[i * 3 + 2] = -9 + Math.random() * 11;
-      // eslint-disable-next-line react-hooks/purity
       const c = Math.random() < 0.5 ? COL.cyan : COL.violet;
       col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
     }
@@ -153,7 +149,6 @@ function CircuitStage({ index }: StageProps) {
   const { traceGeo, flowPaths, chips } = useMemo(() => {
     const segs: number[] = [];
     const paths: THREE.Vector3[][] = [];
-    // eslint-disable-next-line react-hooks/purity
     const rng = (a: number, b: number) => a + Math.random() * (b - a);
     for (let i = 0; i < 22; i++) {
       const z = 0.09;
@@ -206,7 +201,6 @@ function CircuitStage({ index }: StageProps) {
       const p = pts[Math.floor(f * (pts.length - 1))];
       pos.setXYZ(i, p.x, p.y, p.z);
     }
-    // eslint-disable-next-line react-hooks/immutability
     pos.needsUpdate = true;
     if (flowRef.current) (flowRef.current.material as THREE.PointsMaterial).opacity = vis * (0.6 + 0.4 * Math.sin(time * 4));
 
@@ -298,13 +292,10 @@ function NeuroStage({ index }: StageProps) {
     const verts: THREE.Vector3[] = [];
     const pp = new Float32Array(N * 3);
     for (let i = 0; i < N; i++) {
-      // eslint-disable-next-line react-hooks/purity
       const u = Math.random();
-      // eslint-disable-next-line react-hooks/purity
       const v = Math.random();
       const theta = u * Math.PI * 2;
       const phi = Math.acos(2 * v - 1);
-      // eslint-disable-next-line react-hooks/purity
       const r = 2.5 + (Math.random() - 0.5) * 0.4;
       const x = r * 1.3 * Math.sin(phi) * Math.cos(theta);
       const y = r * 0.95 * Math.cos(phi);
@@ -353,7 +344,6 @@ function NeuroStage({ index }: StageProps) {
       const f = (time * 0.8 + i * 0.083) % 1;
       pos.setXYZ(i, a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f, a.z + (b.z - a.z) * f);
     }
-    // eslint-disable-next-line react-hooks/immutability
     pos.needsUpdate = true;
     if (signalsRef.current) (signalsRef.current.material as THREE.PointsMaterial).opacity = vis;
 
@@ -434,7 +424,6 @@ function FlowStage({ index }: StageProps) {
   const { streamGeo, seeds } = useMemo(() => {
     const seeds: { y: number; z: number; off: number; speed: number }[] = [];
     for (let i = 0; i < M; i++) {
-      // eslint-disable-next-line react-hooks/purity
       seeds.push({ y: (Math.random() - 0.5) * 3.4, z: (Math.random() - 0.5) * 3.4, off: Math.random(), speed: 0.7 + Math.random() * 0.8 });
     }
     const streamGeo = new THREE.BufferGeometry();
@@ -474,7 +463,6 @@ function FlowStage({ index }: StageProps) {
       x = THREE.MathUtils.lerp(x, carX, collapse);
       pos.setXYZ(i, x, THREE.MathUtils.lerp(yDefl, carY, collapse), THREE.MathUtils.lerp(zDefl, 0, collapse));
     }
-    // eslint-disable-next-line react-hooks/immutability
     pos.needsUpdate = true;
 
     // quantum spark ring + core at the car as it dematerialises
@@ -667,7 +655,6 @@ function CavityStage({ index }: StageProps) {
       const b = Math.exp(-dd * dd * 0.5);
       colAttr.setXYZ(k, COL.violet.r * 0.4 + COL.cyan.r * b, COL.violet.g * 0.4 + COL.cyan.g * b, COL.violet.b * 0.4 + COL.cyan.b * b);
     }
-    // eslint-disable-next-line react-hooks/immutability
     colAttr.needsUpdate = true;
     void GY;
 
@@ -750,11 +737,8 @@ function LatticeStage({ index }: StageProps) {
 
     const stars: number[] = [];
     for (let i = 0; i < 1500; i++) {
-      // eslint-disable-next-line react-hooks/purity
       const r = 9 + Math.random() * 16;
-      // eslint-disable-next-line react-hooks/purity
       const th = Math.random() * Math.PI * 2;
-      // eslint-disable-next-line react-hooks/purity
       const ph = Math.acos(2 * Math.random() - 1);
       stars.push(r * Math.sin(ph) * Math.cos(th), r * Math.sin(ph) * Math.sin(th), r * Math.cos(ph));
     }
@@ -790,7 +774,6 @@ function LatticeStage({ index }: StageProps) {
       lattice.push(v);
       ppos.setXYZ(i, v.x, v.y, v.z);
     }
-    // eslint-disable-next-line react-hooks/immutability
     ppos.needsUpdate = true;
 
     const lpos = lineGeo.attributes.position as THREE.BufferAttribute;
@@ -804,7 +787,6 @@ function LatticeStage({ index }: StageProps) {
           if (j + 1 < G) { const b = lattice[idx(i, j + 1, k)]; lpos.setXYZ(s++, a.x, a.y, a.z); lpos.setXYZ(s++, b.x, b.y, b.z); }
           if (k + 1 < G) { const b = lattice[idx(i, j, k + 1)]; lpos.setXYZ(s++, a.x, a.y, a.z); lpos.setXYZ(s++, b.x, b.y, b.z); }
         }
-    // eslint-disable-next-line react-hooks/immutability
     lpos.needsUpdate = true;
 
     (pointsRef.current.material as THREE.PointsMaterial).color.setHSL(0.45 + 0.12 * Math.sin(time * 0.3), 0.9, 0.6);

@@ -34,7 +34,6 @@ export const mdxComponents = {
     />
   ),
   
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   a: (props: any) => (
     <Link 
       className="text-[var(--terminal-cyan)] hover:underline"
@@ -65,7 +64,6 @@ export const mdxComponents = {
   ),
   
   // Code blocks with syntax highlighting
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pre: (props: any) => <CodeBlock {...props} />,
   
   code: (props: React.HTMLAttributes<HTMLElement> & { className?: string; children?: React.ReactNode }) => {
@@ -82,7 +80,6 @@ export const mdxComponents = {
   },
   
   // Images with Next.js optimization
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   img: (props: any) => (
     <span className="block my-8">
       <Image

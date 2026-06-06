@@ -139,7 +139,6 @@ export default function Hero() {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('click', handleClick);
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [boundsX, boundsY]);
 
     useFrame((state, delta) => {

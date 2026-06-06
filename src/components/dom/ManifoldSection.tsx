@@ -191,9 +191,7 @@ export default function ManifoldSection() {
   // Flying in + floating animation
   useLayoutEffect(() => {
     if (!isVisible) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAnimationProgress({});
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setEdgesVisible(new Set());
       return;
     }

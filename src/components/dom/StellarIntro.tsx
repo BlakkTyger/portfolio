@@ -44,7 +44,6 @@ export default function StellarIntro() {
   // -> To force the intro on EVERY refresh: Comment out lines 47-49.
   // -> To restore showing it only once: Uncomment lines 47-49.
   useLayoutEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHasMounted(true);
     //  try {
     //    if (localStorage.getItem(LOCALSTORAGE_KEY) === 'true') {

@@ -79,9 +79,7 @@ function BackgroundStars({ time, cameraDistance }: { time: React.MutableRefObjec
   }, [COUNT]);
 
   useFrame(() => {
-    // eslint-disable-next-line react-hooks/immutability
     uniforms.uTime.value = time.current;
-    // eslint-disable-next-line react-hooks/immutability
     uniforms.uCameraDistance.value = cameraDistance.current;
   });
 
@@ -179,33 +177,24 @@ function CoronaParticles({ uniforms }: { uniforms: Record<string, THREE.IUniform
     const siz = new Float32Array(COUNT);
 
     for (let i = 0; i < COUNT; i++) {
-      // eslint-disable-next-line react-hooks/purity
       const theta = Math.random() * Math.PI * 2;
-      // eslint-disable-next-line react-hooks/purity
       const phi = Math.acos(2 * Math.random() - 1);
-      // eslint-disable-next-line react-hooks/purity
       const r = RADIUS * (0.7 + Math.random() * 0.3); // shell
 
       pos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
       pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       pos[i * 3 + 2] = r * Math.cos(phi);
 
-      // eslint-disable-next-line react-hooks/purity
       const jx = pos[i * 3] + (Math.random() - 0.5) * 0.5;
-      // eslint-disable-next-line react-hooks/purity
       const jy = pos[i * 3 + 1] + (Math.random() - 0.5) * 0.5;
-      // eslint-disable-next-line react-hooks/purity
       const jz = pos[i * 3 + 2] + (Math.random() - 0.5) * 0.5;
       const len = Math.sqrt(jx * jx + jy * jy + jz * jz) || 1;
       dir[i * 3]     = jx / len;
       dir[i * 3 + 1] = jy / len;
       dir[i * 3 + 2] = jz / len;
 
-      // eslint-disable-next-line react-hooks/purity
       spd[i] = 0.5 + Math.random() * 1.4;
-      // eslint-disable-next-line react-hooks/purity
       off[i] = Math.random() * Math.PI * 2;
-      // eslint-disable-next-line react-hooks/purity
       siz[i] = 5.0 + Math.random() * 10.0;
     }
 
