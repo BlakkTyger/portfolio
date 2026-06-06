@@ -39,10 +39,72 @@ export default function WhoAmI() {
   };
 
   return (
-    <SectionWrapper id="whoami" animation="fade-up" stagger={true} className="!px-2 md:!px-4 lg:!px-6 !py-10 md:!py-14">
-      <div className="w-full max-w-[1400px] mx-auto px-3 md:px-4 flex flex-col justify-center min-h-[calc(100vh-80px)] relative">
+    <SectionWrapper id="whoami" animation="fade-up" stagger={true} className="!px-2 md:!px-4 lg:!px-6 !py-10 md:!py-14 relative overflow-visible">
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+      {/* Ambient Graphics Layer positioned absolutely relative to the entire screen-width SectionWrapper */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-visible select-none">
+        
+        {/* Bloch Sphere (1.5x bigger, top-right margin) */}
+        <div className="absolute left-[80%] top-[8%] lg:left-[85%] lg:top-[14%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.6] lg:scale-[1.2] opacity-20 lg:opacity-100 transition-all duration-500">
+          <BlochSphereGraphic isHovered={true} />
+        </div>
+
+        {/* Cavity QED (1.5x bigger, top-left margin behind text) */}
+        <div className="absolute left-[15%] top-[14%] lg:left-[10%] lg:top-[10%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.6] lg:scale-[1.25] opacity-20 lg:opacity-[0.35] transition-all duration-500">
+          <CavityQEDGraphic isHovered={true} />
+        </div>
+
+        {/* Neural Network (1.5x bigger, right margin center) */}
+        <div className="absolute left-[85%] top-[40%] lg:left-[78%] lg:top-[38%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.6] lg:scale-[1.25] opacity-15 lg:opacity-100 transition-all duration-500">
+          <NeuralNetworkGraphic isHovered={true} />
+        </div>
+
+        {/* Philosophy Book (maintained scale, left center background behind text) */}
+        <div className="absolute left-[25%] top-[55%] lg:left-[18%] lg:top-[50%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.4] lg:scale-[0.7] opacity-15 lg:opacity-[0.25] transition-all duration-500">
+          <PhilosophyBookGraphic isHovered={true} />
+        </div>
+
+        {/* Coffee Cup / Mug (extremely large, bottom-right margin) */}
+        <div className="absolute left-[78%] top-[82%] lg:left-[82%] lg:top-[72%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.55] lg:scale-[1.35] opacity-20 lg:opacity-100 transition-all duration-500">
+          <CoffeeCupGraphic isHovered={true} />
+        </div>
+
+        {/* Quantum Symbols Cloud (Main - 1.5x bigger, right center space) */}
+        <div className="absolute left-[70%] top-[25%] lg:left-[68%] lg:top-[24%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.65] lg:scale-[1.3] opacity-15 lg:opacity-100 transition-all duration-500">
+          <QuantumSymbolsCloud isHovered={true} />
+        </div>
+
+        {/* Background Quantum Cloud Copies (5 copies scattered around all margins) */}
+        {/* Copy 1: Far Left Upper margin (below Cavity QED) */}
+        <div className="absolute left-[8%] top-[22%] lg:left-[6%] lg:top-[28%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.6] lg:scale-[0.85] opacity-[0.2] lg:opacity-[0.35] transition-all duration-500">
+          <QuantumSymbolsCloud isHovered={true} />
+        </div>
+
+        {/* Copy 2: Mid Left background (behind text paragraphs 1-2) */}
+        <div className="absolute left-[30%] top-[18%] lg:left-[32%] lg:top-[15%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.5] lg:scale-[0.7] opacity-[0.15] lg:opacity-[0.25] transition-all duration-500">
+          <QuantumSymbolsCloud isHovered={true} />
+        </div>
+
+        {/* Copy 3: Far Right Mid-lower margin (below Neural Network) */}
+        <div className="absolute left-[88%] top-[60%] lg:left-[92%] lg:top-[55%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.7] lg:scale-[1.0] opacity-[0.25] lg:opacity-[0.4] transition-all duration-500">
+          <QuantumSymbolsCloud isHovered={true} />
+        </div>
+
+        {/* Copy 4: Bottom Left Background (behind text paragraph 3) */}
+        <div className="absolute left-[15%] top-[80%] lg:left-[12%] lg:top-[82%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.65] lg:scale-[0.95] opacity-[0.15] lg:opacity-[0.3] transition-all duration-500">
+          <QuantumSymbolsCloud isHovered={true} />
+        </div>
+
+        {/* Copy 5: Bottom Center-Right Background (under Coffee Cup area) */}
+        <div className="absolute left-[50%] top-[88%] lg:left-[62%] lg:top-[88%] transform -translate-x-1/2 -translate-y-1/2 scale-[0.55] lg:scale-[0.8] opacity-[0.15] lg:opacity-[0.25] transition-all duration-500">
+          <QuantumSymbolsCloud isHovered={true} />
+        </div>
+
+      </div>
+
+      <div className="w-full max-w-[1400px] mx-auto px-3 md:px-4 flex flex-col justify-center min-h-[calc(100vh-80px)] relative z-10">
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center relative z-10">
 
           {/* Left Column: Bio Content (7/12 cols) */}
           <div className="md:col-span-7 relative z-10 flex flex-col justify-center" style={{ pointerEvents: 'auto' }}>
@@ -139,53 +201,6 @@ export default function WhoAmI() {
                 >cappuccino</span>.
               </p>
             </div>
-          </div>
-
-          {/* Right Column: Distributed Cognitive Graphics (5/12 cols) */}
-          <div className="md:col-span-5 grid grid-cols-2 gap-x-6 gap-y-10 items-center justify-items-center relative z-10 w-full animate-item" style={{ pointerEvents: 'auto' }}>
-            
-            {/* Bloch Sphere */}
-            <div className="relative w-full h-[150px] flex items-center justify-center">
-              <div style={{ transform: 'scale(0.65)', transformOrigin: 'center' }}>
-                <BlochSphereGraphic isHovered={true} />
-              </div>
-            </div>
-
-            {/* Cavity QED */}
-            <div className="relative w-full h-[150px] flex items-center justify-center">
-              <div style={{ transform: 'scale(0.65)', transformOrigin: 'center' }}>
-                <CavityQEDGraphic isHovered={true} />
-              </div>
-            </div>
-
-            {/* Quantum Symbols Cloud */}
-            <div className="relative w-full h-[150px] flex items-center justify-center">
-              <div className="absolute inset-0 w-full h-full" style={{ transform: 'scale(0.75)', transformOrigin: 'center' }}>
-                <QuantumSymbolsCloud isHovered={true} />
-              </div>
-            </div>
-
-            {/* Neural Network */}
-            <div className="relative w-full h-[150px] flex items-center justify-center">
-              <div style={{ transform: 'scale(0.65)', transformOrigin: 'center' }}>
-                <NeuralNetworkGraphic isHovered={true} />
-              </div>
-            </div>
-
-            {/* Philosophy Book */}
-            <div className="relative w-full h-[150px] flex items-center justify-center">
-              <div style={{ transform: 'scale(0.6)', transformOrigin: 'center' }}>
-                <PhilosophyBookGraphic isHovered={true} />
-              </div>
-            </div>
-
-            {/* Coffee Cup */}
-            <div className="relative w-full h-[150px] flex items-center justify-center">
-              <div style={{ transform: 'scale(0.45)', transformOrigin: 'center', marginTop: '-35px' }}>
-                <CoffeeCupGraphic isHovered={true} />
-              </div>
-            </div>
-
           </div>
 
         </div>
