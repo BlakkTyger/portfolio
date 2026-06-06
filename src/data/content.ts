@@ -1,7 +1,7 @@
 export interface Skill {
   name: string;
-  level: number;  // 0-100 (proficiency percentage)
-  category: 'development' | 'research' | 'tools';
+  level?: number;  // 0-100 (proficiency percentage)
+  category: 'programming' | 'physics' | 'ml' | 'experimental';
 }
 
 export interface Experience {
@@ -42,24 +42,31 @@ export const personalInfo = {
 // === SKILLS ===
 
 export const skills: Skill[] = [
-  // Development
-  { name: 'TypeScript', level: 85, category: 'development' },
-  { name: 'Python', level: 90, category: 'development' },
-  { name: 'React/Next.js', level: 80, category: 'development' },
-  { name: 'Three.js/R3F', level: 70, category: 'development' },
-  { name: 'Node.js', level: 75, category: 'development' },
+  // Programming
+  { name: 'Python', category: 'programming' },
+  { name: 'MATLAB', category: 'programming' },
+  { name: 'C', category: 'programming' },
+  { name: 'C++', category: 'programming' },
 
-  // Research
-  { name: 'Quantum Computing', level: 80, category: 'research' },
-  { name: 'Machine Learning', level: 75, category: 'research' },
-  { name: 'Data Analysis', level: 85, category: 'research' },
-  { name: 'Scientific Writing', level: 80, category: 'research' },
+  // Computational Physics & Toolkits
+  { name: 'QuTiP', category: 'physics' },
+  { name: 'Qiskit', category: 'physics' },
+  { name: 'COMSOL Multiphysics', category: 'physics' },
+  { name: 'OriginPro', category: 'physics' },
 
-  // Tools
-  { name: 'Git', level: 85, category: 'tools' },
-  { name: 'Docker', level: 65, category: 'tools' },
-  { name: 'Linux', level: 80, category: 'tools' },
-  { name: 'LaTeX', level: 75, category: 'tools' },
+  // Machine Learning and Data Analysis
+  { name: 'Tensorflow', category: 'ml' },
+  { name: 'Keras', category: 'ml' },
+  { name: 'PyTorch', category: 'ml' },
+  { name: 'Transformerlens', category: 'ml' },
+  { name: 'OpenCV', category: 'ml' },
+
+  // Experimental Skills
+  { name: 'Crystal Growth', category: 'experimental' },
+  { name: 'Chemical Vapor Transport', category: 'experimental' },
+  { name: 'Scanning Electron Microscopy', category: 'experimental' },
+  { name: 'X-ray Diffraction', category: 'experimental' },
+  { name: 'Energy-Dispersive X-ray Spectroscopy', category: 'experimental' },
 ];
 
 // === EXPERIENCE ===

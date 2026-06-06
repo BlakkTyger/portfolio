@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const BLOCKS = [
   {
     year: '2018 – 2019',
-    title: 'Early Years: Circuits, Debate Floors & Neurodiversity',
+    title: 'Early Years: Circuits, Debate Floors & Social Work',
     body: [
       { subtitle: 'Electronics', text: 'Played around with electronics, broke hundreds of jumper wires and eventally built an Arduino based soil-moisture and weed-detection systems before fully understanding why or how they worked.' },
       { subtitle: 'Debate & Public Speaking', text: "Ran school-wide MUN conferences as chair and host. Collected Best Delegate awards; more importantly, learned to argue for positions I didn't believe in :)" },

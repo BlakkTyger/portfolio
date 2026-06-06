@@ -139,9 +139,9 @@ export default function ResearchPage() {
                           Repository
                         </a>
                       )}
-                      {(project.links?.paper || project.assets?.document) && (
+                       {project.links?.paper && (
                         <a
-                          href={project.links?.paper || project.assets?.document}
+                          href={project.links.paper}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
@@ -150,9 +150,9 @@ export default function ResearchPage() {
                           Paper
                         </a>
                       )}
-                      {(project.links?.presentation || project.assets?.ppt) && (
+                      {project.links?.presentation && (
                         <a
-                          href={project.links?.presentation || project.assets?.ppt}
+                          href={project.links.presentation}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"
@@ -161,9 +161,9 @@ export default function ResearchPage() {
                           Slides
                         </a>
                       )}
-                      {(project.links?.website || project.assets?.link) && (
+                      {project.links?.website && (
                         <a
-                          href={project.links?.website || project.assets?.link}
+                          href={project.links.website}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-sm text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors"

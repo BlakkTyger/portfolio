@@ -1,11 +1,9 @@
 ## TODO
 1. CV update
-2. Journey text change
-3. Physics Research add links
-4. Physics research update and edit
-5. CS Proejcts add links
-6. CS Projects update and edit
-7. misc: add content 
+2. Physics Research add links
+3. Physics research update and edit
+4. CS Proejcts add links
+5. CS Projects update and edit
 
 ## Getting Started
 

@@ -5,11 +5,6 @@ export interface Project {
   category: 'cs' | 'physics';
   tags: string[];
   image?: string;
-  assets?: {
-    ppt?: string;
-    document?: string;
-    link?: string;
-  };
   links?: {
     github?: string;
     website?: string;
@@ -30,16 +25,7 @@ export const projects: Project[] = [
     tags: ['Machine Learning', 'Transformers', 'NLP', 'State-Space'],
     year: 2025,
     image: '/images/projects/transformer.jpg',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
     }
   },
   {
@@ -50,16 +36,10 @@ export const projects: Project[] = [
     tags: ['Rust', 'C', 'Networking', 'NFS', 'RPC'],
     year: '2024',
     image: '/images/projects/nfs.png',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      github: 'https://github.com/BlakkTyger/NFS_ass_Summer-24/',
+      paper: 'https://drive.google.com/file/d/1UaDLdh44RZ3ZHhdBoAdAAUdYS8f2PpRV/view?usp=drive_link',
+      presentation: 'https://drive.google.com/file/d/1dYa5cUtmxPogKjXR49LVvMC8WO6RNedX/view?usp=drive_link'
     }
   },
   {
@@ -70,16 +50,10 @@ export const projects: Project[] = [
     tags: ['Computer Vision', 'GAN', 'YOLOv7', 'DeepSort', 'Deep Learning'],
     year: '2023 - 2024',
     image: '/images/projects/cctv.jpg',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      github: 'https://www.kaggle.com/code/himanshu2909/cctv-cv',
+      paper: 'https://drive.google.com/file/d/1QJZSs-_NDCnIFeCiP-HHc0YJ1sdS4QQJ/view?usp=sharing',
+      presentation: 'https://drive.google.com/file/d/1G5J6QqJhzwjV56pmDouu8vSLOU5CE_az/view?usp=sharing'
     }
   },
   {
@@ -90,16 +64,9 @@ export const projects: Project[] = [
     tags: ['Flutter', 'Docker', 'Python', 'Machine Learning', 'MediaPipe'],
     year: '2024',
     image: '/images/projects/police.jpg',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      github: 'https://github.com/pclubiitk/attendance-app',
+      website: 'https://pclubiitk.github.io/attendance-app/',
     }
   },
   {
@@ -110,16 +77,10 @@ export const projects: Project[] = [
     tags: ['RAG', 'LLM', 'Multi-Agent', 'LangGraph', 'MetaGPT'],
     year: '2024',
     image: '/images/projects/rag.jpeg',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      github: 'https://github.com/BlakkTyger/Dynamic-Multi-Agentic-RAG',
+      paper: 'https://drive.google.com/file/d/1_m1quO-Mb9i5_KhwVQ20uJ8npTebiw8W/view?usp=drive_link',
+      presentation: 'https://drive.google.com/file/d/1sxOpwsSgENyrEpsL0BCSxB0zwJ_8bQ_7/view?usp=drive_link'
     }
   },
   {
@@ -130,16 +91,8 @@ export const projects: Project[] = [
     tags: ['LlamaIndex', 'LangGraph', 'ETL', 'Milvus', 'Celery'],
     year: '2024 - 2025',
     image: '/images/projects/stepsai.png',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      website: 'https://stepsai.co/',
     }
   },
 
@@ -152,16 +105,10 @@ export const projects: Project[] = [
     tags: ['Quantum Optics', 'Cavity-QED', 'Open Quantum Systems'],
     year: '2025 - Ongoing',
     image: '/images/projects/cavity-qed.jpg',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      github: 'https://github.com/BlakkTyger/QC-Nielsen-Chuang-Simulations',
+      paper: 'https://arxiv.org/pdf/2301.02269',
+      presentation: 'https://drive.google.com/file/d/1VhG3mHvgZPPoG90-ULWFWUuRxXP1BTL-/view'
     }
   },
   {
@@ -172,16 +119,9 @@ export const projects: Project[] = [
     tags: ['Qiskit', 'Quantum Error Correction', 'VQE', 'Benchmarking'],
     year: '2025',
     image: '/images/projects/ibm-qgss.png',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      github: 'https://github.com/BlakkTyger/qgss-2025/',
+      website: 'https://www.credly.com/badges/f7736fc2-60be-442e-897f-25acaea3834f',
     }
   },
   {
@@ -192,16 +132,9 @@ export const projects: Project[] = [
     tags: ['COMSOL', 'Nanophotonics', 'Quantum Optics'],
     year: 2024,
     image: '/images/projects/wgm.png',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      paper: 'https://drive.google.com/file/d/15R3Dq0i6N-sZtKSh1gSmYhUXA9a3nHw-/view',
+      presentation: 'https://drive.google.com/file/d/1b1bWOtVRze8Jv0epnyrF2uD1VjKqV1zr/view'
     }
   },
   {
@@ -212,16 +145,9 @@ export const projects: Project[] = [
     tags: ['Condensed Matter', 'Crystal Growth', 'Transport Properties'],
     year: 2025,
     image: '/images/projects/nbni2te2.jpg',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      paper: 'https://drive.google.com/file/d/18dyI0IgkpLbJhikGdQMVGZHVi5R30Dc5/view',
+      presentation: 'https://drive.google.com/file/d/1m5WmqC7nyIo8dnABOW3j5Sy_7-bQ02il/view'
     }
   },
   {
@@ -232,16 +158,9 @@ export const projects: Project[] = [
     tags: ['Quantum Computing', 'Qiskit', 'QML'],
     year: 2025,
     image: '/images/projects/vqe.png',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      paper: 'https://arxiv.org/pdf/2112.08506',
+      presentation: 'https://drive.google.com/file/d/1apBlGq_DWbAC368Arbda9mEBoxvkNZfE/view'
     }
   },
   {
@@ -252,16 +171,8 @@ export const projects: Project[] = [
     tags: ['Crystallography', 'Group Theory', 'Semiconductors'],
     year: 2025,
     image: '/images/projects/point-groups.png',
-    assets: {
-      document: '/docs/my-project-report.pdf',
-      ppt: '/docs/my-project-slides.pptx',
-      link: 'https://example.com'
-    },
     links: {
-      github: 'https://github.com/user/repo',
-      website: 'https://demo.example.com',
-      paper: '/docs/research-paper.pdf',
-      presentation: '/docs/slides.pdf'
+      presentation: 'https://drive.google.com/file/d/1nLoLAfj_VBsweQ09aMbyQcEn30n70elj/view'
     }
   }
 ];

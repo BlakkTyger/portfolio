@@ -109,27 +109,34 @@ Your interests are visualized as an interactive node graph.
 
 ---
 
-## 5. Add Projects (CS/Physics)
+## 5. Add/Edit Projects (CS/Physics)
 
 Projects are displayed in the Projects section with details and links.
 1. Open `src/data/projects.ts`.
-2. Add a new object to the `projects` array:
+2. Add or modify an object in the `projects` array:
 ```typescript
 {
   id: 'my-new-project',
   title: 'Project Title',
   description: 'What the project does.',
-  longDescription: 'A more detailed explanation.',
+  category: 'cs', // 'cs' or 'physics'
   tags: ['Python', 'Machine Learning'],
-  category: 'cs', // 'cs', 'physics', or 'both'
-  featured: true, // Set to true to highlight it
+  image: '/images/projects/project.jpg', // optional
   links: {
-    github: 'https://github.com/...',
-    live: 'https://...', // optional
-    paper: 'https://...' // optional
-  }
+    github: 'https://github.com/BlakkTyger/my-repo', // optional
+    website: 'https://my-demo.com', // optional
+    paper: '/docs/my-paper.pdf', // optional
+    presentation: 'https://drive.google.com/file/d/.../view' // optional
+  },
+  year: 2025 // optional
 }
 ```
+
+> [!NOTE]
+> **Selective Links & Asset Availability**:
+> The `assets` object has been completely removed from the project schema. All external references are now managed inside the `links` object.
+>
+> All keys within `links` (`github`, `website`, `paper`, `presentation`, `docs`) are entirely optional. If a project does not have a website, research paper, or presentation slides, simply remove those specific keys from that project's `links` object. The UI will automatically hide the corresponding button/link for that project.
 
 ---
 

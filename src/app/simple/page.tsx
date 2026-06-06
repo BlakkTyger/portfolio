@@ -12,13 +12,13 @@ export const metadata = {
 const ACADEMIC_JOURNEY = [
   {
     year: '2018 – 2019',
-    title: 'Foundations in Engineering & Advocacy',
-    description: 'Began tinkering with electronics and Arduinos. Chaired MUN debating conferences and led social impact initiatives for neurodivergent children.',
+    title: 'Early Years: Circuits, Debate Floors & Social Work',
+    description: 'Began tinkering with electronics and Arduinos. Chaired MUN debating conferences and led social impact initiatives for children with special needs.',
   },
   {
     year: '2020',
-    title: 'Sustainability, Design & Early Code',
-    description: 'Prototyped sustainable models in Fusion 360, winning national ATL Marathon. Trained in tech entrepreneurship and transitioned to Python programming.',
+    title: 'Sustainable Design, Bioplastics & First Real Code',
+    description: 'Prototyped sustainable models in Fusion 360, winning 3rd position in national ATL Marathon. Trained in tech entrepreneurship by Tech Mahindra and transitioned to Python programming.',
   },
   {
     year: '2020 – 2021',
@@ -28,22 +28,22 @@ const ACADEMIC_JOURNEY = [
   {
     year: '2020 – 2022',
     title: 'F1 in Schools & The Quantum Spark',
-    description: 'Served as Design Engineer for Team Quantum Racing at the F1 in Schools World Finals (UK). Sparked interest in Quantum Computing and QKD.',
+    description: 'Served as Research Analyst and Design Engineer for Team Quantum Racing at the F1 in Schools World Finals (UK). DRDO Achievement sparked interest in Quantum Computing and QKD.',
   },
   {
     year: '2023 – 2024',
     title: 'IIT Kanpur & Technical Leadership',
-    description: 'Enrolled in Physics at IIT Kanpur, focusing on Quantum Computing, Quantum Optics, and Machine Learning. Coordinated the Programming Club ML domain.',
+    description: 'Enrolled in Physics at IIT Kanpur, focusing on Quantum Computing, Quantum Optics, and Machine Learning. Completed IBM Quantum Challenge 2024, did programming and debating as hobbies.',
   },
   {
     year: '2025',
     title: 'Quantum Research & AI Internals  ',
-    description: 'Researched LLM mechanics at Kyoto University and Quantum Optics / Cavity QED at the Nanophotonics Group, IIT Kanpur.',
+    description: 'Research in Quantum Optics and Cavity QED at the Nanophotonics Group, IIT Kanpur and LLM internals at Kyoto University.',
   },
   {
     year: '2026 & Beyond',
-    title: 'Lattices & The Quantum Frontier',
-    description: 'Assessing lattice-based cryptographic vulnerabilities and publishing research bridging classical AI and Quantum Physics.',
+    title: 'Committed to Research',
+    description: "Actively working across three labs - Nanophotonics (IITK), Photonic Devices (IITK), and Kyoto University's LLM Center",
   },
 ];
 
@@ -117,18 +117,18 @@ export default function SimpleProfile() {
                       <Github size={14} /> Repository
                     </a>
                   )}
-                  {(project.links?.paper || project.assets?.document) && (
-                    <a href={project.links?.paper || project.assets?.document} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
+                  {project.links?.paper && (
+                    <a href={project.links.paper} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
                       <FileText size={14} /> Paper
                     </a>
                   )}
-                  {(project.links?.presentation || project.assets?.ppt) && (
-                    <a href={project.links?.presentation || project.assets?.ppt} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
+                  {project.links?.presentation && (
+                    <a href={project.links.presentation} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
                       <Presentation size={14} /> Slides
                     </a>
                   )}
-                  {(project.links?.website || project.assets?.link) && (
-                    <a href={project.links?.website || project.assets?.link} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
+                  {project.links?.website && (
+                    <a href={project.links.website} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#8F00FF] transition-colors flex items-center gap-1.5">
                       <ExternalLink size={14} /> Demo
                     </a>
                   )}
@@ -163,18 +163,18 @@ export default function SimpleProfile() {
                       <Github size={14} /> Repository
                     </a>
                   )}
-                  {(project.links?.paper || project.assets?.document) && (
-                    <a href={project.links?.paper || project.assets?.document} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
+                  {project.links?.paper && (
+                    <a href={project.links.paper} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
                       <FileText size={14} /> Paper
                     </a>
                   )}
-                  {(project.links?.presentation || project.assets?.ppt) && (
-                    <a href={project.links?.presentation || project.assets?.ppt} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
+                  {project.links?.presentation && (
+                    <a href={project.links.presentation} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
                       <Presentation size={14} /> Slides
                     </a>
                   )}
-                  {(project.links?.website || project.assets?.link) && (
-                    <a href={project.links?.website || project.assets?.link} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
+                  {project.links?.website && (
+                    <a href={project.links.website} target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#00FF9D] transition-colors flex items-center gap-1.5">
                       <ExternalLink size={14} /> Demo
                     </a>
                   )}
@@ -187,23 +187,29 @@ export default function SimpleProfile() {
         {/* Technical Skills */}
         <section>
           <h2 className="text-2xl font-bold border-b border-[#222] pb-4 mb-8 text-white">Core Skills</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-[#888]">Development</h3>
+              <h3 className="text-lg font-semibold mb-4 text-[#888]">Programming</h3>
               <ul className="space-y-2 text-[#aaa]">
-                {skills.filter(s => s.category === 'development').map(s => <li key={s.name} className="flex items-center gap-2"><div className="w-1 h-1 bg-[#00FF9D] rounded-full"/> {s.name}</li>)}
+                {skills.filter(s => s.category === 'programming').map(s => <li key={s.name} className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-[#00FF9D] rounded-full shadow-[0_0_8px_rgba(0,255,157,0.5)]"/> {s.name}</li>)}
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-[#888]">Research</h3>
+              <h3 className="text-lg font-semibold mb-4 text-[#888]">Computational Physics</h3>
               <ul className="space-y-2 text-[#aaa]">
-                {skills.filter(s => s.category === 'research').map(s => <li key={s.name} className="flex items-center gap-2"><div className="w-1 h-1 bg-[#8F00FF] rounded-full"/> {s.name}</li>)}
+                {skills.filter(s => s.category === 'physics').map(s => <li key={s.name} className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-[#8F00FF] rounded-full shadow-[0_0_8px_rgba(143,0,255,0.5)]"/> {s.name}</li>)}
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-[#888]">Tools</h3>
+              <h3 className="text-lg font-semibold mb-4 text-[#888]">Machine Learning & Data</h3>
               <ul className="space-y-2 text-[#aaa]">
-                {skills.filter(s => s.category === 'tools').map(s => <li key={s.name} className="flex items-center gap-2"><div className="w-1 h-1 bg-white rounded-full"/> {s.name}</li>)}
+                {skills.filter(s => s.category === 'ml').map(s => <li key={s.name} className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-[#22D3EE] rounded-full shadow-[0_0_8px_rgba(34,211,238,0.5)]"/> {s.name}</li>)}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-[#888]">Experimental Skills</h3>
+              <ul className="space-y-2 text-[#aaa]">
+                {skills.filter(s => s.category === 'experimental').map(s => <li key={s.name} className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-[#F97316] rounded-full shadow-[0_0_8px_rgba(249,115,22,0.5)]"/> {s.name}</li>)}
               </ul>
             </div>
           </div>
