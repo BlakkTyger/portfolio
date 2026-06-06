@@ -479,10 +479,23 @@ float fbm(vec2 p) {
 
 // ── Plasma Disk Generator ──
 // Creates sweeping, swirling bands of auroral plasma
-vec4 computeAccretionDisk(vec2 uv, float eh, float dist, float angle, float timeOffset) {
-    // Flatten the disk mathematically to simulate a 3D tilted plane
+// cameraAngle: the orbital angle of the camera around the black hole
+vec4 computeAccretionDisk(vec2 uv, float eh, float dist, float angle, float timeOffset, float cameraAngle) {
+    // ── Perspective Disk Tilt based on camera's orbital position ──
+    // As the camera sweeps around the black hole (cameraAngle changes),
+    // the apparent tilt of the disk changes — when camera is at the equator
+    // the disk looks like a flat ellipse; at different orbital phases
+    // the squish axis rotates to simulate a 3D disk seen from different sides.
+    float tiltPhase = cameraAngle; // camera's current orbital angle around the BH
+    // Project the 2D screen coordinate onto the disk's tilted plane:
+    // Rotate the squish into the camera's orbital plane direction
+    float cosTilt = cos(tiltPhase);
+    float sinTilt = sin(tiltPhase);
     vec2 tiltedUV = uv;
-    tiltedUV.y *= 2.5; // Squish Y to simulate viewing at an angle
+    // Squish along the axis perpendicular to the camera's orbital direction
+    // This simulates seeing the disk edge-on vs face-on as you orbit
+    float squishAxis = abs(cosTilt) * 2.5 + abs(sinTilt) * 1.2;
+    tiltedUV.y *= squishAxis;
     float tDist = length(tiltedUV);
     float tAngle = atan(tiltedUV.y, tiltedUV.x);
     
@@ -511,8 +524,12 @@ vec4 computeAccretionDisk(vec2 uv, float eh, float dist, float angle, float time
     float mask = smoothstep(eh * 0.9, eh * 1.5, tDist) * smoothstep(eh * 8.0, eh * 3.0, tDist);
     density *= mask;
     
-    // Doppler Beaming (approaching side is brighter and bluer)
-    float doppler = sin(angle - 0.5); // Offset angle for cinematic lighting
+    // ── Relativistic Doppler Beaming (physically tied to camera's orbital position) ──
+    // As the camera orbits at angle cameraAngle, the side of the disk that is
+    // moving TOWARD the camera is blueshifted and brighter. This naturally
+    // shifts as the orbital angle changes — no disk rotation needed.
+    float dopplerPhase = angle - cameraAngle; // angle relative to camera's orbital position
+    float doppler = sin(dopplerPhase - 0.5);
     float dopplerFactor = pow(max(0.0, doppler + 1.2) * 0.45, 2.0);
     
     // ── Extreme Relativistic Doppler/Redshift shift as we fall closer ──
@@ -540,6 +557,10 @@ void main() {
     vec2 center = vec2(0.5);
     vec2 toCenter = center - uv;
     toCenter.x *= aspect;
+    // NOTE: toCenter is NOT rotated by uCameraAngle.
+    // The black hole sits fixed at screen centre. The camera orbits it in 3D;
+    // its orbital angle only changes the Doppler beaming and disk tilt — not
+    // the screen-space position of the disk itself.
     
     // ── Spacetime Swirl (Relativistic Kerr Frame-Dragging) ──
     // Spacetime bends and twists near a spinning black hole. 
@@ -591,12 +612,14 @@ void main() {
     // ── Pseudo-3D Accretion Disk ──
     if (uFormation > 0.01) {
         // Render the FRONT of the disk
-        vec4 frontDisk = computeAccretionDisk(twistedCenter, eh, dist, twistedAngle, 0.0);
+        // Pass uCameraAngle so Doppler beaming and disk tilt respond to the
+        // camera's orbital position around the fixed black hole.
+        vec4 frontDisk = computeAccretionDisk(twistedCenter, eh, dist, twistedAngle, 0.0, uCameraAngle);
         
         // Render the BACK of the disk (gravitationally lensed over the top/bottom)
         // We use the lensedUV but invert it to simulate looking "around" the black hole
         vec2 backUV = twistedCenter - twistedDir * min(lens * 1.5, 0.85);
-        vec4 backDisk = computeAccretionDisk(backUV, eh, length(backUV), atan(backUV.y, backUV.x), 3.14);
+        vec4 backDisk = computeAccretionDisk(backUV, eh, length(backUV), atan(backUV.y, backUV.x), 3.14, uCameraAngle);
         // Dim the back disk slightly
         backDisk.a *= 0.6 * smoothstep(eh * 0.9, eh * 1.2, dist);
         

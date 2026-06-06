@@ -338,8 +338,8 @@ export default function StellarIntroScene({ onFlash, onComplete, onPhaseChange }
     uFormation:      { value: 0 },
     uCameraDistance: { value: 1 },
     uCameraAngle:    { value: 0 },
-    uResolution:     { value: new THREE.Vector2(size.width, size.height) },
-  }), [size]);
+    uResolution:     { value: new THREE.Vector2(0, 0) },
+  }), []);
 
   // Bloom ref for dynamic intensity
   const bloomIntensityRef = useRef(1.0);

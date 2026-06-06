@@ -201,6 +201,7 @@ function CircuitStage({ index }: StageProps) {
       const p = pts[Math.floor(f * (pts.length - 1))];
       pos.setXYZ(i, p.x, p.y, p.z);
     }
+    // eslint-disable-next-line react-hooks/immutability
     pos.needsUpdate = true;
     if (flowRef.current) (flowRef.current.material as THREE.PointsMaterial).opacity = vis * (0.6 + 0.4 * Math.sin(time * 4));
 
@@ -344,6 +345,7 @@ function NeuroStage({ index }: StageProps) {
       const f = (time * 0.8 + i * 0.083) % 1;
       pos.setXYZ(i, a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f, a.z + (b.z - a.z) * f);
     }
+    // eslint-disable-next-line react-hooks/immutability
     pos.needsUpdate = true;
     if (signalsRef.current) (signalsRef.current.material as THREE.PointsMaterial).opacity = vis;
 
@@ -463,6 +465,7 @@ function FlowStage({ index }: StageProps) {
       x = THREE.MathUtils.lerp(x, carX, collapse);
       pos.setXYZ(i, x, THREE.MathUtils.lerp(yDefl, carY, collapse), THREE.MathUtils.lerp(zDefl, 0, collapse));
     }
+    // eslint-disable-next-line react-hooks/immutability
     pos.needsUpdate = true;
 
     // quantum spark ring + core at the car as it dematerialises
