@@ -12,64 +12,64 @@ gsap.registerPlugin(ScrollTrigger);
 const BLOCKS = [
   {
     year: '2018 – 2019',
-    title: 'Foundations in Engineering & Advocacy',
+    title: 'Early Years: Circuits, Debate Floors & Neurodiversity',
     body: [
-      { subtitle: 'Electronics & Machine Learning', text: 'Tinkered with electronics and Arduinos, developing automated soil-moisture and ML weed detection systems.' },
-      { subtitle: 'Leadership & MUNs', text: 'Chaired and hosted school-wide Model United Nations (MUN) debating conferences, securing multiple Best Delegate awards.' },
-      { subtitle: 'Social Impact', text: 'Led advocacy initiatives integrating neurodivergent children into mainstream society via adaptive sensory techniques.' },
+      { subtitle: 'Electronics', text: 'Played around with electronics, broke hundreds of jumper wires and eventally built an Arduino based soil-moisture and weed-detection systems before fully understanding why or how they worked.' },
+      { subtitle: 'Debate & Public Speaking', text: "Ran school-wide MUN conferences as chair and host. Collected Best Delegate awards; more importantly, learned to argue for positions I didn't believe in :)" },
+      { subtitle: 'Social Impact', text: 'Led a social initiative helping integrate neurodivergent children into the mainstream society by working with NGOs, clinics, schools, hair salons, cafes etc.' },
     ],
   },
   {
     year: '2020',
-    title: 'Sustainability, Design & Early Code',
+    title: 'Sustainable Design, Bioplastics & First Real Code',
     body: [
-      { subtitle: '3D Modelling & Prototyping', text: 'Modelled sustainable bioplastic structures in Fusion 360, winning 3rd place nationally in the ATL Marathon.' },
-      { subtitle: 'Tech Entrepreneurship', text: 'Trained with Tech Mahindra and MIT to build go-to-market strategies, business plans, and commercial frameworks.' },
-      { subtitle: 'Programming & Software Shift', text: 'Began rigorous software engineering, establishing core competencies in Python and web architectures.' },
+      { subtitle: '3D Modelling & Prototyping', text: 'Designed sustainable bioplastic structures in Fusion 360, winning 3rd nationally at the ATL Marathon.' },
+      { subtitle: 'Tech Entrepreneurship', text: 'Trained with Tech Mahindra on go-to-market strategy and commercial frameworks. Briefly entertained the idea of becoming a founder; but academia won <3' },
+      { subtitle: 'Programming & The Shift', text: 'Started exploring programming during COVID: Python, web architectures, the fundamentals. The beginning of building things that live inside computers.' },
     ],
   },
   {
     year: '2020 – 2021',
     title: 'Computational Neuroscience (AIM-SIRIUS)',
     body: [
-      { subtitle: 'Global Neuroimaging Platform', text: 'Led an Indo-Russian team of 6 under researchers from the Sirius Institute, designing a web platform for EEG signal analysis.' },
-      { subtitle: 'Data Pipelines', text: 'Engineered pipeline architectures to clean EEG Time Series streams, compute brain source coordinates, and construct functional graph maps.' },
-      { subtitle: 'Algorithmic Optimization', text: 'Optimized neuroimaging pipelines using Python MNE to extract and visualize neural connectivity clusters for scientific analysis.' },
+      { subtitle: 'Global Neuroimaging Platform', text: 'Led an Indo-Russian team of 6 under Sirius Institute researchers to build a web platform for EEG signal analysis.' },
+      { subtitle: 'Data Pipelines', text: 'Engineered pipelines to clean EEG time-series streams, compute brain source coordinates, and construct functional graph maps of neural activity.' },
+      { subtitle: 'Algorithmic Optimization', text: 'Used Python MNE to extract and visualize neural connectivity clusters. The brain, it turns out, is also just a graph problem.' },
     ],
   },
   {
     year: '2020 – 2022',
     title: 'F1 in Schools & The Quantum Spark',
     body: [
-      { subtitle: 'Engineering an F1 Car', text: 'Served as Design Engineer and Research Analyst for Team Quantum Racing at the 2022 F1 in Schools World Finals (UK) after winning the Indian National Championship.' },
-      { subtitle: 'Aerodynamics & Simulation', text: 'Iterated aerodynamic models in Fusion 360. Conducted Computational Fluid Dynamics (CFD), FEM structural analysis, and physical wind tunnel tests. Optimized airflow using genetic algorithms.' },
-      { subtitle: 'The Quantum Spark', text: 'Read a DRDO milestone article that ignited a deep, lifelong fascination with Quantum Computing and Quantum Key Distribution (QKD).' },
+      { subtitle: 'Engineering an F1 Car', text: 'Design Engineer and Research Analyst for Team Quantum Racing: Indian National Champions, then 2022 F1 in Schools World Finalists in the UK. A lot of carbon fibre and lost sleep.' },
+      { subtitle: 'Aerodynamics & Simulation', text: 'Ran CFD, FEM structural analysis, and physical wind tunnel tests. Optimized airflow geometries using genetic algorithms. Combined computation and physics in a way that felt truly powerful.' },
+      { subtitle: 'The Quantum Spark', text: 'A DRDO article on Quantum Key Distribution landed at exactly the right moment. Everything since has been downstream of that paragraph.' },
     ],
   },
   {
     year: '2023 – 2024',
     title: 'IIT Kanpur & Technical Leadership',
     body: [
-      { subtitle: 'Physics Major at IIT Kanpur', text: 'Enrolled in Physics at IIT Kanpur, focusing coursework on Quantum Computing, Quantum Optics, and Condensed Matter Physics.' },
-      { subtitle: 'Quantum Milestones & Qiskit', text: 'Completed the IBM Quantum Challenge 2024 using Qiskit 1.0. Placed as a finalist in the IIT Bombay TechFest Quant Challenge.' },
-      { subtitle: 'Campus & Tech Leadership', text: 'Served as Secretary of the Programming Club, coordinating the Machine Learning domain, and debated in parliamentary formats.' },
+      { subtitle: 'Physics at IIT Kanpur', text: 'Enrolled in Physics at IIT Kanpur and centred my coursework on Quantum Computing, Quantum Optics, and Condensed Matter.' },
+      { subtitle: 'Quantum Milestones & Qiskit', text: 'Completed IBM Quantum Challenge 2024 on Qiskit 1.0; started studying quantum algorithms and the QC God Book: Nielsen-Chuang' },
+      { subtitle: 'Campus & Tech Leadership', text: 'Actively involved in the Debating and Programming Clubs of the institute. Physics by day, programming and rhetoric by night :)' },
     ],
   },
   {
     year: '2025',
     title: 'AI Internals & Quantum Research',
     body: [
-      { subtitle: 'Mechanistic Interpretability', text: 'Researched LLM internals and information processing representations at the Kyoto University Large Language Model Center.' },
-      { subtitle: 'Advanced Quantum Circuits', text: 'Completed the Qiskit Global Summer School 2025, bridging quantum algorithms, chemistry simulation, and hardware implementation.' },
-      { subtitle: 'Quantum Optics & Nanophotonics', text: 'Joined the Nanophotonics Group at IITK as an undergraduate researcher in Quantum Optics and Cavity QED.' },
+      { subtitle: 'Mechanistic Interpretability', text: 'Researched how LLMs represent and process information internally at the Kyoto University LLM Center. Asking "how does the model actually know?" turns out to be surprisingly hard.' },
+      { subtitle: 'Quantum Algorithms & Hardware', text: 'Completed Qiskit Global Summer School 2025: quantum algorithms, chemistry simulation on real hardware. The gap between theory and reality due to decoherence is very real.' },
+      { subtitle: 'Quantum Optics & Cavity QED', text: 'Joined the Nanophotonics Group at IITK as an undergrad researcher in Quantum Optics and Cavity QED. Now officially spending time thinking about single photons for a living.' },
     ],
   },
   {
     year: '2026 & Beyond',
-    title: 'Lattices & The Quantum Frontier',
+    title: 'Committed to Research',
     body: [
-      { subtitle: 'Lattice-Based Cryptography', text: 'Built post-quantum security assessment tools to identify lattice-based cryptographic vulnerabilities for the PnB Hackathon.' },
-      { subtitle: 'Current Academic Research', text: 'Actively publishing research across three labs: Nanophotonics (IITK), Photonic Devices (IITK), and the Kyoto University LLM Center, bridging classical AI and Quantum Physics.' },
+      { subtitle: 'Post-Quantum Cryptography', text: 'Built security assessment tools for lattice-based cryptographic vulnerabilities at the PnB Hackathon.' },
+      { subtitle: 'Current Research', text: 'Actively working across three labs - Nanophotonics (IITK), Photonic Devices (IITK), and Kyoto University\'s LLM Center - sitting at the intersection of quantum light-matter interaction and classical AI. Actively working on Cavity-QED, Single Photon Sources, and Mechanistic Interpretabiliy' },
     ],
   },
 ];
@@ -90,7 +90,7 @@ export default function WorldlineSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const renderTextWithHighlights = (text: string) => {
-    const regex = /(Quantum Computing|Quantum Optics|Quantum Key Distribution|QKD|Post-Quantum|Quantum|Physics|Research|Computational Neuroscience|Lattice-Based Cryptography|Qiskit|Nanophotonics|Cavity QED|Arduinos|Machine Learning|ML|EEG|F1 Car|Aerodynamics)/g;
+    const regex = /(Quantum Computing|Quantum Optics|Quantum Key Distribution|QKD|Post-Quantum|Quantum|Physics|Research|Computational Neuroscience|Lattice-Based Cryptography|Qiskit|Nanophotonics|Cavity QED|Arduino|Machine Learning|ML|EEG|Aerodynamics)/g;
     const parts = text.split(regex);
     return parts.map((part, idx) => {
       if (regex.test(part)) {

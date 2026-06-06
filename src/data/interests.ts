@@ -18,64 +18,70 @@ export interface InterestEdge {
 // Satellite nodes (smaller, connected to hubs)
 export const nodes: InterestNode[] = [
   // === MAJOR HUBS ===
-  { id: 'programming', label: 'Programming', description: 'The art of instructing machines', category: 'tech', size: 1.5, isHub: true },
-  { id: 'physics', label: 'Physics', description: 'Understanding the fundamental laws of nature', category: 'science', size: 1.5, isHub: true },
-  { id: 'philosophy', label: 'Philosophy', description: 'Questioning existence, knowledge, and meaning', category: 'philosophy', size: 1.5, isHub: true },
-
-  // === AI/ML CLUSTER (connected to Programming) ===
-  { id: 'ml', label: 'Machine Learning', description: 'Teaching machines to learn from data', category: 'tech', size: 1.1 },
-  { id: 'cv', label: 'Computer Vision', description: 'Enabling machines to see and understand images', category: 'tech', size: 0.6 },
-  { id: 'nlp', label: 'NLP', description: 'Processing and understanding human language', category: 'tech', size: 0.6 },
-  { id: 'interp', label: 'Mech. Interp.', description: 'Understanding how neural networks think', category: 'tech', size: 0.5 },
-  { id: 'gnn', label: 'Graph NNs', description: 'Learning on graph-structured data', category: 'tech', size: 0.5 },
-  { id: 'agents', label: 'AI Agents', description: 'Autonomous systems that reason and act', category: 'tech', size: 0.5 },
-  { id: 'web', label: 'Web Dev', description: 'Building experiences for the modern web', category: 'tech', size: 0.5 },
-
-  // === QUANTUM CLUSTER (connected to Physics) ===
-  { id: 'qc', label: 'Quantum Computing', description: 'Harnessing quantum mechanics for computation', category: 'science', size: 1.1 },
-  { id: 'qalgos', label: 'Quantum Algorithms', description: 'Algorithms exploiting quantum parallelism', category: 'science', size: 0.5 },
-  { id: 'qml', label: 'Quantum ML', description: 'Machine learning on quantum computers', category: 'science', size: 0.5 },
-  { id: 'qoptics', label: 'Quantum Optics', description: 'Light at the quantum level', category: 'science', size: 0.5 },
-  { id: 'nanophotonics', label: 'Nanophotonics', description: 'Manipulating light at the nanoscale', category: 'science', size: 0.5 },
-
+  { id: 'programming', label: 'Programming', description: 'The unreasonable effectiveness of telling rocks to do math', category: 'tech', size: 1.5, isHub: true },
+  { id: 'physics', label: 'Physics', description: 'Reality\'s source code : still poorly documented', category: 'science', size: 1.5, isHub: true },
+  { id: 'philosophy', label: 'Philosophy', description: 'The discipline of asking questions that dissolve into harder questions', category: 'philosophy', size: 1.5, isHub: true },
+ 
+  // === AI/ML CLUSTER ===
+  { id: 'ml', label: 'Machine Learning', description: 'Gradient descent as a lifestyle', category: 'tech', size: 1.1 },
+  { id: 'cv', label: 'Computer Vision', description: 'Forcing convolutions to care about raccoons', category: 'tech', size: 0.6 },
+  { id: 'nlp', label: 'NLP', description: 'Statistical sorcery applied to human babble', category: 'tech', size: 0.6 },
+  { id: 'interp', label: 'Mech. Interp.', description: 'Reverse-engineering the neural ghosts inside transformers', category: 'tech', size: 0.5 },
+  { id: 'gnn', label: 'Graph NNs', description: 'When your data has the audacity to have structure', category: 'tech', size: 0.5 },
+  { id: 'agents', label: 'AI Agents', description: 'Autonomous systems that reason, act, and occasionally hallucinate', category: 'tech', size: 0.5 },
+ 
+  // === QUANTUM CLUSTER ===
+  { id: 'qc', label: 'Quantum Computing', description: 'Superposition of "it works" and "it doesn\'t" until you measure', category: 'science', size: 1.1 },
+  { id: 'qalgos', label: 'Quantum Algorithms', description: 'Shor, Grover, et al. : polynomial speedups and existential dread for cryptographers', category: 'science', size: 0.5 },
+  { id: 'cQED', label: 'Cavity QED', description: 'Trapping photons in tiny mirrors until the atom confesses its quantum state', category: 'science', size: 0.5 },
+  { id: 'qml', label: 'Quantum ML', description: 'Classical ML but with exponential Hilbert space and exponential headaches', category: 'science', size: 0.5 },
+  { id: 'qoptics', label: 'Quantum Optics', description: 'Where photons stop being waves and start being weird', category: 'science', size: 0.5 },
+  { id: 'nanophotonics', label: 'Nanophotonics', description: 'Bullying Maxwell\'s equations at sub-wavelength scales', category: 'science', size: 0.5 },
+ 
   // === PHILOSOPHY CLUSTER ===
-  { id: 'nihilism', label: 'Nihilism', description: 'Confronting the absence of inherent meaning', category: 'philosophy', size: 0.6 },
-  { id: 'absurdism', label: 'Absurdism', description: 'Embracing life despite its absurdity', category: 'philosophy', size: 0.6 },
-  { id: 'existentialism', label: 'Existentialism', description: 'Creating meaning through authentic existence', category: 'philosophy', size: 0.6 },
+  { id: 'nihilism', label: 'Nihilism', description: 'The vertigo of a universe indifferent to your pull requests', category: 'philosophy', size: 0.6 },
+  { id: 'absurdism', label: 'Absurdism', description: 'Sisyphean defiance: one must imagine the optimizer happy', category: 'philosophy', size: 0.6 },
+  { id: 'existentialism', label: 'Existentialism', description: 'Condemned to be free : and to choose your own tech stack', category: 'philosophy', size: 0.6 },
 ];
-
+ 
 export const edges: InterestEdge[] = [
-  // === Hub interconnections (thick lines) ===
-  { from: 'programming', to: 'physics', strength: 0.7, description: 'Computational physics and simulation' },
-  { from: 'physics', to: 'philosophy', strength: 0.6, description: 'Nature of reality and existence' },
-  { from: 'programming', to: 'philosophy', strength: 0.4, description: 'Logic, abstraction, and meaning' },
-
+  // === Hub interconnections ===
+  { from: 'programming', to: 'physics', strength: 0.7, description: 'Numerical simulation: where differential equations meet floating-point regret' },
+  { from: 'physics', to: 'philosophy', strength: 0.6, description: 'Quantum mechanics broke ontology first; philosophy is still filing the incident report' },
+  { from: 'programming', to: 'philosophy', strength: 0.4, description: 'Type theory, formal logic, and the haunting question of whether P = NP has meaning' },
+ 
   // === AI/ML to Programming hub ===
-  { from: 'programming', to: 'ml', strength: 0.9, description: 'Implementing learning algorithms' },
-  { from: 'programming', to: 'web', strength: 0.8, description: 'Building digital experiences' },
-  { from: 'programming', to: 'agents', strength: 0.75, description: 'Autonomous reasoning systems' },
-  { from: 'ml', to: 'cv', strength: 0.85, description: 'Visual understanding through CNNs' },
-  { from: 'ml', to: 'nlp', strength: 0.85, description: 'Language models and transformers' },
-  { from: 'ml', to: 'interp', strength: 0.7, description: 'Understanding neural network internals' },
-  { from: 'ml', to: 'gnn', strength: 0.65, description: 'Learning on relational data' },
-  { from: 'agents', to: 'nlp', strength: 0.6, description: 'Language as the interface for agents' },
-
+  { from: 'programming', to: 'ml', strength: 0.9, description: 'Backpropagation is just the chain rule wearing a GPU' },
+  { from: 'programming', to: 'agents', strength: 0.75, description: 'Tool-calling LLMs in a while loop : welcome to agentic systems' },
+  { from: 'ml', to: 'cv', strength: 0.85, description: 'Hierarchical feature extraction from pixels, all the way up to "it\'s a raccoon"' },
+  { from: 'ml', to: 'nlp', strength: 0.85, description: 'Attention is all you need : and also terabytes of Common Crawl' },
+  { from: 'ml', to: 'interp', strength: 0.7, description: 'Superposition, circuits, and the archaeology of learned representations' },
+  { from: 'ml', to: 'gnn', strength: 0.65, description: 'Message passing on non-Euclidean domains where CNNs fear to tread' },
+  { from: 'agents', to: 'nlp', strength: 0.6, description: 'Language as the universal API for reasoning and action' },
+ 
   // === Quantum to Physics hub ===
-  { from: 'physics', to: 'qc', strength: 0.9, description: 'Quantum mechanics as computation' },
-  { from: 'physics', to: 'qoptics', strength: 0.75, description: 'Photons and quantum states' },
-  { from: 'physics', to: 'nanophotonics', strength: 0.65, description: 'Light at nanoscale' },
-  { from: 'qc', to: 'qalgos', strength: 0.85, description: 'Shor, Grover, and beyond' },
-  { from: 'qc', to: 'qml', strength: 0.8, description: 'Quantum advantage for ML' },
-  { from: 'qml', to: 'ml', strength: 0.6, description: 'Classical-quantum hybrid models' },
-  { from: 'qoptics', to: 'nanophotonics', strength: 0.7, description: 'Photonic quantum devices' },
-
+  { from: 'physics', to: 'qc', strength: 0.9, description: 'Quantum coherence as a computational resource : Feynman\'s revenge' },
+  { from: 'physics', to: 'qoptics', strength: 0.75, description: 'Quantum electrodynamics distilled to photons, beam splitters, and wonder' },
+  { from: 'physics', to: 'nanophotonics', strength: 0.65, description: 'Plasmonics and photonic crystals: light squeezed into geometries it finds objectionable' },
+  { from: 'qc', to: 'qalgos', strength: 0.85, description: 'Shor factorises; Grover searches; both keep cryptographers up at night' },
+  { from: 'qc', to: 'qml', strength: 0.8, description: 'Variational quantum circuits as parameterised ansätze : quantum gradient descent, basically' },
+  { from: 'qml', to: 'ml', strength: 0.6, description: 'Hybrid classical–quantum models: outsource the hard parts to Hilbert space' },
+  { from: 'qoptics', to: 'nanophotonics', strength: 0.7, description: 'Purcell enhancement, cavity modes, and photonic quantum devices at the nanoscale' },
+ 
+  // === Cavity QED edges ===
+  { from: 'cQED', to: 'qc', strength: 0.8, description: 'Strong-coupling regime: single photons as quantum bus between stationary qubits' },
+  { from: 'cQED', to: 'qoptics', strength: 0.85, description: 'Jaynes–Cummings Hamiltonian: the hydrogen atom of quantum optics' },
+  { from: 'cQED', to: 'nanophotonics', strength: 0.75, description: 'Photonic crystal nanocavities: shrinking mode volume until the vacuum fluctuations notice' },
+  { from: 'cQED', to: 'physics', strength: 0.7, description: 'Vacuum Rabi splitting as experimental proof that the electromagnetic vacuum is genuinely weird' },
+  { from: 'cQED', to: 'qalgos', strength: 0.45, description: 'Cavity-mediated gates: photon-shuttling as a physical substrate for quantum logic' },
+ 
   // === Philosophy cluster ===
-  { from: 'philosophy', to: 'nihilism', strength: 0.8, description: 'Confronting meaninglessness' },
-  { from: 'philosophy', to: 'absurdism', strength: 0.8, description: 'Embracing the absurd' },
-  { from: 'philosophy', to: 'existentialism', strength: 0.75, description: 'Creating authentic meaning' },
-  { from: 'nihilism', to: 'absurdism', strength: 0.7, description: 'From despair to rebellion' },
-  { from: 'existentialism', to: 'absurdism', strength: 0.65, description: 'Camus meets Sartre' },
-
+  { from: 'philosophy', to: 'nihilism', strength: 0.8, description: 'Analytic philosophy asked about intrinsic value; nihilism answered bluntly' },
+  { from: 'philosophy', to: 'absurdism', strength: 0.8, description: 'Camus: revolt is the only coherent response to an irrational universe' },
+  { from: 'philosophy', to: 'existentialism', strength: 0.75, description: 'Existence precedes essence : your identity is a pull request you keep amending' },
+  { from: 'nihilism', to: 'absurdism', strength: 0.7, description: 'Nihilism sees the void; absurdism shrugs and keeps going anyway' },
+  { from: 'existentialism', to: 'absurdism', strength: 0.65, description: 'Sartre and Camus disagreed on rebellion; both agreed the universe owes you nothing' },
+ 
   // === Cross-domain connections ===
 ];
 
