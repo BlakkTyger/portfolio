@@ -1,37 +1,23 @@
 'use client'
 
-import { useRef, useEffect } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useRef } from 'react';
 import * as THREE from 'three';
-import WorldlineGrid from './WorldlineGrid';
+import WorldlineStages from './WorldlineStages';
+import { scrollState } from './worldlineState';
 
-// Store scroll progress globally (updated from DOM)
-// progress: worldline section progress (0-1)
-// pageScrollY: raw page scroll position for early particle fade
-export const scrollState = { progress: 0, pageScrollY: 0 };
+// Re-export so existing imports (e.g. WorldlineSection) keep working.
+export { scrollState };
 
 export default function WorldlineScene() {
   const groupRef = useRef<THREE.Group>(null);
-  const { camera } = useThree();
 
-  // Camera path parameters - subtle movement during worldline section
-  const startZ = 10;
-  const endZ = 5;
-
-  useFrame(() => {
-    const progress = scrollState.progress;
-
-    // Subtle camera movement when scrolling through Worldline section
-    if (progress > 0.01) {
-      camera.position.z = startZ + (endZ - startZ) * progress;
-      camera.position.y = Math.sin(progress * Math.PI) * 0.5;
-    }
-  });
-
+  // The 7 procedural stages drive all of their own animation from scroll
+  // progress; the shared camera is intentionally left untouched so it does not
+  // conflict with the Hero / intro scenes.
   return (
     <group ref={groupRef}>
-      <ambientLight intensity={0.4} />
-      <WorldlineGrid scrollProgress={scrollState.progress} />
+      <ambientLight intensity={0.35} />
+      <WorldlineStages />
     </group>
   );
 }

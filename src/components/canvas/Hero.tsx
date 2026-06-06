@@ -41,6 +41,9 @@ interface ClickRipple {
 }
 
 export default function Hero() {
+    useEffect(() => {
+        console.log('[Hero] mounted')
+    }, [])
     const meshRef = useRef<THREE.InstancedMesh>(null);
     const materialRef = useRef<THREE.MeshBasicMaterial>(null);
     const mouse3D = useRef(new THREE.Vector3(0, 0, 0));
@@ -179,9 +182,10 @@ export default function Hero() {
             if (contactEl) {
                 const cRect = contactEl.getBoundingClientRect();
                 if (cRect.top < window.innerHeight) {
-                    const fadeProgress = Math.min(1, Math.max(0, (window.innerHeight - cRect.top) / 400));
-                    targetOpacity = 0.4 * fadeProgress;
-                    targetCollapse = 1.0 - fadeProgress;
+                    // Keep the Hero particle field hidden in the Contact section
+                    // (the cosmic lattice backdrop carries the visuals there).
+                    targetOpacity = 0.0;
+                    targetCollapse = 1.0;
                 }
             }
         }
