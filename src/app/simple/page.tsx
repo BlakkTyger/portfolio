@@ -37,7 +37,7 @@ const ACADEMIC_JOURNEY = [
   },
   {
     year: '2025',
-    title: 'AI Internals & Quantum Research',
+    title: 'Quantum Research & AI Internals  ',
     description: 'Researched LLM mechanics at Kyoto University and Quantum Optics / Cavity QED at the Nanophotonics Group, IIT Kanpur.',
   },
   {

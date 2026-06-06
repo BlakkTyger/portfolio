@@ -57,7 +57,7 @@ const BLOCKS = [
   },
   {
     year: '2025',
-    title: 'AI Internals & Quantum Research',
+    title: 'Quantum Research & AI Internals  ',
     body: [
       { subtitle: 'Mechanistic Interpretability', text: 'Researched how LLMs represent and process information internally at the Kyoto University LLM Center. Asking "how does the model actually know?" turns out to be surprisingly hard.' },
       { subtitle: 'Quantum Algorithms & Hardware', text: 'Completed Qiskit Global Summer School 2025: quantum algorithms, chemistry simulation on real hardware. The gap between theory and reality due to decoherence is very real.' },

@@ -38,7 +38,7 @@ Block 5: 2023–2024 | IIT Kanpur & Technical Leadership
 
     Campus Leadership: Rose from Coordinator to Secretary of the Programming Club, overseeing the Machine Learning and Web Development domains. Additionally, joined the college Debating Society, participating in Asian and British Parliamentary formats.
 
-Block 6: 2025 | AI Internals & Quantum Research
+Block 6: 2025 | Quantum Research & AI Internals  
 
     Mechanistic Interpretability: Began working with the Large Language Model Center at Kyoto University (Dept. of Intelligence Science and Technology), researching LLM internals and how these models process information.
 

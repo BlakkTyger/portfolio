@@ -955,7 +955,7 @@ function BlochStage({ index }: StageProps) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
-//  STAGE 5 — AI Internals & Quantum Research  (2× scroll window)
+//  STAGE 5 — Quantum Research & AI Internals    (2× scroll window)
 //
 //  Split into two clearly-labelled sub-stages that share the same component:
 //

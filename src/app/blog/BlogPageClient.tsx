@@ -123,8 +123,7 @@ export default function BlogPageClient({ posts, allTags, categoryHierarchy }: Bl
               Blog
             </h1>
             <p className="text-lg md:text-xl text-[var(--tungsten-gray)] max-w-2xl">
-              Explorations at the intersection of physics, code, and philosophy. 
-              Deep dives into quantum mechanics, programming tutorials, and philosophical musings.
+              Random stuff: anywhere from quantum physics to machine learning to economics to international politics to abstract philosophies to personal essays. If it’s interesting, I’ll probably write about it.
             </p>
           </header>
 
