@@ -7,15 +7,42 @@ import { Metadata } from 'next';
 const PURPLE = '#8F00FF';
 
 export const metadata: Metadata = {
-  title: 'Physics Research | Himanshu Sharma',
-  description: 'Quantum computing, optics, and computational physics research.',
+  title: 'Physics Research',
+  description: 'Quantum computing, optics, and computational physics research. Exploring light-matter interactions and classical AI.',
+  alternates: {
+    canonical: '/research',
+  },
 };
 
 export default function ResearchPage() {
   const physicsProjects = projects.filter(p => p.category === 'physics');
+  
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://himanshu.be'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Physics Research',
+        item: 'https://himanshu.be/research'
+      }
+    ]
+  };
 
   return (
     <main className="min-h-screen py-20 px-6">
+      {/* Structured SEO Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
+      />
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-12">

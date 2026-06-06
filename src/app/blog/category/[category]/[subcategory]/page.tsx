@@ -15,8 +15,11 @@ export async function generateMetadata({ params }: SubcategoryPageProps) {
   const decodedSub = decodeURIComponent(subcategory);
   
   return {
-    title: `${decodedSub} (${decodedCat}) | Blog`,
-    description: `Posts about ${decodedSub} under ${decodedCat}`,
+    title: `${decodedSub} (${decodedCat})`,
+    description: `Browse posts under the subcategory ${decodedSub} within ${decodedCat}.`,
+    alternates: {
+      canonical: `/blog/category/${category}/${subcategory}`,
+    },
   };
 }
 
@@ -27,8 +30,44 @@ export default async function SubcategoryPage({ params }: SubcategoryPageProps) 
   
   const posts = getPostsByCategory(decodedCat, decodedSub);
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://himanshu.be'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://himanshu.be/blog'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: decodedCat,
+        item: `https://himanshu.be/blog?category=${category}`
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: decodedSub,
+        item: `https://himanshu.be/blog/category/${category}/${subcategory}`
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen relative overflow-hidden py-16 px-4 md:px-6">
+      {/* Structured SEO Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
+      />
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--void-black)] via-[#0a0a1a] to-[var(--void-black)]" />
       </div>

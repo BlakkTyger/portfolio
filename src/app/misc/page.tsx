@@ -2,8 +2,11 @@ import Link from 'next/link';
 import { ArrowLeft, BookOpen, GraduationCap, FileQuestion, ScrollText } from 'lucide-react';
 
 export const metadata = {
-  title: 'Misc | Himanshu Sharma',
-  description: 'Books, courses, problem statements, and research articles.',
+  title: 'Miscellaneous',
+  description: 'A collection of books, courses, interesting resources, and research articles.',
+  alternates: {
+    canonical: '/misc',
+  },
 };
 
 const books = [
@@ -88,8 +91,32 @@ const researchArticles = [
 ];
 
 export default function MiscPage() {
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://himanshu.be'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Miscellaneous',
+        item: 'https://himanshu.be/misc'
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen py-20 px-6">
+      {/* Structured SEO Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
+      />
       <div className="max-w-6xl mx-auto">
         {/* Back Button */}
         <Link

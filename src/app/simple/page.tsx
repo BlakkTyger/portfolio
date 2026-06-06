@@ -5,8 +5,11 @@ import { personalInfo, skills } from '@/data/content';
 import { projects } from '@/data/projects';
 
 export const metadata = {
-  title: 'Himanshu Sharma | Minimal Website',
-  description: 'Academic and professional profile of Himanshu Sharma.',
+  title: 'Minimal Website',
+  description: 'Academic and professional profile of Himanshu Sharma. Simplified version for fast reading.',
+  alternates: {
+    canonical: '/simple',
+  },
 };
 
 const ACADEMIC_JOURNEY = [
@@ -51,8 +54,32 @@ export default function SimpleProfile() {
   const physicsProjects = projects.filter(p => p.category === 'physics');
   const csProjects = projects.filter(p => p.category === 'cs');
   
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://himanshu.be'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Minimal Website',
+        item: 'https://himanshu.be/simple'
+      }
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-[#050505] text-[#F0F0F0] font-sans selection:bg-[#8F00FF] selection:text-white">
+      {/* Structured SEO Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
+      />
       {/* Navigation */}
       <nav className="border-b border-[#222] bg-[#050505]/95 backdrop-blur sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">

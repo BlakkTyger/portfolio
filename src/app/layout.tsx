@@ -33,22 +33,57 @@ const arizonia = Arizonia({
 
 // METADATA
 export const metadata: Metadata = {
+  metadataBase: new URL("https://himanshu.be"),
+
   // Browser tab title
-  title: "Himanshu Sharma | The Coherent State",
+  title: {
+    default: "Himanshu Sharma | The Coherent State",
+    template: "%s | Himanshu Sharma"
+  },
 
   // Search engine description
-  description: "Personal portfolio showcasing physics research and software development",
+  description: "Personal portfolio of Himanshu Sharma, showcasing research in quantum computing, optics, and software development.",
 
-  keywords: ["portfolio", "physicist", "developer", "quantum computing", "AI"],
+  keywords: ["portfolio", "physicist", "developer", "quantum computing", "AI", "Cavity QED", "interpretability"],
 
   // Author info
-  authors: [{ name: "Himanshu Sharma" }],
+  authors: [{ name: "Himanshu Sharma", url: "https://himanshu.be" }],
+  creator: "Himanshu Sharma",
+
+  // Canonical and Alternates
+  alternates: {
+    canonical: "/",
+  },
 
   // Open Graph metadata (for social media sharing)
   openGraph: {
-    title: "Himanshu Sharma | Personal Portfolio",
-    description: "Physicist, Developer, Philosopher",
+    title: "Himanshu Sharma | The Coherent State",
+    description: "Physicist and Developer working at the intersection of quantum light-matter interaction and classical AI.",
+    url: "https://himanshu.be",
+    siteName: "Himanshu Sharma Portfolio",
     type: "website",
+    locale: "en_US",
+  },
+
+  // Twitter metadata
+  twitter: {
+    card: "summary_large_image",
+    title: "Himanshu Sharma | The Coherent State",
+    description: "Physicist and Developer working at the intersection of quantum light-matter interaction and classical AI.",
+    creator: "@blakktyger",
+  },
+
+  // Search robots control
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

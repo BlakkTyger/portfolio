@@ -24,8 +24,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getPostBySlug(slug);
   
   return {
-    title: `${post.title} | Blog`,
+    title: post.title,
     description: post.description,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      title: `${post.title} | Himanshu Sharma Blog`,
+      description: post.description,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Himanshu Sharma'],
+      url: `https://himanshu.be/blog/${slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+    }
   };
 }
 
@@ -39,8 +55,64 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
   
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://himanshu.be'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://himanshu.be/blog'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `https://himanshu.be/blog/${slug}`
+      }
+    ]
+  };
+
+  const blogPostJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: {
+      '@type': 'Person',
+      name: 'Himanshu Sharma',
+      url: 'https://himanshu.be'
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Himanshu Sharma',
+      url: 'https://himanshu.be'
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://himanshu.be/blog/${slug}`
+    }
+  };
+  
   return (
     <main className="min-h-screen py-20 px-6">
+      {/* Structured SEO Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostJsonLd).replace(/</g, '\\u003c') }}
+      />
       <ViewTracker slug={slug} />
       <div className="max-w-[90rem] mx-auto grid grid-cols-1 xl:grid-cols-[1fr_minmax(auto,48rem)_1fr] gap-8 relative">
         {/* Left Sidebar: TOC */}
