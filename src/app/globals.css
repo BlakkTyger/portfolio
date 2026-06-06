@@ -18,6 +18,72 @@
   --foreground: var(--photon-white);
   --card: var(--event-horizon);
   --muted: var(--tungsten-gray);
+
+  /* Responsive styling variables */
+  /* WhoAmI Page */
+  --whoami-heading-size: clamp(2.2rem, 5vw, 4rem);
+  --whoami-tagline-size: clamp(1rem, 1.5vw, 1.25rem);
+  --whoami-body-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  --whoami-cappuccino-size: clamp(1.2rem, 1.8vw, 1.8rem);
+  --whoami-spacing: 1.25rem;
+
+  /* CV Section */
+  --cv-padding-y: 6rem;
+  --cv-heading-size: clamp(2.5rem, 6vw, 4.5rem);
+  --cv-desc-size: clamp(1rem, 1.8vw, 1.25rem);
+  --cv-mockup-scale: 1;
+
+  /* Journey (Worldline) Timeline */
+  --jny-card-padding: clamp(28px, 3vw, 48px);
+  --jny-title-size: clamp(24px, 3vw, 40px);
+  --jny-subtitle-size: clamp(14px, 1.2vw, 16px);
+  --jny-body-size: clamp(14px, 1.25vw, 16.5px);
+  --jny-gap: 16px;
+  --jny-margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --whoami-heading-size: clamp(1.8rem, 8vw, 2.5rem);
+    --whoami-tagline-size: clamp(0.9rem, 4vw, 1.05rem);
+    --whoami-body-size: clamp(0.9rem, 3.8vw, 1.05rem);
+    --whoami-cappuccino-size: clamp(1.1rem, 5vw, 1.3rem);
+    --whoami-spacing: 0.8rem;
+
+    --cv-padding-y: 3rem;
+    --cv-heading-size: clamp(2rem, 8vw, 3rem);
+    --cv-desc-size: clamp(0.9rem, 4vw, 1.1rem);
+    --cv-mockup-scale: 0.85;
+
+    --jny-card-padding: clamp(16px, 4vw, 24px);
+    --jny-title-size: clamp(20px, 6vw, 26px);
+    --jny-subtitle-size: clamp(13px, 4vw, 15px);
+    --jny-body-size: clamp(13px, 3.5vw, 14.5px);
+    --jny-gap: 10px;
+    --jny-margin-bottom: 14px;
+  }
+}
+
+@media (max-height: 750px) {
+  :root {
+    --whoami-heading-size: clamp(1.5rem, 6vh, 2.5rem);
+    --whoami-tagline-size: clamp(0.85rem, 3vh, 1rem);
+    --whoami-body-size: clamp(0.85rem, 2.8vh, 1rem);
+    --whoami-cappuccino-size: clamp(1rem, 3.5vh, 1.25rem);
+    --whoami-spacing: 0.6rem;
+
+    --cv-padding-y: clamp(1.5rem, 4vh, 3.5rem);
+    --cv-heading-size: clamp(1.8rem, 5vh, 2.8rem);
+    --cv-desc-size: clamp(0.85rem, 2.5vh, 1.05rem);
+    --cv-mockup-scale: 0.7;
+
+    --jny-card-padding: clamp(16px, 3vh, 28px);
+    --jny-title-size: clamp(18px, 4.5vh, 30px);
+    --jny-subtitle-size: clamp(12px, 2vh, 14px);
+    --jny-body-size: clamp(12px, 2.2vh, 14px);
+    --jny-gap: 8px;
+    --jny-margin-bottom: 12px;
+  }
 }
 
 html {

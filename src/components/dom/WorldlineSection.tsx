@@ -185,24 +185,19 @@ export default function WorldlineSection() {
         {BLOCKS.map((block, i) => (
           <div
             key={i}
-            className="relative flex items-center"
+            className={`relative flex w-full px-6 md:px-12 lg:px-24 ${i % 2 === 0 ? 'justify-center md:justify-start' : 'justify-center md:justify-end'} ${i === 5 ? 'items-start pt-[12vh]' : 'items-center'}`}
             style={{
               // AI Internals (index 5) gets 2× scroll space to match canvas stage
               minHeight: i === 5 ? '200vh' : '100vh',
-              padding: '0 clamp(24px, 8vw, 120px)',
-              justifyContent: i % 2 === 0 ? 'flex-start' : 'flex-end',
-              // Vertically pin the card to the top half of the extra space
-              alignItems: i === 5 ? 'flex-start' : 'center',
-              paddingTop: i === 5 ? '12vh' : undefined,
             }}
           >
             <div
-              className="jny-card max-w-[700px] pointer-events-auto relative overflow-hidden"
+              className="jny-card max-w-[700px] w-full pointer-events-auto relative overflow-hidden"
               style={{
                 background: 'rgba(6, 7, 12, 0.72)',
                 backdropFilter: 'blur(22px)',
                 WebkitBackdropFilter: 'blur(22px)',
-                padding: 'clamp(32px, 3.2vw, 52px)',
+                padding: 'var(--jny-card-padding)',
                 borderRadius: '20px',
                 border: '1px solid rgba(0, 255, 157, 0.22)',
                 boxShadow:
@@ -221,10 +216,10 @@ export default function WorldlineSection() {
 
               {/* Year tag */}
               <span
-                className="jny-reveal inline-block mb-5 font-bold"
+                className="jny-reveal inline-block font-bold"
                 style={{
                   fontFamily: 'monospace',
-                  fontSize: 'clamp(13px, 1.4vw, 16px)',
+                  fontSize: 'var(--jny-subtitle-size)',
                   color: C.cyan,
                   letterSpacing: '0.28em',
                   padding: '6px 14px',
@@ -232,6 +227,7 @@ export default function WorldlineSection() {
                   border: `1px solid ${C.cyan}33`,
                   background: 'rgba(0,255,157,0.06)',
                   textShadow: `0 0 16px ${C.cyan}66`,
+                  marginBottom: 'var(--jny-margin-bottom)',
                 }}
               >
                 {block.year}
@@ -243,10 +239,10 @@ export default function WorldlineSection() {
                 style={{
                   fontFamily: 'Georgia, "Cormorant Garamond", serif',
                   fontWeight: 600,
-                  fontSize: 'clamp(30px, 3.8vw, 50px)',
+                  fontSize: 'var(--jny-title-size)',
                   color: '#ffffff',
                   lineHeight: 1.15,
-                  marginBottom: 28,
+                  marginBottom: 'var(--jny-margin-bottom)',
                   letterSpacing: '0.01em',
                   textShadow: '0 2px 18px rgba(0,0,0,0.85), 0 0 28px rgba(0,255,157,0.12)',
                 }}
@@ -255,14 +251,14 @@ export default function WorldlineSection() {
               </h3>
 
               {/* Body — each entry as a labelled mini-block to break up the text */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--jny-gap)' }}>
                 {block.body.map((item, idx) => (
                   <div key={idx} className="jny-reveal">
                     <span
                       style={{
                         display: 'inline-block',
                         fontFamily: 'var(--font-heading), monospace',
-                        fontSize: 'clamp(14px, 1.3vw, 17px)',
+                        fontSize: 'var(--jny-subtitle-size)',
                         fontWeight: 700,
                         color: C.parchment,
                         letterSpacing: '0.08em',
@@ -277,7 +273,7 @@ export default function WorldlineSection() {
                     <p
                       style={{
                         fontFamily: 'system-ui, sans-serif',
-                        fontSize: 'clamp(15.5px, 1.35vw, 18.5px)',
+                        fontSize: 'var(--jny-body-size)',
                         color: '#d6d6dc',
                         lineHeight: 1.75,
                         margin: 0,
@@ -292,7 +288,7 @@ export default function WorldlineSection() {
               {/* Index indicator */}
               <div
                 className="jny-reveal"
-                style={{ marginTop: 26, display: 'flex', alignItems: 'center', gap: 10 }}
+                style={{ marginTop: 'var(--jny-margin-bottom)', display: 'flex', alignItems: 'center', gap: 10 }}
               >
                 <span
                   style={{

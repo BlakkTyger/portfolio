@@ -31,28 +31,28 @@ export default function SocialLinks() {
   };
   
   return (
-    <div className="flex flex-wrap gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
       {socialLinks.map(link => {
         const IconComponent = iconMap[link.icon] || ExternalLink;
         const isEmail = link.url.startsWith('mailto:');
         
         return (
-          <div key={link.name} className="relative group">
+          <div key={link.name} className="relative group w-full">
             {isEmail ? (
               // Email with copy functionality
               <button
                 onClick={() => copyEmail(link.url)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--event-horizon)] hover:bg-[var(--event-horizon)]/80 transition-all group"
+                className="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-[var(--event-horizon)] hover:bg-[var(--event-horizon)]/80 transition-all group w-full cursor-pointer"
               >
                 <IconComponent 
-                  size={24} 
-                  className="text-[var(--tungsten-gray)] group-hover:text-[var(--terminal-cyan)] transition-colors"
+                  size={20} 
+                  className="text-[var(--tungsten-gray)] group-hover:text-[var(--terminal-cyan)] transition-colors shrink-0"
                 />
-                <span className="text-[var(--photon-white)]">{link.name}</span>
+                <span className="text-[var(--photon-white)] text-sm md:text-base">{link.name}</span>
                 {copiedEmail ? (
-                  <Check size={16} className="text-green-500" />
+                  <Check size={16} className="text-green-500 ml-auto shrink-0" />
                 ) : (
-                  <Copy size={16} className="text-[var(--tungsten-gray)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Copy size={16} className="text-[var(--tungsten-gray)] opacity-0 group-hover:opacity-100 transition-opacity ml-auto shrink-0" />
                 )}
               </button>
             ) : (
@@ -61,16 +61,16 @@ export default function SocialLinks() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--event-horizon)] hover:bg-[var(--event-horizon)]/80 transition-all group"
+                className="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-[var(--event-horizon)] hover:bg-[var(--event-horizon)]/80 transition-all group w-full cursor-pointer"
               >
                 <IconComponent 
-                  size={24} 
-                  className="text-[var(--tungsten-gray)] group-hover:text-[var(--terminal-cyan)] transition-colors"
+                  size={20} 
+                  className="text-[var(--tungsten-gray)] group-hover:text-[var(--terminal-cyan)] transition-colors shrink-0"
                 />
-                <span className="text-[var(--photon-white)]">{link.name}</span>
+                <span className="text-[var(--photon-white)] text-sm md:text-base">{link.name}</span>
                 <ExternalLink 
                   size={16} 
-                  className="text-[var(--tungsten-gray)] opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="text-[var(--tungsten-gray)] opacity-0 group-hover:opacity-100 transition-opacity ml-auto shrink-0"
                 />
               </a>
             )}

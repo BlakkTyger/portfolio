@@ -6,7 +6,10 @@ export default function CV() {
   return (
     <SectionWrapper id="cv" animation="fade-up" stagger={true}>
       {/* max-w-5xl with glassmorphism, glowing ambient lighting, and interactive visual flow */}
-      <div className="relative w-full max-w-5xl mx-auto py-24 px-8 md:px-12 rounded-3xl border border-[var(--tungsten-gray)]/10 bg-gradient-to-b from-[var(--event-horizon)]/30 to-transparent backdrop-blur-md overflow-hidden shadow-[0_0_50px_rgba(143,0,255,0.02)]">
+      <div
+        className="relative w-full max-w-5xl mx-auto px-8 md:px-12 rounded-3xl border border-[var(--tungsten-gray)]/10 bg-gradient-to-b from-[var(--event-horizon)]/30 to-transparent backdrop-blur-md overflow-hidden shadow-[0_0_50px_rgba(143,0,255,0.02)]"
+        style={{ paddingTop: 'var(--cv-padding-y)', paddingBottom: 'var(--cv-padding-y)' }}
+      >
 
         {/* Ambient top/bottom neon light guides */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-px bg-gradient-to-r from-transparent via-[var(--terminal-cyan)]/30 to-transparent"></div>
@@ -15,7 +18,10 @@ export default function CV() {
         <div className="relative z-10 text-center flex flex-col items-center">
 
           {/* ── Interactive Floating Document Graphic ── */}
-          <div className="animate-item mb-12 relative group cursor-pointer">
+          <div
+            className="animate-item relative group cursor-pointer"
+            style={{ marginBottom: 'calc(var(--cv-padding-y) * 0.5)', transform: 'scale(var(--cv-mockup-scale))', transformOrigin: 'center' }}
+          >
             {/* Pulsing colored glow aura in the background */}
             <div className="absolute inset-0 bg-gradient-to-tr from-[var(--spectral-violet)] to-[var(--terminal-cyan)] rounded-2xl filter blur-2xl opacity-10 group-hover:opacity-25 transition-opacity duration-500"></div>
             
@@ -61,12 +67,18 @@ export default function CV() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="animate-item font-heading font-light text-5xl md:text-6xl lg:text-7xl mb-6 text-[var(--photon-white)] tracking-wide">
+          <h2
+            className="animate-item font-heading font-light text-[var(--photon-white)] tracking-wide"
+            style={{ fontSize: 'var(--cv-heading-size)', marginBottom: 'calc(var(--cv-padding-y) * 0.25)' }}
+          >
             Curriculum Vitae
           </h2>
 
           {/* Description */}
-          <p className="animate-item text-lg md:text-xl text-[var(--tungsten-gray)]/85 mb-14 max-w-xl mx-auto leading-relaxed font-body">
+          <p
+            className="animate-item text-[var(--tungsten-gray)]/85 max-w-xl mx-auto leading-relaxed font-body"
+            style={{ fontSize: 'var(--cv-desc-size)', marginBottom: 'calc(var(--cv-padding-y) * 0.6)' }}
+          >
             A comprehensive exposition of my academic background, research publications, technical milestones, and professional journey.
           </p>
 
@@ -76,7 +88,7 @@ export default function CV() {
               href="/cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center justify-center gap-4 px-12 py-5 rounded-full bg-black/60 border border-[var(--tungsten-gray)]/30 text-white font-mono text-base tracking-widest transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_30px_rgba(0,255,157,0.2)]"
+              className="group relative inline-flex items-center justify-center gap-4 px-8 py-3.5 sm:px-10 sm:py-4 md:px-12 md:py-5 rounded-full bg-black/60 border border-[var(--tungsten-gray)]/30 text-white font-mono text-sm md:text-base tracking-widest transition-all duration-300 hover:border-white/60 hover:shadow-[0_0_30px_rgba(0,255,157,0.2)]"
             >
               {/* Animated hover gradient overlay inside button */}
               <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[var(--spectral-violet)]/10 to-[var(--terminal-cyan)]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>

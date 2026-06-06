@@ -16,7 +16,7 @@
  */
 
 import { useMemo, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { scrollState } from './worldlineState';
@@ -171,6 +171,9 @@ function CircuitStage({ index }: StageProps) {
   const flowRef = useRef<THREE.Points>(null!);
   const hoverT  = useRef(0);
 
+  const { width } = useThree((state) => state.viewport);
+  const responsiveScale = Math.min(1.0, width / 14);
+
   const { traceGeo, flowPaths, chips } = useMemo(() => {
     const segs: number[] = [];
     const paths: THREE.Vector3[][] = [];
@@ -214,8 +217,13 @@ function CircuitStage({ index }: StageProps) {
 
     // Faster settle: 0.15 instead of 0.32
     const settle = smoothstep(0, 0.15, t);
-    g.position.x = THREE.MathUtils.lerp(-7, 2.6, settle);
-    g.position.y = THREE.MathUtils.lerp(-3.5, 0.2, settle);
+    const targetX = width > 10 ? 2.6 : 0;
+    const startX = width > 10 ? -7 : -width - 2;
+    const targetY = width > 10 ? 0.2 : 0;
+    const startY = width > 10 ? -3.5 : -2;
+
+    g.position.x = THREE.MathUtils.lerp(startX, targetX, settle);
+    g.position.y = THREE.MathUtils.lerp(startY, targetY, settle);
     g.rotation.x = -0.5 + 0.06 * Math.sin(time * 0.5);
     g.rotation.y = (1 - settle) * 1.0 - 0.45 + 0.18 * Math.sin(time * 0.35);
     g.rotation.z = 0.04 * Math.sin(time * 0.4);
@@ -261,7 +269,7 @@ function CircuitStage({ index }: StageProps) {
   });
 
   return (
-    <group ref={group} scale={1.35}>
+    <group ref={group} scale={1.35 * responsiveScale}>
       <mesh userData={{ baseOpacity: 0.95 }}>
         <boxGeometry args={[6.2, 3.8, 0.14]} />
         <meshStandardMaterial color={'#0c241c'} emissive={'#06140e'} metalness={0.5} roughness={0.55} />
@@ -294,6 +302,9 @@ function ModellingStage({ index }: StageProps) {
   const inner  = useRef<THREE.Mesh>(null!);
   const hoverT = useRef(0);
 
+  const { width } = useThree((state) => state.viewport);
+  const responsiveScale = Math.min(1.0, width / 14);
+
   const { edgeGeo, solidGeo, edgeCount } = useMemo(() => {
     const solidGeo = new THREE.IcosahedronGeometry(2.6, 1);
     const edgeGeo  = new THREE.EdgesGeometry(solidGeo, 1);
@@ -307,7 +318,8 @@ function ModellingStage({ index }: StageProps) {
     g.visible = vis > 0.002;
     if (!g.visible) return;
     const time = state.clock.elapsedTime;
-    g.position.set(-2.8, 0.2, 0);
+    const targetX = width > 10 ? -2.8 : 0;
+    g.position.set(targetX, 0.2, 0);
 
     hoverT.current = THREE.MathUtils.lerp(
       hoverT.current,
@@ -341,7 +353,7 @@ function ModellingStage({ index }: StageProps) {
   });
 
   return (
-    <group ref={group}>
+    <group ref={group} scale={responsiveScale}>
       <mesh ref={solid} geometry={solidGeo} userData={{ baseOpacity: 0.16 }}>
         <meshStandardMaterial color={COL.cyan} emissive={COL.cyan} emissiveIntensity={0.5} transparent flatShading metalness={0.2} roughness={0.5} />
       </mesh>
@@ -368,6 +380,9 @@ function NeuroStage({ index }: StageProps) {
   const pointsRef  = useRef<THREE.Points>(null!);
   const hoverT     = useRef(0);
   const N = 1300;
+
+  const { width } = useThree((state) => state.viewport);
+  const responsiveScale = Math.min(1.0, width / 14);
 
   const { pointGeo, edgeGeo, signalGeo, signalPairs } = useMemo(() => {
     const verts: THREE.Vector3[] = [];
@@ -431,7 +446,7 @@ function NeuroStage({ index }: StageProps) {
     g.rotation.y = time * 0.22;
     const baseScale = THREE.MathUtils.lerp(0.5, 1, smoothstep(0, 0.3, t));
     const pulse     = 1 + 0.03 * Math.sin(time * 2.2);
-    g.scale.setScalar(baseScale * pulse * expandScale);
+    g.scale.setScalar(baseScale * pulse * expandScale * responsiveScale);
 
     // Signals (speed up on hover or burst)
     const sigSpeed  = 0.8 + h * 1.6 + outroBurst * 6;
@@ -672,6 +687,9 @@ function FlowStage({ index }: StageProps) {
   const hoverT    = useRef(0);
   const M = 1800;
 
+  const { width } = useThree((state) => state.viewport);
+  const responsiveScale = Math.min(1.0, width / 14);
+
   const { streamGeo, seeds } = useMemo(() => {
     const seeds: { y: number; z: number; off: number; speed: number }[] = [];
     for (let i = 0; i < M; i++) {
@@ -691,9 +709,11 @@ function FlowStage({ index }: StageProps) {
     g.position.set(0, 0, 0);
 
     // Car travels left (−x). Nose now leads because car is rotated π.
+    const startX = width * 0.5 + 2;
+    const endX = -width * 0.5 - 2;
     const carX = t < 0.4
-      ? THREE.MathUtils.lerp(7.5, 0, smoothstep(0, 0.4, t))
-      : THREE.MathUtils.lerp(0, -8, smoothstep(0.6, 1, t));
+      ? THREE.MathUtils.lerp(startX, 0, smoothstep(0, 0.4, t))
+      : THREE.MathUtils.lerp(0, endX, smoothstep(0.6, 1, t));
     const carY = Math.sin(t * Math.PI) * 0.6 - 0.2 + 0.1 * Math.sin(time * 3);
     carRef.current.position.set(carX, carY, 0);
     carRef.current.rotation.z = (t < 0.4 ? -0.06 : 0.05) + 0.03 * Math.sin(time * 5);
@@ -716,7 +736,7 @@ function FlowStage({ index }: StageProps) {
     for (let i = 0; i < M; i++) {
       const s = seeds[i];
       const f    = (time * s.speed * streamSpeed + s.off) % 1;
-      let x      = THREE.MathUtils.lerp(8, -8, f);
+      let x      = THREE.MathUtils.lerp(width * 0.5 + 1, -width * 0.5 - 1, f);
       const rel  = x - carX;
       const bodyMask = Math.exp(-(rel * rel) * 0.18);
       const yDefl = s.y + Math.sign(s.y || 1) * bodyMask * 1.0 + 0.15 * Math.sin(x * 1.5 + time * 4);
@@ -745,7 +765,7 @@ function FlowStage({ index }: StageProps) {
   });
 
   return (
-    <group ref={group} scale={1.28}>
+    <group ref={group} scale={1.28 * responsiveScale}>
       <group ref={carRef}><F1Car /></group>
       <points ref={streamRef} geometry={streamGeo}>
         <pointsMaterial color={COL.orange} size={0.07} sizeAttenuation blending={THREE.AdditiveBlending} depthWrite={false} transparent />
@@ -777,6 +797,9 @@ function BlochStage({ index }: StageProps) {
   const gateRingRefs = useRef<(THREE.Mesh | null)[]>([]);
   const hoverT   = useRef(0);
   const R = 2.4;
+
+  const { width } = useThree((state) => state.viewport);
+  const responsiveScale = Math.min(1.0, width / 14);
 
   // Gate ring base angles & outward dirs
   const gateAngles = useMemo(() => [0, 1, 2, 3].map((i) => (i / 4) * Math.PI * 2), []);
@@ -817,7 +840,8 @@ function BlochStage({ index }: StageProps) {
     g.visible = vis > 0.002;
     if (!g.visible) return;
     const time = state.clock.elapsedTime;
-    g.position.set(2.8, 0.1, 0);
+    const targetX = width > 10 ? 2.8 : 0;
+    g.position.set(targetX, 0.1, 0);
 
     hoverT.current = THREE.MathUtils.lerp(
       hoverT.current,
@@ -835,7 +859,7 @@ function BlochStage({ index }: StageProps) {
     g.rotation.y = time * 0.3;
     g.rotation.z = 0.12 * Math.sin(time * 0.5);
     const swell = 1 + blochExit * 0.55;
-    g.scale.setScalar(THREE.MathUtils.lerp(0.5, 1, smoothstep(0, 0.3, t)) * swell);
+    g.scale.setScalar(THREE.MathUtils.lerp(0.5, 1, smoothstep(0, 0.3, t)) * swell * responsiveScale);
 
     // Quantum vector — spins faster during hover & exit
     const vecSpeed = 1.2 + h * 1.8 + blochExit * 8;
@@ -967,6 +991,9 @@ function NeuralQuantumStage({ index }: StageProps) {
   const groupB = useRef<THREE.Group>(null!);
   const hoverT = useRef(0);
 
+  const { width } = useThree((state) => state.viewport);
+  const responsiveScale = Math.min(1.0, width / 14);
+
   // ── Sub-stage A: Attention heatmap cells ─────────────────────────────────
   const GRID = 8;
   const cellRefs = useRef<(THREE.Mesh | null)[]>([]);
@@ -1053,7 +1080,7 @@ function NeuralQuantumStage({ index }: StageProps) {
     // Subtle ambient sway
     g.rotation.y = 0.03 * Math.sin(time * 0.2);
     g.rotation.x = 0;
-    g.scale.setScalar(1.0);
+    g.scale.setScalar(responsiveScale);
 
     // Apply sub-group opacities
     if (groupA.current) applyOpacity(groupA.current, aVis * vis);
@@ -1191,7 +1218,7 @@ function NeuralQuantumStage({ index }: StageProps) {
           >{String(i)}</Text>
         ))}
 
-        <BigYear text="2025" position={[5.5, GRID_OFFSET_Y + 0.5, -2]} size={1.5} color={COL.cyan} opacity={0.14} />
+        <BigYear text="2025" position={[width > 10 ? 5.5 : 0, GRID_OFFSET_Y + 0.5, -2]} size={1.5} color={COL.cyan} opacity={0.14} />
       </group>
 
       {/* ══ Sub-stage B: Quantum Fourier Transform Circuit ══════════════════ */}
@@ -1328,6 +1355,9 @@ function LatticeStage({ index }: StageProps) {
   const hoverT    = useRef(0);
   const G = 6;
 
+  const { width } = useThree((state) => state.viewport);
+  const responsiveScale = Math.min(1.0, width / 14);
+
   const { pointGeo, lineGeo, base, starGeo } = useMemo(() => {
     const spacing = 0.95;
     const base: THREE.Vector3[] = [];
@@ -1430,7 +1460,7 @@ function LatticeStage({ index }: StageProps) {
   });
 
   return (
-    <group ref={group}>
+    <group ref={group} scale={responsiveScale}>
       <points ref={starsRef} geometry={starGeo}>
         <pointsMaterial color={COL.white} size={0.06} sizeAttenuation blending={THREE.AdditiveBlending} depthWrite={false} transparent />
       </points>

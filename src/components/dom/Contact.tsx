@@ -10,7 +10,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto px-4 md:px-8">
         
         {/* Interactive Command Dashboard Wrapper */}
-        <div className="relative bg-gradient-to-b from-[var(--event-horizon)]/40 to-transparent backdrop-blur-md border border-[var(--tungsten-gray)]/10 p-8 md:p-16 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,255,157,0.01)]">
+        <div className="relative bg-gradient-to-b from-[var(--event-horizon)]/40 to-transparent backdrop-blur-md border border-[var(--tungsten-gray)]/10 p-6 sm:p-8 md:p-16 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,255,157,0.01)]">
           
           {/* Ambient top light guide */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-[var(--terminal-cyan)]/30 to-transparent"></div>
@@ -32,23 +32,23 @@ export default function Contact() {
               Get in Touch
             </span>
             
-            <h2 className="animate-item font-heading font-light text-5xl md:text-6xl text-[var(--photon-white)] mb-6 tracking-wide">
+            <h2 className="animate-item font-heading font-light text-4xl sm:text-5xl md:text-6xl text-[var(--photon-white)] mb-6 tracking-wide">
               Contact
             </h2>
             
-            <p className="animate-item text-lg text-[var(--tungsten-gray)]/85 mb-12 max-w-xl leading-relaxed">
+            <p className="animate-item text-base sm:text-lg text-[var(--tungsten-gray)]/85 mb-8 md:mb-12 max-w-xl leading-relaxed">
               Have an open problem to solve, a quantum simulation to debug, or want to collaborate? Connect with my nodes across the network.
             </p>
 
             {/* Dashboard Two-Column Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 pt-4">
               
               {/* Left Column: Social Nodes */}
               <div className="flex flex-col space-y-6">
                 <h3 className="text-xs font-mono uppercase tracking-widest text-[var(--tungsten-gray)]/60">
                   Connect Nodes
                 </h3>
-                <div className="bg-black/20 rounded-2xl border border-[var(--tungsten-gray)]/10 p-8 shadow-inner h-full flex items-center">
+                <div className="bg-black/20 rounded-2xl border border-[var(--tungsten-gray)]/10 p-5 sm:p-8 shadow-inner h-full flex items-center justify-center">
                   <SocialLinks />
                 </div>
               </div>
@@ -79,7 +79,7 @@ export default function Contact() {
             </div>
 
             {/* Bottom Status Panel */}
-            <div className="animate-item mt-16 pt-8 border-t border-[var(--tungsten-gray)]/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="animate-item mt-10 md:mt-16 pt-8 border-t border-[var(--tungsten-gray)]/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-green-500/80 animate-pulse" />
                 <p className="text-[var(--tungsten-gray)]/85 font-mono text-sm tracking-wide">
