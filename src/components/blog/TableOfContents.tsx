@@ -16,7 +16,6 @@ export default function TableOfContents() {
       level: Number(elem.tagName.substring(1)),
     }));
     
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHeadings(headingData);
     
     // Intersection Observer for highlighting active section

@@ -338,7 +338,6 @@ function ParticleConnections({
                 
                 if (dist < 1.5) {
                     const idx = connectionCount * 6;
-                    // eslint-disable-next-line react-hooks/immutability
                     positions[idx] = particles[i].position.x;
                     positions[idx + 1] = particles[i].position.y;
                     positions[idx + 2] = particles[i].position.z;

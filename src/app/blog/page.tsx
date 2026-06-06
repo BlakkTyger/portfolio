@@ -12,7 +12,6 @@ export default function BlogPage() {
   
   // Extract all unique tags - topics are optional and may not exist in PostMeta
   const allTags = [...new Set(posts.flatMap(post => post.tags || []))];
-  const allTopics: string[] = []; // Topics can be added to PostMeta later if needed
   
   return <BlogPageClient posts={posts} allTags={allTags} categoryHierarchy={categoryHierarchy} />;
 }
