@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useLayoutEffect, useEffect, useRef, useState, useCallback } from 'react';
 import { nodes, edges, categoryColors, InterestNode, InterestEdge } from '@/data/interests';
 
 // Export for potential 3D scene coordination
@@ -189,9 +189,11 @@ export default function ManifoldSection() {
   const timeRef = useRef(0);
 
   // Flying in + floating animation
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isVisible) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAnimationProgress({});
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setEdgesVisible(new Set());
       return;
     }

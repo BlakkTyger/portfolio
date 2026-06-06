@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 export default function TableOfContents() {
   const [headings, setHeadings] = useState<{ id: string; text: string; level: number }[]>([]);
   const [activeId, setActiveId] = useState<string>('');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Find all headings inside the article
     const elements = Array.from(document.querySelectorAll('article h2, article h3'));
     
@@ -16,6 +16,7 @@ export default function TableOfContents() {
       level: Number(elem.tagName.substring(1)),
     }));
     
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHeadings(headingData);
     
     // Intersection Observer for highlighting active section

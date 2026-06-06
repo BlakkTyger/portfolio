@@ -14,5 +14,5 @@ export default function BlogPage() {
   const allTags = [...new Set(posts.flatMap(post => post.tags || []))];
   const allTopics: string[] = []; // Topics can be added to PostMeta later if needed
   
-  return <BlogPageClient posts={posts} allTags={allTags} allTopics={allTopics} categoryHierarchy={categoryHierarchy} />;
+  return <BlogPageClient posts={posts} allTags={allTags} categoryHierarchy={categoryHierarchy} />;
 }

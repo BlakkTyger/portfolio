@@ -8,7 +8,7 @@ import { scrollState } from '@/components/canvas/WorldlineScene';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── Journey data (sourced from docs/JOURNEY.md) ──────────────────────────────
+{/*─── Journey data (sourced from docs/JOURNEY.md) ────────────────────────────── */}
 const BLOCKS = [
   {
     year: '2018 – 2019',
@@ -74,7 +74,7 @@ const BLOCKS = [
   },
 ];
 
-// ─── Palette (Dark Academia × High-Tech) ──────────────────────────────────────
+{/*─── Palette (Dark Academia × High-Tech) ──────────────────────────────────────*/}
 const C = {
   espresso: '#020204',
   parchment: '#c8b98a',
@@ -85,11 +85,11 @@ const C = {
   orange: '#F97316',
 };
 
-// ─── Component ────────────────────────────────────────────────────────────────
+{/*─── Component ────────────────────────────────────────────────────────────────*/}
 export default function WorldlineSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Keep the 3-D scene aware of scroll progress through this section.
+  {/*Keep the 3-D scene aware of scroll progress through this section.*/}
   useEffect(() => {
     const onScroll = () => {
       scrollState.pageScrollY = window.scrollY;
@@ -105,7 +105,7 @@ export default function WorldlineSection() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // ── Cinematic card reveals (the 3-D graphics live in the global Canvas) ──────
+  {/*── Cinematic card reveals (the 3-D graphics live in the global Canvas) ──────*/}
   useGSAP(() => {
     if (!sectionRef.current) return;
 
@@ -122,7 +122,7 @@ export default function WorldlineSection() {
         .to(items, { autoAlpha: 1, y: 0, stagger: 0.12, ease: 'power2.out' }, 0.12);
     });
 
-    // Fill the vertical progress rail as the section scrolls.
+    {/*Fill the vertical progress rail as the section scrolls.*/}
     gsap.utils.toArray<HTMLElement>('.jny-rail-dot').forEach((dot, i) => {
       gsap.to(dot, {
         backgroundColor: C.cyan,
@@ -272,7 +272,7 @@ export default function WorldlineSection() {
                     letterSpacing: '0.15em',
                   }}
                 >
-                  {String(i + 1).padStart(2, '0')} // 07
+                  {String(i + 1).padStart(2, '0')}
                 </span>
                 <div style={{ flex: 1, maxWidth: 80, height: 1, background: C.cyan, opacity: 0.25 }} />
               </div>

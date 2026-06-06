@@ -6,56 +6,58 @@ import CodeBlock from './CodeBlock';
 
 export const mdxComponents = {
   // Override default elements
-  h1: (props: any) => (
+  h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1 
       className="font-heading text-4xl md:text-5xl text-[var(--photon-white)] mt-12 mb-6"
       {...props}
     />
   ),
   
-  h2: (props: any) => (
+  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2 
       className="font-heading text-3xl text-[var(--photon-white)] mt-10 mb-4 border-b border-[var(--tungsten-gray)]/20 pb-2"
       {...props}
     />
   ),
   
-  h3: (props: any) => (
+  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3 
       className="font-heading text-2xl text-[var(--photon-white)] mt-8 mb-3"
       {...props}
     />
   ),
   
-  p: (props: any) => (
+  p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p 
       className="text-[var(--photon-white)]/90 leading-relaxed mb-6"
       {...props}
     />
   ),
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   a: (props: any) => (
     <Link 
       className="text-[var(--terminal-cyan)] hover:underline"
+      href={props.href || ''}
       {...props}
     />
   ),
   
-  ul: (props: any) => (
+  ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
     <ul 
       className="list-disc list-inside space-y-2 mb-6 text-[var(--photon-white)]/90"
       {...props}
     />
   ),
   
-  ol: (props: any) => (
+  ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
     <ol 
       className="list-decimal list-inside space-y-2 mb-6 text-[var(--photon-white)]/90"
       {...props}
     />
   ),
   
-  blockquote: (props: any) => (
+  blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote 
       className="border-l-4 border-[var(--spectral-violet)] pl-4 italic text-[var(--tungsten-gray)] my-6"
       {...props}
@@ -63,9 +65,10 @@ export const mdxComponents = {
   ),
   
   // Code blocks with syntax highlighting
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pre: (props: any) => <CodeBlock {...props} />,
   
-  code: (props: any) => {
+  code: (props: React.HTMLAttributes<HTMLElement> & { className?: string; children?: React.ReactNode }) => {
     // Inline code (no language)
     if (!props.className) {
       return (
@@ -79,6 +82,7 @@ export const mdxComponents = {
   },
   
   // Images with Next.js optimization
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   img: (props: any) => (
     <span className="block my-8">
       <Image

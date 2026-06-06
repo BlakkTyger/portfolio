@@ -3,7 +3,6 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { scrollState } from './WorldlineScene';
 
 // More prominent particle configuration
 const CONFIG = {
@@ -66,12 +65,12 @@ export default function Hero() {
             // More uniform distribution across entire screen
             let x = (Math.random() - 0.5) * boundsX * 2.5;
             let y = (Math.random() - 0.5) * boundsY * 2.5;
-            let z = (Math.random() - 0.5) * CONFIG.Z_DEPTH;
+            const z = (Math.random() - 0.5) * CONFIG.Z_DEPTH;
             
             // Push away from center text area (approx 4 units radius)
-            let distToCenter = Math.sqrt(x*x + y*y);
+            const distToCenter = Math.sqrt(x*x + y*y);
             if (distToCenter < 4) {
-                let pushScale = 4 / distToCenter;
+                const pushScale = 4 / distToCenter;
                 x *= pushScale;
                 y *= pushScale;
             }
@@ -140,7 +139,8 @@ export default function Hero() {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('click', handleClick);
         };
-    }, [boundsX, boundsY, size]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [boundsX, boundsY]);
 
     useFrame((state, delta) => {
         if (!meshRef.current) return;
@@ -303,8 +303,6 @@ export default function Hero() {
             <ParticleConnections 
                 particles={particles} 
                 opacity={currentOpacity} 
-                boundsX={boundsX}
-                boundsY={boundsY}
             />
         </group>
     );
@@ -314,13 +312,9 @@ export default function Hero() {
 function ParticleConnections({ 
     particles, 
     opacity,
-    boundsX,
-    boundsY,
 }: { 
     particles: Particle[];
     opacity: React.MutableRefObject<number>;
-    boundsX: number;
-    boundsY: number;
 }) {
     const lineRef = useRef<THREE.LineSegments>(null);
     const maxConnections = 80;
@@ -345,6 +339,7 @@ function ParticleConnections({
                 
                 if (dist < 1.5) {
                     const idx = connectionCount * 6;
+                    // eslint-disable-next-line react-hooks/immutability
                     positions[idx] = particles[i].position.x;
                     positions[idx + 1] = particles[i].position.y;
                     positions[idx + 2] = particles[i].position.z;

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useLayoutEffect, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Preload, PerformanceMonitor } from '@react-three/drei';
 import { useStore } from '@/store/useStore';
@@ -26,6 +26,7 @@ const PHASE_LABELS = [
 export default function StellarIntro() {
   const [hasMounted, setHasMounted] = useState(false);
   const [flashVisible, setFlashVisible] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [fadeToBlack, setFadeToBlack] = useState(false);
   const [fadeOutIntro, setFadeOutIntro] = useState(false); // Buttery-smooth transition to landing page
   const [dismissed, setDismissed] = useState(false);
@@ -33,20 +34,21 @@ export default function StellarIntro() {
   const [phaseLabel, setPhaseLabel] = useState('');
   const [labelVisible, setLabelVisible] = useState(false);
   const [dpr, setDpr] = useState<[number, number]>([1, 1.5]);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const labelTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const setIntroComplete = useStore((state) => state.setIntroComplete);
   const isComplete = useStore((state) => state.isIntroComplete);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const labelTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // ── DEVELOPER REFERENCE: INTRO REPEAT VISITS BYPASS ──
   // By default, the intro animation is shown only ONCE per user. A key is saved in localStorage.
   // -> To force the intro on EVERY refresh: Comment out lines 47-49.
   // -> To restore showing it only once: Uncomment lines 47-49.
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHasMounted(true);
     //  try {
     //    if (localStorage.getItem(LOCALSTORAGE_KEY) === 'true') {
-    //      setIntroComplete(true);
+    //      setzzzzIntroComplete(true);
     //    }
     //  } catch {}
   }, [setIntroComplete]);

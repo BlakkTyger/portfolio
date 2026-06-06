@@ -12,7 +12,6 @@ export default function HeroText() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [displayText, setDisplayText] = useState(ROLES[0]);
-  const [mounted, setMounted] = useState(false);
   const isIntroComplete = useStore((state) => state.isIntroComplete);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -25,9 +24,6 @@ export default function HeroText() {
     }
   }, [isIntroComplete]);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!isIntroComplete) return;

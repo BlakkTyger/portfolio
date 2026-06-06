@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/mdx';
 import { mdxComponents } from '@/components/mdx/MDXComponents';
@@ -54,18 +55,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <header className="mb-12">
           {/* Back links */}
           <div className="flex items-center justify-between mb-8">
-            <a 
+            <Link 
               href="/blog" 
               className="text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors text-sm font-mono tracking-wide"
             >
               ← Blog Home
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="/" 
               className="text-[var(--tungsten-gray)] hover:text-[var(--photon-white)] transition-colors text-sm font-mono tracking-wide"
             >
               Back to Portfolio →
-            </a>
+            </Link>
           </div>
           
           {/* Meta */}

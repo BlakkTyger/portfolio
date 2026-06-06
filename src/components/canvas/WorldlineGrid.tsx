@@ -1,14 +1,9 @@
 'use client'
 
 import { useRef, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-interface WorldlineGridProps {
-  scrollProgress: number;  // 0 to 1
-}
-
-export default function WorldlineGrid({ scrollProgress }: WorldlineGridProps) {
+export default function WorldlineGrid() {
   const linesRef = useRef<THREE.LineSegments>(null);
   
   // Create grid geometry

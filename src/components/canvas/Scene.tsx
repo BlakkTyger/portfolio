@@ -5,7 +5,6 @@ import { Canvas } from '@react-three/fiber'
 import { Preload } from '@react-three/drei'
 import Hero from './Hero';
 import WorldlineScene from './WorldlineScene';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 interface SceneProps {
   children?: React.ReactNode;

@@ -45,7 +45,7 @@ function BinaryStream({ active }: { active: boolean }) {
   return (
     <div className="absolute inset-0 flex items-center overflow-hidden" style={{ height: '40px', top: '-18px' }}>
       <div className="flex items-center gap-1 animate-pulse">
-        {bits.map((bit, i) => (
+        {bits.map((bit) => (
           <span
             key={bit.key}
             className="text-lg md:text-2xl font-mono font-black"

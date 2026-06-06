@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { projects } from '@/data/projects';
 import { ArrowLeft, Github, ExternalLink, FileText, Presentation } from 'lucide-react';
 import { Metadata } from 'next';
@@ -83,7 +84,7 @@ export default function ResearchPage() {
                     <div className="w-full md:w-1/3 flex-shrink-0">
                       <div className="w-full overflow-hidden rounded-lg bg-[var(--void-black)] border border-[var(--tungsten-gray)]/30">
                         <Link href={`/blog/${project.id}`} className="block w-full">
-                          <img src={project.image} alt={project.title} className="w-full h-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                          <Image src={project.image} alt={project.title} width={400} height={300} className="w-full h-auto object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
                         </Link>
                       </div>
                     </div>

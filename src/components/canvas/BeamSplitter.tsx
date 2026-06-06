@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useRouter } from 'next/navigation';
 import * as THREE from 'three';
@@ -16,8 +16,7 @@ export default function BeamSplitter() {
   const inputParticlesRef = useRef<THREE.Points>(null);
   
   // Animation for all beams
-  useFrame((state) => {
-    const time = state.clock.elapsedTime;
+  useFrame(() => {
     
     // Animate input beam particles (moving right toward splitter)
     if (inputParticlesRef.current) {
@@ -33,7 +32,7 @@ export default function BeamSplitter() {
     
     // Animate binary data flowing along transmitted beam
     if (binaryDataRef.current) {
-      binaryDataRef.current.children.forEach((child, i) => {
+      binaryDataRef.current.children.forEach((child) => {
         child.position.x += 0.04;
         if (child.position.x > 6) {
           child.position.x = 1;
@@ -44,22 +43,28 @@ export default function BeamSplitter() {
   
   // Generate input beam particles
   const inputParticleCount = 50;
-  const inputParticlePositions = new Float32Array(inputParticleCount * 3);
-  for (let i = 0; i < inputParticleCount; i++) {
-    inputParticlePositions[i * 3] = -5 + (i / inputParticleCount) * 4; // x: spread from -5 to -1
-    inputParticlePositions[i * 3 + 1] = (Math.random() - 0.5) * 0.1; // y: small variation
-    inputParticlePositions[i * 3 + 2] = (Math.random() - 0.5) * 0.1; // z: small variation
-  }
+  const inputParticlePositions = useMemo(() => {
+    const positions = new Float32Array(inputParticleCount * 3);
+    for (let i = 0; i < inputParticleCount; i++) {
+      positions[i * 3] = -5 + (i / inputParticleCount) * 4; // x: spread from -5 to -1
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 0.1; // y: small variation
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 0.1; // z: small variation
+    }
+    return positions;
+  }, [inputParticleCount]);
   
   // Generate binary particles for CS beam
-  const binaryParticles = [];
-  for (let i = 0; i < 15; i++) {
-    binaryParticles.push({
-      id: i,
-      x: 1 + (i * 0.4),
-      value: Math.random() > 0.5 ? '1' : '0',
-    });
-  }
+  const binaryParticles = useMemo(() => {
+    const particles = [];
+    for (let i = 0; i < 15; i++) {
+      particles.push({
+        id: i,
+        x: 1 + (i * 0.4),
+        value: Math.random() > 0.5 ? '1' : '0',
+      });
+    }
+    return particles;
+  }, []);
   
   const handleCSClick = () => {
     router.push('/cs-projects');
@@ -148,7 +153,7 @@ export default function BeamSplitter() {
         
         {/* Binary data flowing */}
         <group ref={binaryDataRef}>
-          {binaryParticles.map((p) => (
+          {binaryParticles.map((p: { id: number; x: number; value: string }) => (
             <Text
               key={p.id}
               position={[p.x, 0.15, 0]}

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Github, Mail, Linkedin, ExternalLink, FileText, Presentation } from 'lucide-react';
-import { personalInfo, experiences, skills } from '@/data/content';
+import { ArrowLeft, Github, Mail, ExternalLink, FileText, Presentation } from 'lucide-react';
+import { personalInfo, skills } from '@/data/content';
 import { projects } from '@/data/projects';
 import { milestones } from '@/data/timeline';
 

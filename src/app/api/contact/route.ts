@@ -6,7 +6,6 @@ import { NextRequest, NextResponse } from 'next/server';
 // Option 3: Store in database
 
 const WEB3FORMS_ACCESS_KEY = process.env.WEB3FORMS_ACCESS_KEY || '';
-const RECIPIENT_EMAIL = process.env.CONTACT_EMAIL || 'your-email@example.com';
 
 export async function POST(request: NextRequest) {
   try {

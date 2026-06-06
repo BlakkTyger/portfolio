@@ -13,7 +13,7 @@ import {
 import { socialLinks } from '@/data/content';
 
 // Map icon names to components
-const iconMap: Record<string, React.ComponentType<any>> = {
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Github,
   Linkedin,
   Twitter,

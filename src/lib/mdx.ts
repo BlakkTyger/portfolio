@@ -67,7 +67,7 @@ export function getAllPostsMeta(): PostMeta[] {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
   
-  return posts.map(({ content, ...meta }) => meta);
+  return posts.map(({ ...meta }) => meta);
 }
 
 /**

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useStore } from '@/store/useStore';
@@ -136,18 +136,22 @@ export default function IntroAnimation() {
 
   }, { scope: containerRef, dependencies: [hasMounted, isComplete] });
 
+  // Generate stars
+  const stars = useMemo(() => Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    // eslint-disable-next-line react-hooks/purity
+    left: `${Math.random() * 100}%`,
+    // eslint-disable-next-line react-hooks/purity
+    top: `${Math.random() * 100}%`,
+    // eslint-disable-next-line react-hooks/purity
+    size: 1 + Math.random() * 2,
+    // eslint-disable-next-line react-hooks/purity
+    color: ['#00FF9D', '#8F00FF', '#FFFFFF'][Math.floor(Math.random() * 3)],
+  })), []);
+
   if (!hasMounted || isComplete) {
     return null;
   }
-
-  // Generate stars
-  const stars = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    size: 1 + Math.random() * 2,
-    color: ['#00FF9D', '#8F00FF', '#FFFFFF'][Math.floor(Math.random() * 3)],
-  }));
 
   return (
     <div

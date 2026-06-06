@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { projects, binaryColors } from '@/data/projects';
-import { ArrowLeft, Github, ExternalLink, FileText, Presentation, BookOpen } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, FileText, Presentation } from 'lucide-react';
 
 export const metadata = {
   title: 'CS Projects | Himanshu Sharma',
@@ -72,7 +73,7 @@ export default function CSProjectsPage() {
                 <div className="w-full h-48 mb-4 overflow-hidden rounded-lg bg-zinc-900 border border-zinc-800">
                   {/* Replace with next/image later if optimized images exist */}
                   <Link href={`/blog/${project.id}`} className="block w-full h-full">
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+                    <Image src={project.image} alt={project.title} width={400} height={300} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
                   </Link>
                 </div>
               )}

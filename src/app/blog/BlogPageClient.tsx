@@ -8,11 +8,10 @@ import type { PostMeta } from '@/lib/mdx';
 interface BlogPageClientProps {
   posts: PostMeta[];
   allTags: string[];
-  allTopics: string[];
   categoryHierarchy: Record<string, string[]>;
 }
 
-export default function BlogPageClient({ posts, allTags, allTopics, categoryHierarchy }: BlogPageClientProps) {
+export default function BlogPageClient({ posts, allTags, categoryHierarchy }: BlogPageClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
