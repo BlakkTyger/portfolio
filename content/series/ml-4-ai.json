@@ -1,0 +1,8 @@
+{
+  "id": "hardware-4-ai",
+  "title": "Hardware Organization for Artificial Intelligence",
+  "tagline": "GPU Architecture and Beyond",
+  "description": "A 3-part series explaining the organization of an NVIDIA A100 GPU, how data is moved into and within a GPU and why was attention memory bound?",
+  "cover": "",
+  "accent": "#22d3ee"
+}

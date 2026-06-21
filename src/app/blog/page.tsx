@@ -1,4 +1,5 @@
 import { getAllPostsMeta, getCategoryHierarchy } from '@/lib/mdx';
+import { getAllSeries } from '@/lib/series';
 import BlogPageClient from './BlogPageClient';
 
 export const metadata = {
@@ -12,6 +13,7 @@ export const metadata = {
 export default function BlogPage() {
   const posts = getAllPostsMeta();
   const categoryHierarchy = getCategoryHierarchy();
+  const series = getAllSeries();
   
   // Extract all unique tags - topics are optional and may not exist in PostMeta
   const allTags = [...new Set(posts.flatMap(post => post.tags || []))];
@@ -42,7 +44,7 @@ export default function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c') }}
       />
-      <BlogPageClient posts={posts} allTags={allTags} categoryHierarchy={categoryHierarchy} />
+      <BlogPageClient posts={posts} allTags={allTags} categoryHierarchy={categoryHierarchy} series={series} />
     </>
   );
 }

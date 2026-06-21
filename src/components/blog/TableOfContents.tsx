@@ -7,8 +7,12 @@ export default function TableOfContents() {
   const [activeId, setActiveId] = useState<string>('');
 
   useLayoutEffect(() => {
-    // Find all headings inside the article
-    const elements = Array.from(document.querySelectorAll('article h2, article h3'));
+    // Find all headings inside the MDX content area (excludes header, series-nav, etc.).
+    // Fallback to scanning the entire article when no scoped container exists.
+    const scoped = document.querySelectorAll('article [data-mdx-content] h2, article [data-mdx-content] h3');
+    const elements = scoped.length > 0
+      ? Array.from(scoped)
+      : Array.from(document.querySelectorAll('article h2, article h3'));
     
     const headingData = elements.map((elem) => ({
       id: elem.id,

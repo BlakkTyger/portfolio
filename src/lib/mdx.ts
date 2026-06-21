@@ -5,6 +5,8 @@ import readingTime from 'reading-time';
 
 // === TYPES ===
 
+export type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 export interface PostMeta {
   slug: string;
   title: string;
@@ -16,6 +18,22 @@ export interface PostMeta {
   category: string;
   subCategory: string;
   views?: number;
+  /** Cover image, optional. e.g. /images/blog/<slug>/cover.jpg */
+  cover?: string;
+  // === Series ===
+  /** Series ID (slug). When set, post belongs to the given blog series. */
+  series?: string;
+  /** Position within the series (1-indexed). Lower = earlier. */
+  seriesOrder?: number;
+  // === Multi-page ===
+  /** Enable the optional multi-page reading mode for this post. */
+  multiPage?: boolean;
+  /** Heading level at which automatic page splits occur. Defaults to 'h2'. */
+  multiPageSplit?: HeadingLevel;
+  /** If true, single-page mode is unavailable; post always opens in multi-page. */
+  multiPageOnly?: boolean;
+  /** If true, the reading-mode prompt highlights the multi-page option as recommended. */
+  multiPageRecommended?: boolean;
 }
 
 export interface Post extends PostMeta {
@@ -108,6 +126,13 @@ export function getPostBySlug(slug: string): Post {
     category: data.category || 'Miscellaneous',
     subCategory: data.subCategory || 'General',
     views: data.views || 0,
+    cover: data.cover,
+    series: data.series,
+    seriesOrder: typeof data.seriesOrder === 'number' ? data.seriesOrder : undefined,
+    multiPage: data.multiPage === true,
+    multiPageSplit: (data.multiPageSplit as HeadingLevel) || 'h2',
+    multiPageOnly: data.multiPageOnly === true,
+    multiPageRecommended: data.multiPageRecommended === true,
     content,
   };
 }

@@ -4,14 +4,17 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Search, X, Filter, Tag, BookOpen, TrendingUp, Clock, FolderTree } from 'lucide-react';
 import type { PostMeta } from '@/lib/mdx';
+import type { Series } from '@/lib/series';
+import SeriesCarousel from '@/components/blog/SeriesCarousel';
 
 interface BlogPageClientProps {
   posts: PostMeta[];
   allTags: string[];
   categoryHierarchy: Record<string, string[]>;
+  series: Series[];
 }
 
-export default function BlogPageClient({ posts, allTags, categoryHierarchy }: BlogPageClientProps) {
+export default function BlogPageClient({ posts, allTags, categoryHierarchy, series }: BlogPageClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [showFilters, setShowFilters] = useState(false);
@@ -126,6 +129,9 @@ export default function BlogPageClient({ posts, allTags, categoryHierarchy }: Bl
               Random stuff: anywhere from quantum physics to machine learning to economics to international politics to abstract philosophies to personal essays. If it’s interesting, I’ll probably write about it.
             </p>
           </header>
+
+          {/* Series Showcase */}
+          <SeriesCarousel series={series} />
 
           {/* Categories & Subcategories Section */}
           <section className="mb-16">

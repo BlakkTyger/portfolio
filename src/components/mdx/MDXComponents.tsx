@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import CodeBlock from './CodeBlock';
+import PageBreak from './PageBreak';
 
 // === COMPONENT MAP ===
 
@@ -118,4 +119,10 @@ export const mdxComponents = {
       <div>{children}</div>
     </div>
   ),
+
+  /**
+   * Explicit page-break marker for multi-page blogs.
+   * Renders an invisible element that MultiPageView scans for.
+   */
+  PageBreak,
 };

@@ -2,9 +2,12 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/mdx';
+import { getSeriesContextForPost } from '@/lib/series';
 import { mdxComponents } from '@/components/mdx/MDXComponents';
 import ViewTracker from '@/components/mdx/ViewTracker';
 import TableOfContents from '@/components/blog/TableOfContents';
+import MultiPageView from '@/components/blog/MultiPageView';
+import SeriesNavigation from '@/components/blog/SeriesNavigation';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeSlug from 'rehype-slug';
@@ -50,11 +53,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  
+
   if (!post.published) {
     notFound();
   }
-  
+
+  // Series context (if this post belongs to a series)
+  const seriesCtx = getSeriesContextForPost(slug);
+
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -115,10 +121,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       />
       <ViewTracker slug={slug} />
       <div className="max-w-[90rem] mx-auto grid grid-cols-1 xl:grid-cols-[1fr_minmax(auto,48rem)_1fr] gap-8 relative">
-        {/* Left Sidebar: TOC */}
+        {/* Left Sidebar
+            - Regular posts: shows the "On this page" TOC.
+            - Multi-page posts: hosts a portal slot that MultiPageView injects the
+              Pages index into. In single-page mode the slot stays empty (CSS only). */}
         <aside className="hidden xl:block pr-4">
           <div className="sticky top-24 h-[calc(100vh-8rem)] overflow-y-auto no-scrollbar">
-            <TableOfContents />
+            {post.multiPage ? (
+              <div id="multipage-index-slot" />
+            ) : (
+              <TableOfContents />
+            )}
           </div>
         </aside>
 
@@ -141,6 +154,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </Link>
           </div>
           
+          {/* Series badge (if this post is part of a series) */}
+          {seriesCtx && (
+            <Link
+              href={`/blog/series/${seriesCtx.series.id}`}
+              className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border text-xs font-mono uppercase tracking-widest transition-colors"
+              style={{
+                color: seriesCtx.series.accent || 'var(--terminal-cyan)',
+                borderColor: `${seriesCtx.series.accent || 'var(--terminal-cyan)'}55`,
+                backgroundColor: `${seriesCtx.series.accent || 'var(--terminal-cyan)'}10`,
+              }}
+            >
+              <span>{seriesCtx.series.title}</span>
+              <span className="opacity-60">·</span>
+              <span>Part {seriesCtx.index + 1} of {seriesCtx.total}</span>
+            </Link>
+          )}
+
           {/* Meta */}
           <div className="flex items-center gap-4 text-sm text-[var(--tungsten-gray)] mb-4">
             <time>{new Date(post.date).toLocaleDateString('en-US', {
@@ -175,19 +205,54 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         </header>
         
-        {/* Content */}
-        <div className="prose prose-invert max-w-none">
-          <MDXRemote 
-            source={post.content} 
-            components={mdxComponents}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkMath],
-                rehypePlugins: [rehypeKatex, rehypeSlug],
-              }
-            }}
+        {/* Content (wrapped in MultiPageView to enable optional multi-page reading mode) */}
+        {post.multiPage ? (
+          <MultiPageView
+            slug={slug}
+            multiPageOnly={post.multiPageOnly}
+            multiPageRecommended={post.multiPageRecommended}
+            splitLevel={post.multiPageSplit || 'h2'}
+            readingTime={post.readingTime}
+            series={seriesCtx?.series || null}
+            seriesIndex={seriesCtx?.index || 0}
+            seriesPrev={seriesCtx?.prev || null}
+            seriesNext={seriesCtx?.next || null}
+          >
+            <MDXRemote
+              source={post.content}
+              components={mdxComponents}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkMath],
+                  rehypePlugins: [rehypeKatex, rehypeSlug],
+                },
+              }}
+            />
+          </MultiPageView>
+        ) : (
+          <div className="prose prose-invert max-w-none" data-mdx-content>
+            <MDXRemote
+              source={post.content}
+              components={mdxComponents}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkMath],
+                  rehypePlugins: [rehypeKatex, rehypeSlug],
+                },
+              }}
+            />
+          </div>
+        )}
+
+        {/* Series navigation (only for single-page mode; multi-page handles its own neighbour links). */}
+        {seriesCtx && !post.multiPage && (
+          <SeriesNavigation
+            series={seriesCtx.series}
+            index={seriesCtx.index}
+            prev={seriesCtx.prev}
+            next={seriesCtx.next}
           />
-        </div>
+        )}
       </article>
 
       {/* Right Sidebar: Empty for centering balance */}
